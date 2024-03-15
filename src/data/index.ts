@@ -1,4 +1,4 @@
-import { NavigationMenuProps, PostProps, PostCategoryType } from '@/type';
+import { NavigationMenuProps, PostDescription, PostCategoryType } from '@/type';
 
 const postsMenu: NavigationMenuProps[] = [
   { title: 'All', href: '/posts', description: 'get all posts' },
@@ -32,15 +32,40 @@ export const navbarFooterItems: NavigationMenuProps[] = [
   ...navbarItems,
 ];
 
-export const publicPosts: PostProps[] = [
+export const publicPosts: PostDescription[] = [
   {
+    id: 1,
     title: 'first post',
-    content: '...',
+    content: `# title
+
+## heading 1
+
+### heading 2
+
+- item1
+
+~~delete~~`,
+
     category: PostCategoryType.React,
   },
   {
+    id: 2,
     title: 'second post',
-    content: '...',
+    content: `
+    # heading 1
+
+    `,
     category: PostCategoryType.General,
+  },
+  {
+    id: 3,
+    title: 'third post',
+    content: `# React Tutorial
+
+> ...
+\`\`\`js
+console.log(123)
+\`\`\``,
+    category: PostCategoryType.React,
   },
 ];

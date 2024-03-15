@@ -51,7 +51,7 @@ export default function RootLayout({
             <LogoSection />
             <NavbarSection />
           </div>
-          <div className="m-4 border-2">{children}</div>
+          {children}
           <NavbarFooterSection />
         </div>
       </body>

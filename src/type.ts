@@ -15,7 +15,8 @@ export enum PostCategoryType {
   Other,
 }
 
-export type PostProps = {
+export type PostDescription = {
+  id: string | number;
   title: string;
   category: PostCategoryType;
   tags?: string[];
