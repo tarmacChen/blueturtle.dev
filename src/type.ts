@@ -21,4 +21,6 @@ export type PostDescription = {
   category: PostCategoryType;
   tags?: string[];
   content: string;
+  description?: string;
+  releaseTime?: Date;
 };

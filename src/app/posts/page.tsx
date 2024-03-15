@@ -3,7 +3,8 @@
 import { PostDescription } from '@/type';
 import { publicPosts } from '@/data/index';
 import { useEffect, useState } from 'react';
-import { MarkdownViewer } from './MarkdownViewer';
+import { PostCard } from './components/Post';
+import { useSearchParams } from 'next/navigation';
 
 export default function PostsPage() {
   const [posts, setPosts] = useState<PostDescription[]>([]);
@@ -12,5 +13,11 @@ export default function PostsPage() {
     setPosts(publicPosts);
   }, [posts]);
 
-  return <MarkdownViewer posts={posts} />;
+  return (
+    <>
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </>
+  );
 }

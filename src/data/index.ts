@@ -47,6 +47,7 @@ export const publicPosts: PostDescription[] = [
 ~~delete~~`,
 
     category: PostCategoryType.React,
+    description: '...',
   },
   {
     id: 2,

@@ -9,13 +9,13 @@ import { PostDescription } from '@/type';
 
 export const PostSelector = ({
   posts,
-  onChange: valueChangeHandler,
+  valueChangeHandler: handler,
 }: {
   posts: PostDescription[];
-  onChange: (value: string) => void;
+  valueChangeHandler: (value: string) => void;
 }) => {
   return (
-    <Select onValueChange={valueChangeHandler}>
+    <Select onValueChange={handler}>
       <SelectTrigger>
         <SelectValue placeholder="Select post"></SelectValue>
       </SelectTrigger>
