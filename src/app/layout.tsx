@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar';
 import { Logo } from './components/Logo';
 import { NavbarFooter } from './components/NavbarFooter';
 import { navbarItems, navbarFooterItems } from '@/data';
+import { MobileNavbar } from './components/MobileNavbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -52,7 +53,10 @@ export default function RootLayout({
             <NavbarSection />
           </div>
           {children}
-          <NavbarFooterSection />
+          <div className="fixed w-screen bottom-0 justify-center">
+            <NavbarFooterSection />
+            <MobileNavbar />
+          </div>
         </div>
       </body>
     </html>
