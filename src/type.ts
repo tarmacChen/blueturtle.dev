@@ -3,6 +3,7 @@ export type NavigationMenuProps = {
   href: string;
   description: string;
   child?: NavigationMenuProps[];
+  children?: React.ReactNode;
 };
 
 export type NavbarProps = {

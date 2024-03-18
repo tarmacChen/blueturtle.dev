@@ -1,36 +1,4 @@
-import { NavigationMenuProps, PostDescription, PostCategoryType } from '@/type';
-
-const postsMenu: NavigationMenuProps[] = [
-  { title: 'All', href: '/posts', description: 'get all posts' },
-  {
-    title: 'React',
-    href: '/posts/react',
-    description: 'get posts about React',
-  },
-];
-
-export const navbarItems: NavigationMenuProps[] = [
-  {
-    title: 'Posts',
-    href: '/posts',
-    description: 'posts',
-    child: postsMenu,
-  },
-  {
-    title: 'Contact',
-    href: '/contact',
-    description: 'contact',
-  },
-];
-
-export const navbarFooterItems: NavigationMenuProps[] = [
-  {
-    title: 'Home',
-    href: '/',
-    description: 'homepage',
-  },
-  ...navbarItems,
-];
+import { PostDescription, PostCategoryType } from '@/type';
 
 export const publicPosts: PostDescription[] = [
   {
