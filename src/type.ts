@@ -25,3 +25,21 @@ export type PostDescription = {
   description?: string;
   releaseTime?: Date;
 };
+
+export type MarkdownMetadata = {
+  title?: string;
+  publicDate?: string;
+  description?: string;
+  author?: string;
+  tags?: string[];
+  category?: string;
+  weight?: number;
+  draft?: boolean;
+  keywords?: string[];
+};
+
+export type MarkdownFile = {
+  filename: string;
+  content?: string;
+  data?: MarkdownMetadata & { [key: string]: any };
+};

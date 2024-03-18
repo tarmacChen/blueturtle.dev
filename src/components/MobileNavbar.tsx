@@ -1,5 +1,3 @@
-'use client';
-
 import { ReactNode } from 'react';
 import {
   HomeIcon,
@@ -7,11 +5,9 @@ import {
   FileIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
-import { useMobile } from '@/hooks/useMobile';
 
 export function MobileNavbar() {
-  const { isMobile } = useMobile();
-  const containerClasses = 'flex flex-row flex-1 px-0 justify-around';
+  const containerClasses = 'flex flex-row flex-1 px-0 justify-around ';
 
   const NavbarItem = ({
     href,
@@ -56,5 +52,5 @@ export function MobileNavbar() {
     </div>
   );
 
-  return isMobile ? <Navbar /> : <></>;
+  return <Navbar />;
 }

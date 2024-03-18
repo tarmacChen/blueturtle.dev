@@ -7,8 +7,8 @@ export const MarkdownViewer = ({ content }: { content?: string }) => {
     <ReactMarkdown
       className="prose xl:prose-xl"
       rehypePlugins={[rehypeRaw]}
-      remarkPlugins={[remarkGfm]}
-      children={content}
-    />
+      remarkPlugins={[remarkGfm]}>
+      {content}
+    </ReactMarkdown>
   );
 };

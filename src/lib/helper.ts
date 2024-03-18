@@ -1,10 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
+import { MarkdownFile } from '@/type';
 
 const envName = 'MARKDOWN_FILES_LOCATION';
 const envValue = process.env[envName];
 
-export function getMarkdownFiles() {
+export function getMarkdownFiles(): MarkdownFile[] {
   const rootDir = envValue || 'data';
   const searchLocation = path.join(process.cwd(), rootDir);
   const dirExists = fs.existsSync(searchLocation);
@@ -16,12 +18,15 @@ export function getMarkdownFiles() {
   }
 
   const foundFiles = fs.readdirSync(searchLocation, { recursive: true });
-  const filepaths: string[] = [];
+  const files: MarkdownFile[] = [];
 
   foundFiles.map((filename) => {
-    filepaths.push(path.join(rootDir, filename.toString()));
-  });
-  const mdFiles = filepaths.filter((path) => path.endsWith('.md') == true);
+    const name = path.join(rootDir, filename.toString());
+    if (name.endsWith('.md') == false) return;
 
-  return mdFiles;
+    const content = fs.readFileSync(name, 'utf-8');
+    const matterResults = matter(content);
+    files.push({ filename: name, content: content, data: matterResults.data });
+  });
+  return files;
 }

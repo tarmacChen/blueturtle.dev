@@ -1,5 +1,3 @@
-'use client';
-
 import { Breadcrumb, BreadcrumbList } from '@/components/ui/breadcrumb';
 import { NavbarProps } from '@/type';
 import { BreadcrumbProvider } from '@/components/shadcn-extended';
