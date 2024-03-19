@@ -1,13 +1,3 @@
----
-title: one
-tags: ["post"]
----
-
-# one
-
-## heading 1
-
-```tsx
 import type {
   InferGetStaticPropsType,
   GetStaticPaths,
@@ -55,4 +45,3 @@ export default function Page({
     </Layout>
   )
 }
-```

@@ -1,8 +1,8 @@
-import { Html, Head, Main, NextScript } from 'next/document';
-import { Logo } from '../components/Logo';
-import { SearchButton } from '../components/SearchButton';
-import { DesktopNavbar } from '../components/DesktopNavbar';
-import { MobileNavbar } from '../components/MobileNavbar';
+import { Html, Head, Main, NextScript } from "next/document"
+import { Logo } from "../components/Logo"
+import { SearchButton } from "../components/SearchButton"
+import { DesktopNavbar } from "../components/DesktopNavbar"
+import { MobileNavbar } from "../components/MobileNavbar"
 
 const NavbarSection = () => (
   <div className="flex flex-row w-full">
@@ -16,15 +16,15 @@ const NavbarSection = () => (
       <SearchButton />
     </div>
   </div>
-);
+)
 
 const FooterSection = () => {
   return (
     <div className="invisible max-md:visible fixed w-screen bottom-0 justify-center">
       <MobileNavbar />
     </div>
-  );
-};
+  )
+}
 
 export default function Document() {
   return (
@@ -39,5 +39,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }

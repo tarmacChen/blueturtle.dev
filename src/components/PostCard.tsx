@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import {
   Card,
@@ -7,16 +7,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { MarkdownFile } from '@/type';
+} from "@/components/ui/card"
+import { MarkdownFile } from "@/type"
 
 export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
-  const meta = mdFile.data;
-  const postUrl = `/posts/${meta?.title}`;
+  const meta = mdFile.data
+  const postUrl = `/posts/${meta?.title}`
 
   return (
     <a href={postUrl}>
-      <Card className="h-36">
+      <Card>
         <CardHeader>
           <CardTitle>{meta?.title}</CardTitle>
           <CardDescription>{meta?.tags}</CardDescription>
@@ -24,5 +24,5 @@ export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
         <CardContent>{meta?.description}</CardContent>
       </Card>
     </a>
-  );
-};
+  )
+}
