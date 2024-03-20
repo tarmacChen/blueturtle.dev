@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test"
 import {
+  cleanDirectory,
   createMarkdownFile,
   getMarkdownFileSaveLocation,
   saveMarkdownFile,
@@ -7,57 +8,60 @@ import {
 import moment from "moment"
 import fs from "fs"
 
+test.afterAll(() => {
+  cleanDirectory()
+})
+
 test.describe("createMarkdownFile", () => {
-  test("content is equal to parameter", async () => {
+  test("content is equal to parameter", () => {
+    const fileName = getRandomMarkdownFileName()
     const content = `# title`
-    const md = createMarkdownFile("test.md", content)
+    const md = createMarkdownFile(fileName, content)
     expect(md.content).toEqual("# title")
   })
 
-  test("metadata are empty when create empty file", async () => {
+  test("metadata are empty when create empty file", () => {
+    const fileName = getRandomMarkdownFileName()
     const content = `---
 ---`
-    const md = createMarkdownFile("test.md", content)
+    const md = createMarkdownFile(fileName, content)
     expect(md.metadata).toBeUndefined
   })
 
-  test("metadata's author is john when inject metadata", async () => {
+  test("metadata's author is john when inject metadata", () => {
+    const fileName = getRandomMarkdownFileName()
     const content = `---
 author: john
 ---`
-    const md = createMarkdownFile("test.md", content)
+    const md = createMarkdownFile(fileName, content)
     expect(md.metadata.author).toEqual("john")
   })
 
-  test("metadata's createdTime is now when file created", async () => {
-    const md = createMarkdownFile("empty.md")
+  test("metadata's createdTime is now when file created", () => {
+    const fileName = getRandomMarkdownFileName()
+    const md = createMarkdownFile(fileName)
     const mdTime = moment(md.metadata.createdTime)
     expect(mdTime.day).toEqual(moment().day)
   })
 
-  test("metadata's createdTime is no effected when pass empty string ", async () => {
+  test("metadata's createdTime is no effected when pass empty string ", () => {
+    const fileName = getRandomMarkdownFileName()
     const content = `---
 createdTime: ''
 ---`
-    const md = createMarkdownFile("test.md", content)
+    const md = createMarkdownFile(fileName, content)
     expect(md.metadata.createdTime).not.toEqual("")
   })
 
-  test("filename is equal to parameter", async () => {
-    const md = createMarkdownFile("empty.md")
-    expect(md.filename).toEqual("empty.md")
-  })
-
-  test("parse string to date and restore, both should be equal", async () => {
-    const timestamp = "2024-03-20T01:19:46.657Z"
-    const time = moment(timestamp)
-    const actual = time.toISOString()
-    expect(actual).toEqual(timestamp)
+  test("filename is equal to parameter", () => {
+    const fileName = getRandomMarkdownFileName()
+    const md = createMarkdownFile(fileName)
+    expect(md.filename).toEqual(fileName)
   })
 })
 
 test.describe("getMarkdownFileSaveLocation", () => {
-  test("fullName is equal to", async () => {
+  test("fullName is equal to", () => {
     const testCases = [
       ["", ""],
       ["test.md", "data/test.md"],
@@ -75,16 +79,26 @@ test.describe("getMarkdownFileSaveLocation", () => {
 })
 
 test.describe("saveMarkdownFile", () => {
-  test("file should be existed after save new markdown file", async () => {
-    const mdFile = createMarkdownFile("test.md", "# title\n## heading 2")
+  test("file should be existed after save new markdown file", () => {
+    const fileName = getRandomMarkdownFileName()
+    const mdFile = createMarkdownFile(fileName, "# title\n## heading 2")
     saveMarkdownFile(mdFile)
     const fullName = getMarkdownFileSaveLocation(mdFile)
     expect(fs.existsSync(fullName)).toBeTruthy
   })
 
-  test("markdown file's content should not be replaced after save file", async () => {
+  test("file should be not existed when save empty name file", () => {
+    const mdFile = createMarkdownFile("", "# title\n## heading 2")
+    saveMarkdownFile(mdFile)
+    saveMarkdownFile(mdFile, true)
+    const fullName = getMarkdownFileSaveLocation(mdFile)
+    expect(fs.existsSync(fullName)).toBeFalsy
+  })
+
+  test("content should not be replaced after save file", () => {
+    const fileName = getRandomMarkdownFileName()
     const expectedContent = "# original"
-    const testFile = createMarkdownFile("test.md", expectedContent)
+    const testFile = createMarkdownFile(fileName, expectedContent)
     const fullName = getMarkdownFileSaveLocation(testFile)
     if (fs.existsSync(fullName)) {
       fs.rmSync(fullName)
@@ -98,10 +112,11 @@ test.describe("saveMarkdownFile", () => {
     expect(actual).toEqual(expectedContent)
   })
 
-  test("markdown file's content should be replaced after save file", async () => {
+  test("content should be replaced after save file", () => {
+    const fileName = getRandomMarkdownFileName()
     const originalContent = "# original"
     const expectedContent = "# replace"
-    const testFile = createMarkdownFile("test.md", originalContent)
+    const testFile = createMarkdownFile(fileName, originalContent)
     const fullName = getMarkdownFileSaveLocation(testFile)
     if (fs.existsSync(fullName)) {
       fs.rmSync(fullName)
@@ -114,12 +129,17 @@ test.describe("saveMarkdownFile", () => {
     const actual = fs.readFileSync(fullName, "utf-8")
     expect(actual).toEqual(expectedContent)
   })
-
-  test("file should be not existed when save empty name file", async () => {
-    const mdFile = createMarkdownFile("", "# title\n## heading 2")
-    saveMarkdownFile(mdFile)
-    saveMarkdownFile(mdFile, true)
-    const fullName = getMarkdownFileSaveLocation(mdFile)
-    expect(fs.existsSync(fullName)).toBeFalsy
-  })
 })
+
+test("parse string to date and restore, both should be equal", () => {
+  const timestamp = "2024-03-20T01:19:46.657Z"
+  const time = moment(timestamp)
+  const actual = time.toISOString()
+  expect(actual).toEqual(timestamp)
+})
+
+const getRandomMarkdownFileName = () => {
+  const max = 10000
+  const randomNumber = (Math.random() * max).toFixed(0)
+  return ["test", "/", randomNumber.toString().padStart(5, "0"), ".md"].join("")
+}

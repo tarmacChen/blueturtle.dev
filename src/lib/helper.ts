@@ -67,10 +67,17 @@ export function saveMarkdownFile(
   replace: boolean = false
 ) {
   const fullName = getMarkdownFileSaveLocation(mdFile)
+  const dirName = path.dirname(fullName)
   const content = mdFile.content ?? ""
 
+  if (fs.existsSync(dirName) == false) fs.mkdirSync(dirName)
   if (fs.existsSync(fullName) && replace == false) return
   if (path.basename(fullName) == "") return
 
   fs.writeFileSync(fullName, content)
+}
+
+export function cleanDirectory() {
+  const dir = path.join(rootDir, "test")
+  fs.rmSync(dir, { force: true, recursive: true })
 }
