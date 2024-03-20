@@ -1,5 +1,3 @@
-"use client"
-
 import {
   Card,
   CardContent,
@@ -11,7 +9,7 @@ import {
 import { MarkdownFile } from "@/type"
 
 export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
-  const meta = mdFile.data
+  const meta = mdFile.metadata
   const postUrl = `/posts/${meta?.title}`
 
   return (

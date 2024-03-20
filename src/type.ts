@@ -28,9 +28,10 @@ export type PostDescription = {
 
 export type MarkdownMetadata = {
   title?: string
-  publicDate?: string
-  description?: string
   author?: string
+  createdTime?: string
+  publishedTime?: string
+  description?: string
   tags?: string[]
   category?: string
   weight?: number
@@ -41,7 +42,7 @@ export type MarkdownMetadata = {
 export type MarkdownFile = {
   filename: string
   content?: string
-  data?: MarkdownMetadata & { [key: string]: any }
+  metadata: MarkdownMetadata & { [key: string]: any }
 }
 
 export interface MarkdownNode {

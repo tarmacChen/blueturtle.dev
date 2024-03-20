@@ -16,7 +16,7 @@ export const getStaticPaths = (async () => {
 
   mdFiles.map((file) => {
     result.paths.push({
-      params: { postTitle: file.data?.title },
+      params: { postTitle: file.metadata?.title },
     })
   })
 
@@ -26,7 +26,7 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (ctx) => {
   const mdFiles = getMarkdownFiles()
   const title = ctx.params?.["postTitle"]
-  const foundFile = mdFiles.find((file) => file.data?.title == title)
+  const foundFile = mdFiles.find((file) => file.metadata?.title == title)
 
   return { props: { md: foundFile } }
 }) satisfies GetStaticProps<{
