@@ -6,7 +6,7 @@ import moment from "moment"
 
 const envName = "MARKDOWN_FILES_LOCATION"
 const envValue = process.env[envName]
-const rootDir = envValue || "data"
+const rootDir = envValue || "contents"
 const placeLocation = path.join(process.cwd(), rootDir)
 
 export function getMarkdownFiles(): MarkdownFile[] {
@@ -77,7 +77,7 @@ export function saveMarkdownFile(
   fs.writeFileSync(fullName, content)
 }
 
-export function cleanDirectory() {
+export function cleanTestDirectory() {
   const dir = path.join(rootDir, "test")
   fs.rmSync(dir, { force: true, recursive: true })
 }

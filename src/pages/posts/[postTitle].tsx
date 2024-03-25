@@ -4,7 +4,7 @@ import type {
   GetStaticProps,
 } from "next"
 import { getMarkdownFiles } from "@/lib/helper"
-import { MarkdownFile } from "@/type"
+import { MarkdownFile } from "mdman"
 import type { GetStaticPathsResult } from "next"
 import { MarkdownViewer } from "@/components/Markdown"
 import Layout from "./layout"

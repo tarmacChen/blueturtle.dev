@@ -10,41 +10,6 @@ export type NavbarProps = {
   items: NavigationMenuProps[]
 }
 
-export enum PostCategoryType {
-  General,
-  React,
-  Other,
-}
-
-export type PostDescription = {
-  id: string | number
-  title: string
-  category: PostCategoryType
-  tags?: string[]
-  content: string
-  description?: string
-  releaseTime?: Date
-}
-
-export type MarkdownMetadata = {
-  title?: string
-  author?: string
-  createdTime?: string
-  publishedTime?: string
-  description?: string
-  tags?: string[]
-  category?: string
-  weight?: number
-  draft?: boolean
-  keywords?: string[]
-}
-
-export type MarkdownFile = {
-  filename: string
-  content?: string
-  metadata: MarkdownMetadata & { [key: string]: any }
-}
-
 export interface MarkdownNode {
   [key: string]: any
   type: string

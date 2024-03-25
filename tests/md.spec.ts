@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test"
 import {
-  cleanDirectory,
+  cleanTestDirectory,
   createMarkdownFile,
   getMarkdownFileSaveLocation,
   saveMarkdownFile,
@@ -9,7 +9,7 @@ import moment from "moment"
 import fs from "fs"
 
 test.afterAll(() => {
-  cleanDirectory()
+  cleanTestDirectory()
 })
 
 test.describe("createMarkdownFile", () => {
