@@ -1,9 +1,9 @@
 ---
 title: "Authentication 驗證"
+category: posts
 author: tarmac
-category: authentication
-tags: [Security, Authentication]
 description: ""
+tags: [Security, Authentication]
 createdTime: "2024-01-26T14:37:40+08:00"
 draft: true
 ---

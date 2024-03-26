@@ -5,8 +5,9 @@ import Layout from "./layout"
 import moment from "moment"
 
 export async function getStaticProps() {
-  const mdFiles = getMarkdownFiles().sort(sortByCreatedTime).reverse()
-  return { props: { mdFiles } }
+  const files = getMarkdownFiles().sort(sortByCreatedTime).reverse()
+  const mdFiles = files.filter((file) => file.metadata.category == "posts")
+  return { props: { mdFiles: mdFiles } }
 }
 
 const sortByCreatedTime = (a: MarkdownFile, b: MarkdownFile): number => {

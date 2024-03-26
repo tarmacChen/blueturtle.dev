@@ -1,7 +1,7 @@
 ---
 title: "避免注意力分散 Avoid space out"
+category: posts
 author: tarmac
-category: other
 tags: [Productivity]
 description: "用限制資源這個方法來約束自己處理事情時的擁有的條件"
 createdTime: "2023-02-23T07:15:39+08:00"

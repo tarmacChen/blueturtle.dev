@@ -1,7 +1,7 @@
 ---
 title: "ORM的誕生及了解JPA, Hibernate 與 Spring Data JPA之間的關係"
 author: tarmac
-category: java
+category: other
 tags: [JDBC, ORM, JPA, Hibernate, Spring Data JPA]
 description: ""
 createdTime: "2024-03-26T06:37:00.352Z"
