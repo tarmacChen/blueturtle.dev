@@ -4,6 +4,7 @@ import {
   RocketIcon,
   FileIcon,
   PersonIcon,
+  ScissorsIcon,
 } from "@radix-ui/react-icons"
 
 export function MobileNavbar() {
@@ -42,6 +43,10 @@ export function MobileNavbar() {
       <NavbarItem href="/projects">
         <RocketIcon />
         Projects
+      </NavbarItem>
+      <NavbarItem href="/snippets">
+        <ScissorsIcon />
+        Snippets
       </NavbarItem>
       <NavbarItem href="/posts">
         <FileIcon />
