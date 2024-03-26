@@ -64,6 +64,26 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
         <code className={snippetStyle} {...props}></code>
       )
     },
+    img: ({
+      node,
+      src,
+      inline,
+      className,
+      ...props
+    }: {
+      node: MarkdownNode
+      src: string
+      inline: boolean
+      className: string
+      [key: string]: any
+    }) => {
+      // remove 'public' in static file url
+      const imageSource = src.includes("public")
+        ? "/" + src.split("/").slice(2).join("/")
+        : src
+
+      return <img src={imageSource} {...props} />
+    },
   }
 
   return (
