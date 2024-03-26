@@ -2,10 +2,32 @@ import Markdown from "react-markdown"
 import rehypeRaw from "rehype-raw"
 import remarkGfm from "remark-gfm"
 import remarkToc from "remark-toc"
+import remarkGeomoji from "remark-gemoji"
+import rehypeSlug from "rehype-slug"
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
 import rangeParser from "parse-numeric-range"
 import { MarkdownTypes, MarkdownNode } from "@/type"
-import remarkGeomoji from "remark-gemoji"
+
+const CodeSnippet = ({
+  className,
+  children,
+  ...props
+}: {
+  className?: string
+  children?: React.ReactNode
+}) => {
+  const codeSnippetStyle = [
+    className,
+    "mx-1 p-1 rounded-lg bg-gray-700 text-yellow-300",
+  ].join(" ")
+  console.log(className)
+
+  return (
+    <code className={codeSnippetStyle} {...props}>
+      {children}
+    </code>
+  )
+}
 
 export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
@@ -56,7 +78,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
           {props.children}
         </SyntaxHighlighter>
       ) : (
-        <code className={className} {...props}></code>
+        <CodeSnippet className={className} {...props}></CodeSnippet>
       )
     },
   }
@@ -64,7 +86,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
   return (
     <Markdown
       className="prose max-md:prose-sm w-full"
-      rehypePlugins={[rehypeRaw]}
+        rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkToc, remarkGeomoji]}
       components={MarkdownComponent}
     >

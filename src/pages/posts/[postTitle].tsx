@@ -8,7 +8,7 @@ import { MarkdownFile } from "mdman"
 import type { GetStaticPathsResult } from "next"
 import { MarkdownViewer } from "@/components/MarkdownViewer"
 import Layout from "./layout"
-import { materialOceanic as codeStyle } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import { a11yDark as codeStyle } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles()
