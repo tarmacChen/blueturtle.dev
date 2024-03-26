@@ -5,12 +5,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
-import React from "react"
-import { useMobile } from "@/hooks/useMobile"
+} from '@/components/ui/navigation-menu';
+import React from 'react';
+import { useMobile } from '@/hooks/useMobile';
 
 export function DesktopNavbar() {
-  const { isMobile } = useMobile()
+  const { isMobile } = useMobile();
+  const linkClasses = [navigationMenuTriggerStyle()].join(' ');
 
   const Navbar = () => {
     return (
@@ -19,33 +20,29 @@ export function DesktopNavbar() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/posts"
-              className={navigationMenuTriggerStyle()}
-            >
+              className={linkClasses}>
               Posts
             </NavigationMenuLink>
             <NavigationMenuLink
               href="/snippets"
-              className={navigationMenuTriggerStyle()}
-            >
+              className={linkClasses}>
               Snippets
             </NavigationMenuLink>
             <NavigationMenuLink
               href="/projects"
-              className={navigationMenuTriggerStyle()}
-            >
+              className={linkClasses}>
               Projects
             </NavigationMenuLink>
             <NavigationMenuLink
               href="/contact"
-              className={navigationMenuTriggerStyle()}
-            >
+              className={linkClasses}>
               Contact
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-    )
-  }
+    );
+  };
 
-  return isMobile ? <></> : <Navbar />
+  return isMobile ? <></> : <Navbar />;
 }
