@@ -80,3 +80,12 @@ export function cleanTestDirectory() {
   const dir = path.join(rootDir, "test")
   fs.rmSync(dir, { force: true, recursive: true })
 }
+
+export const sortByCreatedTime = (a: MarkdownFile, b: MarkdownFile): number => {
+  const aTime = moment(a.metadata.createdTime)
+  const bTime = moment(b.metadata.createdTime)
+
+  if (aTime.isBefore(bTime)) return -1
+  if (aTime.isAfter(bTime)) return 1
+  return 0
+}

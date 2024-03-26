@@ -12,7 +12,7 @@ import moment from "moment"
 
 export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const meta = mdFile.metadata
-  const postUrl = `/posts/${meta?.title}`
+  const linkUrl = `/posts/${meta?.title}`
   const createdTime = moment(meta.createdTime)
   const tags = meta.tags ? meta.tags.join(", ") : ""
 
@@ -20,7 +20,7 @@ export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const CategoryBadge = () => <Badge>{meta.category}</Badge>
 
   return (
-    <a href={postUrl}>
+    <a href={linkUrl}>
       <Card>
         <CardHeader>
           <CardTitle>{meta?.title}</CardTitle>
