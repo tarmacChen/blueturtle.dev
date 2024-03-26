@@ -93,7 +93,11 @@ CurrentUserCurrentHost : C:\Users\hugo\Documents\PowerShell\Microsoft.PowerShell
 Length                 : 67
 ```
 
-我只想要套用設定到當前使用者上，修改`C:\Users\hugo\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+我只想要套用設定到當前使用者上，修改
+
+```powershell
+C:\Users\hugo\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+```
 
 ```powershell
 這行在安裝完Jabba後應該會自己出現不用特別新增

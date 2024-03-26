@@ -8,27 +8,6 @@ import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
 import rangeParser from "parse-numeric-range"
 import { MarkdownTypes, MarkdownNode } from "@/type"
 
-const CodeSnippet = ({
-  className,
-  children,
-  ...props
-}: {
-  className?: string
-  children?: React.ReactNode
-}) => {
-  const codeSnippetStyle = [
-    className,
-    "mx-1 p-1 rounded-lg bg-gray-700 text-yellow-300",
-  ].join(" ")
-  console.log(className)
-
-  return (
-    <code className={codeSnippetStyle} {...props}>
-      {children}
-    </code>
-  )
-}
-
 export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
     code({
@@ -44,6 +23,10 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
     }) {
       const hasLang = /language-(\w+)/.exec(className || "")
       const hasMeta = node?.data?.meta
+      const snippetStyle = [
+        className,
+        "mx-1 p-1 rounded-lg bg-gray-700 text-yellow-300",
+      ].join(" ")
 
       const applyHighlight = (lineNumber: number) => {
         if (hasMeta) {
@@ -78,7 +61,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
           {props.children}
         </SyntaxHighlighter>
       ) : (
-        <CodeSnippet className={className} {...props}></CodeSnippet>
+        <code className={snippetStyle} {...props}></code>
       )
     },
   }
@@ -86,7 +69,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
   return (
     <Markdown
       className="prose max-md:prose-sm w-full"
-        rehypePlugins={[rehypeRaw, rehypeSlug]}
+      rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkToc, remarkGeomoji]}
       components={MarkdownComponent}
     >
