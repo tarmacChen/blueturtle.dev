@@ -1,11 +1,10 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-export function Logo() {
+export function Logo({ className }: { className?: string }) {
   return (
-    <Button asChild>
+    <Button asChild className={className}>
       <Link href="/">blueturtle.dev</Link>
-      {/* <a href="/">blueturtle.dev</a> */}
     </Button>
-  );
+  )
 }

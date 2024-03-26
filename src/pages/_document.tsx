@@ -5,15 +5,13 @@ import { DesktopNavbar } from "../components/DesktopNavbar"
 import { MobileNavbar } from "../components/MobileNavbar"
 
 const NavbarSection = () => (
-  <div className="flex flex-row w-full">
-    <div className="flex m-4 justify-center">
-      <Logo />
-    </div>
-    <div className="invisible md:visible flex w-full justify-center">
+  <div className="flex flex-row w-full align-middle h-20 items-center">
+    <Logo className="ml-4" />
+    <div className="invisible md:visible w-full flex justify-center">
       <DesktopNavbar />
     </div>
-    <div className="flex items-center">
-      <SearchButton />
+    <div className="flex items-center w-96">
+      <SearchButton className="mr-4 " />
     </div>
   </div>
 )

@@ -6,9 +6,9 @@ import type {
 import { getMarkdownFiles } from "@/lib/helper"
 import { MarkdownFile } from "mdman"
 import type { GetStaticPathsResult } from "next"
-import { MarkdownViewer } from "@/components/Markdown"
+import { MarkdownViewer } from "@/components/MarkdownViewer"
 import Layout from "./layout"
-import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import { materialOceanic as codeStyle } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles()
@@ -40,7 +40,7 @@ export default function Page({
     <Layout>
       <MarkdownViewer
         markdown={{ content: md?.content }}
-        style={materialOceanic}
+        codeStyle={codeStyle}
       ></MarkdownViewer>
     </Layout>
   )

@@ -5,8 +5,9 @@ import remarkToc from "remark-toc"
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter"
 import rangeParser from "parse-numeric-range"
 import { MarkdownTypes, MarkdownNode } from "@/type"
+import remarkGeomoji from "remark-gemoji"
 
-export const MarkdownViewer = ({ markdown, style }: MarkdownTypes) => {
+export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
     code({
       node,
@@ -43,7 +44,7 @@ export const MarkdownViewer = ({ markdown, style }: MarkdownTypes) => {
       }
       return hasLang ? (
         <SyntaxHighlighter
-          style={style}
+          style={codeStyle}
           language={hasLang[1]}
           PreTag="div"
           className="codeStyle"
@@ -62,9 +63,9 @@ export const MarkdownViewer = ({ markdown, style }: MarkdownTypes) => {
 
   return (
     <Markdown
-      className="prose prose-xl "
+      className="prose max-md:prose-sm w-full"
       rehypePlugins={[rehypeRaw]}
-      remarkPlugins={[remarkGfm, remarkToc]}
+      remarkPlugins={[remarkGfm, remarkToc, remarkGeomoji]}
       components={MarkdownComponent}
     >
       {markdown?.content ?? ""}

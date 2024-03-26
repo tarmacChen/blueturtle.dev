@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
-import { MarkdownFile, MarkdownMetadata } from "@/type"
+import { MarkdownFile, MarkdownMetadata } from "mdman"
 import moment from "moment"
 
 const envName = "MARKDOWN_FILES_LOCATION"
@@ -26,7 +26,6 @@ export function getMarkdownFiles(): MarkdownFile[] {
     if (name.endsWith(".md") == false) return
 
     const content = fs.readFileSync(name, "utf-8")
-    console.log(content)
     const matterResults = matter(content)
 
     files.push({
