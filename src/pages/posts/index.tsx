@@ -3,6 +3,8 @@ import { MarkdownFile } from 'mdman';
 import Layout from './layout';
 import moment from 'moment';
 import { MainWrapper } from '../../components/MainWrapper';
+import { useEffect, useState } from 'react';
+import { useScroll } from '@/hooks/useScroll';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -12,8 +14,27 @@ export async function getStaticProps() {
 
 export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   {
+    const [scrollY, setScrollY] = useState(0);
+    const { isScrollingUp, updatePosition } = useScroll();
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    useEffect(() => {
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+
+    useEffect(() => {
+      updatePosition(scrollY);
+    }, [scrollY]);
+
     return (
-      <MainWrapper>
+      <MainWrapper showMobileNavbar={isScrollingUp}>
         <Layout>
           <div className="w-full items-start">
             <h1 className="text-2xl underline">All Posts</h1>

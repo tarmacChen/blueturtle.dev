@@ -10,6 +10,8 @@ import { MarkdownViewer } from '@/components/MarkdownViewer';
 import Layout from './layout';
 import { a11yDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { MainWrapper } from '../../components/MainWrapper';
+import { useEffect, useState } from 'react';
+import { useScroll } from '@/hooks/useScroll';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();
@@ -37,8 +39,27 @@ export const getStaticProps = (async (ctx) => {
 export default function Page({
   md,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [scrollY, setScrollY] = useState(0);
+  const { isScrollingUp, updatePosition } = useScroll();
+
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    updatePosition(scrollY);
+  }, [scrollY]);
+
   return (
-    <MainWrapper>
+    <MainWrapper showMobileNavbar={isScrollingUp}>
       <Layout>
         <MarkdownViewer
           markdown={{ content: md?.content }}

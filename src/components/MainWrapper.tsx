@@ -3,17 +3,17 @@ import { NavbarSection } from '@/components/NavbarSection';
 
 export const MainWrapper = ({
   children,
-  visible,
+  showMobileNavbar,
 }: {
   children: React.ReactNode;
-  visible?: boolean;
+  showMobileNavbar?: boolean;
 }) => {
   return (
     <>
       <NavbarSection />
       {children}
       <div className="h-20"></div>
-      <FooterSection visible={visible} />
+      <FooterSection visible={showMobileNavbar} />
     </>
   );
 };

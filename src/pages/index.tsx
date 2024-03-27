@@ -1,8 +1,9 @@
 import { PostCard } from '@/components/PostCard';
 import { getMarkdownFiles, sortByCreatedTime } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainWrapper } from '../components/MainWrapper';
+import { useScroll } from '@/hooks/useScroll';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -11,28 +12,27 @@ export async function getStaticProps() {
 }
 
 export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
-  const previousScrollY = useRef(0);
-  const [visible, setVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const { isScrollingUp, updatePosition } = useScroll();
 
-  const updatePosition = () => {
-    if (previousScrollY.current > window.scrollY) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-    previousScrollY.current = window.scrollY;
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', updatePosition);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', updatePosition);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  useEffect(() => {
+    updatePosition(scrollY);
+  }, [scrollY]);
+
   return (
-    <MainWrapper visible={visible}>
+    <MainWrapper showMobileNavbar={isScrollingUp}>
       {mdFiles.map((file) => {
         return (
           <div
