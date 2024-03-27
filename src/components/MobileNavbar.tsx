@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import {
   HomeIcon,
   RocketIcon,
@@ -7,8 +7,9 @@ import {
   ScissorsIcon,
 } from '@radix-ui/react-icons';
 
-export function MobileNavbar({ position }: { position?: number }) {
-  const containerClasses = 'flex flex-row flex-1 px-0 justify-around ';
+export function MobileNavbar() {
+  const containerClasses =
+    'flex flex-row flex-1 px-0 justify-around bg-background text-foreground';
 
   const NavbarItem = ({
     href,
@@ -17,16 +18,16 @@ export function MobileNavbar({ position }: { position?: number }) {
     href?: string;
     children: ReactNode;
   }) => {
-    const containerClasses =
-      'py-2 text-sm flex flex-col w-full justify-center items-center bg-white hover:bg-blue-100 hover:cursor-pointer';
-    const itemClasses = 'flex flex-col items-center';
+    const navbarItemContainerClasses =
+      'py-2 text-sm flex flex-col w-full justify-center items-center hover:bg-primary hover:text-secondary hover:cursor-pointer';
+    const navbarItemClasses = 'flex flex-col items-center';
 
     return (
-      <div className={containerClasses}>
+      <div className={navbarItemContainerClasses}>
         <a
           href={href}
           className="w-full h-full">
-          <div className={itemClasses}>{children}</div>
+          <div className={navbarItemClasses}>{children}</div>
         </a>
       </div>
     );
