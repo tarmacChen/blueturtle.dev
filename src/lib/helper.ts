@@ -90,5 +90,3 @@ export const sortByCreatedTime = (a: MarkdownFile, b: MarkdownFile): number => {
   return 0;
 };
 
-export const mergeClassNames = (...classNames: string[]) =>
-  classNames.filter(Boolean).join(' ');

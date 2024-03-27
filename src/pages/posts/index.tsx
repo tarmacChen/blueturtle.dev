@@ -1,6 +1,5 @@
 import { getMarkdownFiles, sortByCreatedTime } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
-import Layout from './layout';
 import moment from 'moment';
 import { MainWrapper } from '../../components/MainWrapper';
 import { useEffect, useState } from 'react';
@@ -36,17 +35,15 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
 
     return (
       <MainWrapper showMobileNavbar={isScrollingUp}>
-        <Layout>
-          <div className="w-full items-start">
-            <h1 className="text-2xl underline">All Posts</h1>
-          </div>
+        <div className="flex flex-col gap-4 ">
+          <h1 className="text-2xl underline">All Posts</h1>
           {mdFiles.map((file) => {
             const createdTime = moment(file.metadata.createdTime).format('ll');
             const url = `/posts/${file.metadata?.title}`;
 
             return (
               <div
-                className="flex flex-row md:w-2/3 max-md:w-full justify-between"
+                className="flex flex-row w-full justify-between"
                 key={file.filename}>
                 <Link
                   href={url}
@@ -57,7 +54,7 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
               </div>
             );
           })}
-        </Layout>
+        </div>
       </MainWrapper>
     );
   }

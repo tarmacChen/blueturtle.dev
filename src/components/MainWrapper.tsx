@@ -10,9 +10,11 @@ export const MainWrapper = ({
 }) => {
   return (
     <>
-      <NavbarSection />
-      {children}
-      <div className="h-20"></div>
+      <div className="mx-auto pl-4 pr-6 w-full">
+        <NavbarSection />
+        {children}
+        <div className="h-20"></div>
+      </div>
       <FooterSection visible={showMobileNavbar} />
     </>
   );

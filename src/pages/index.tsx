@@ -33,7 +33,7 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
 
   return (
     <MainWrapper showMobileNavbar={isScrollingUp}>
-      <div className="flex flex-col mx-4 gap-4">
+      <div className="flex flex-col gap-4 ">
         {mdFiles.map((file) => {
           return (
             <div

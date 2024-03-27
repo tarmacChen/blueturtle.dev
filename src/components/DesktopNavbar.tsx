@@ -9,9 +9,12 @@ import {
 import React from 'react';
 import { useMobile } from '@/hooks/useMobile';
 
+const mergeClassNames = (...classNames: string[]) =>
+  classNames.filter(Boolean).join(' ');
+
 export function DesktopNavbar() {
   const { isMobile } = useMobile();
-  const linkClasses = [navigationMenuTriggerStyle()].join(' ');
+  const linkClasses = mergeClassNames(navigationMenuTriggerStyle());
 
   const Navbar = () => {
     return (

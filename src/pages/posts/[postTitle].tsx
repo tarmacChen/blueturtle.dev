@@ -7,7 +7,6 @@ import { getMarkdownFiles } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import type { GetStaticPathsResult } from 'next';
 import { MarkdownViewer } from '@/components/MarkdownViewer';
-import Layout from './layout';
 import { a11yDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { MainWrapper } from '../../components/MainWrapper';
 import { useEffect, useState } from 'react';
@@ -60,11 +59,11 @@ export default function Page({
 
   return (
     <MainWrapper showMobileNavbar={isScrollingUp}>
-      <Layout>
+      <div className="flex flex-col items-center">
         <MarkdownViewer
           markdown={{ content: md?.content }}
           codeStyle={codeStyle}></MarkdownViewer>
-      </Layout>
+      </div>
     </MainWrapper>
   );
 }
