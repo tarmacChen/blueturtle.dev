@@ -6,6 +6,7 @@ import {
   PersonIcon,
   ScissorsIcon,
 } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
 export function MobileNavbar() {
   const containerClasses =
@@ -15,7 +16,7 @@ export function MobileNavbar() {
     href,
     children,
   }: {
-    href?: string;
+    href: string;
     children: ReactNode;
   }) => {
     const navbarItemContainerClasses =
@@ -24,11 +25,9 @@ export function MobileNavbar() {
 
     return (
       <div className={navbarItemContainerClasses}>
-        <a
-          href={href}
-          className="w-full h-full">
+        <Link href={href}>
           <div className={navbarItemClasses}>{children}</div>
-        </a>
+        </Link>
       </div>
     );
   };
