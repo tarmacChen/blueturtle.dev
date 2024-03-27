@@ -5,6 +5,7 @@ import moment from 'moment';
 import { MainWrapper } from '../../components/MainWrapper';
 import { useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
+import Link from 'next/link';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -41,18 +42,18 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
           </div>
           {mdFiles.map((file) => {
             const createdTime = moment(file.metadata.createdTime).format('ll');
-            const linkUrl = `/posts/${file.metadata?.title}`;
+            const url = `/posts/${file.metadata?.title}`;
 
             return (
               <div
                 className="flex flex-row md:w-2/3 max-md:w-full justify-between"
                 key={file.filename}>
-                <a
-                  href={linkUrl}
+                <Link
+                  href={url}
                   className="flex flex-row w-full border-b-2 p-2 hover:text-blue-600 hover:underline justify-between">
                   <div>{file.metadata.title}</div>
                   <div>{createdTime}</div>
-                </a>
+                </Link>
               </div>
             );
           })}
