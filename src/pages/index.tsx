@@ -11,12 +11,16 @@ export async function getStaticProps() {
 }
 
 export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
-  const scrollPosition = useRef(0);
-  const [visible, setVisible] = useState(true);
+  const previousScrollY = useRef(0);
+  const [visible, setVisible] = useState(false);
 
   const updatePosition = () => {
-    scrollPosition.current = window.scrollY;
-    setVisible(scrollPosition.current > 0);
+    if (previousScrollY.current > window.scrollY) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+    previousScrollY.current = window.scrollY;
   };
 
   useEffect(() => {
