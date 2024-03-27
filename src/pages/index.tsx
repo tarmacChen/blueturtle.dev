@@ -33,15 +33,17 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
 
   return (
     <MainWrapper showMobileNavbar={isScrollingUp}>
-      {mdFiles.map((file) => {
-        return (
-          <div
-            key={file.filename}
-            className="w-full">
-            <PostCard mdFile={file}></PostCard>
-          </div>
-        );
-      })}
+      <div className="flex flex-col mx-4 gap-4">
+        {mdFiles.map((file) => {
+          return (
+            <div
+              key={file.filename}
+              className="w-full">
+              <PostCard mdFile={file}></PostCard>
+            </div>
+          );
+        })}
+      </div>
     </MainWrapper>
   );
 }
