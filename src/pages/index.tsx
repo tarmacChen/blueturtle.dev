@@ -1,6 +1,8 @@
 import { PostCard } from '@/components/PostCard';
 import { getMarkdownFiles, sortByCreatedTime } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
+import { useEffect, useRef, useState } from 'react';
+import { MainWrapper } from '../components/MainWrapper';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -9,8 +11,24 @@ export async function getStaticProps() {
 }
 
 export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
+  const scrollPosition = useRef(0);
+  const [visible, setVisible] = useState(true);
+
+  const updatePosition = () => {
+    scrollPosition.current = window.scrollY;
+    setVisible(scrollPosition.current > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', updatePosition);
+
+    return () => {
+      window.removeEventListener('scroll', updatePosition);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col mx-auto p-4 gap-4 max-md:w-full xl:w-2/3 items-center ">
+    <MainWrapper visible={visible}>
       {mdFiles.map((file) => {
         return (
           <div
@@ -20,6 +38,6 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
           </div>
         );
       })}
-    </div>
+    </MainWrapper>
   );
 }
