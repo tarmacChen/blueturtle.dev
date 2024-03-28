@@ -35,8 +35,10 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
 
     return (
       <MainWrapper showMobileNavbar={isScrollingUp}>
-        <div className="flex flex-col gap-4 mx-auto ">
-          <h1 className="text-2xl underline">All Posts</h1>
+        <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
+          All Posts
+        </h1>
+        <div className="flex flex-col gap-1 mx-auto ">
           {mdFiles.map((file) => {
             const createdTime = moment(file.metadata.createdTime).format('ll');
             const url = `/posts/${file.metadata?.title}`;
@@ -47,7 +49,7 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
                 key={file.filename}>
                 <Link
                   href={url}
-                  className="flex flex-row w-full border-b-2 p-2 hover:text-blue-600 hover:underline justify-between">
+                  className="flex flex-row w-full border-b-2 p-2 border-dotted hover:text-blue-600 hover:border-b-blue-600 justify-between">
                   <div>{file.metadata.title}</div>
                   <div>{createdTime}</div>
                 </Link>

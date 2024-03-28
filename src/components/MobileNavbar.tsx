@@ -33,7 +33,7 @@ export function MobileNavbar() {
   };
 
   const Navbar = () => (
-    <div className={containerClasses}>
+    <nav className={containerClasses}>
       <NavbarItem href="/">
         <HomeIcon />
         Home
@@ -54,7 +54,7 @@ export function MobileNavbar() {
         <FileIcon />
         Posts
       </NavbarItem>
-    </div>
+    </nav>
   );
 
   return <Navbar />;

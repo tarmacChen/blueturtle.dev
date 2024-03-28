@@ -6,8 +6,8 @@ export const FooterSection = ({ visible }: { visible?: boolean }) => {
     : 'hidden fixed w-screen bottom-0 justify-center';
 
   return (
-    <div className={navbarClasses}>
+    <footer className={navbarClasses}>
       <MobileNavbar />
-    </div>
+    </footer>
   );
 };
