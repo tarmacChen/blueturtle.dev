@@ -35,7 +35,7 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
 
     return (
       <MainWrapper showMobileNavbar={isScrollingUp}>
-        <div className="flex flex-col gap-4 ">
+        <div className="flex flex-col gap-4 mx-auto ">
           <h1 className="text-2xl underline">All Posts</h1>
           {mdFiles.map((file) => {
             const createdTime = moment(file.metadata.createdTime).format('ll');
@@ -43,7 +43,7 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
 
             return (
               <div
-                className="flex flex-row w-full justify-between"
+                className="flex flex-row w-full"
                 key={file.filename}>
                 <Link
                   href={url}

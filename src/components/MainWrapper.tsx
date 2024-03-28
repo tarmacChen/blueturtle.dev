@@ -10,10 +10,12 @@ export const MainWrapper = ({
 }) => {
   return (
     <>
-      <div className="mx-auto px-8 overflow-hidden">
-        <NavbarSection />
+      <div className="w-full lg:w-2/3 mx-auto">
+        <div className="overflow-hidden">
+          <NavbarSection />
+        </div>
+        <div className="mt-20 px-8 overflow-scroll">{children}</div>
       </div>
-      <div className="mt-20 px-8 overflow-scroll">{children}</div>
       <FooterSection visible={showMobileNavbar} />
     </>
   );
