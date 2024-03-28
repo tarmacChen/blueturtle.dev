@@ -20,7 +20,7 @@ export function DesktopNavbar() {
     const isActive = href == pathname;
     const linkClasses = mergeClassNames(
       navigationMenuTriggerStyle(),
-      'bg-white rounded-none border-0 ',
+      'bg-white rounded-md border-0 mx-2 ',
       isActive ? 'border-primary border-b-2' : ''
     );
 
