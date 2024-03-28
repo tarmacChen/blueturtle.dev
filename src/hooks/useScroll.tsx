@@ -5,7 +5,7 @@ export const useScroll = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(false);
 
   const updatePosition = (scrollY: number): any => {
-    if (previousScrollY.current > scrollY) {
+    if (previousScrollY.current > scrollY || previousScrollY.current == 0) {
       setIsScrollingUp(true);
     } else {
       setIsScrollingUp(false);

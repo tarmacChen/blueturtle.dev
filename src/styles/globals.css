@@ -75,7 +75,7 @@
 }
 
 [class*='title-level'].active {
-  @apply font-medium bg-blue-50;
+  @apply font-medium bg-gray-100;
 }
 
 .markdown-navigation .title-level1 {

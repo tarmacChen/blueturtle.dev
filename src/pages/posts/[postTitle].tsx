@@ -64,11 +64,13 @@ export default function Page({
         <MarkdownNavbar
           source={md?.content || ''}
           ordered={true}
-          className="w-64 fixed overflow-hidden"
+          className="invisible md:visible w-64 fixed overflow-hidden"
         />
-        <MarkdownViewer
-          markdown={{ content: md?.content }}
-          codeStyle={codeStyle}></MarkdownViewer>
+        <div className="w-full flex justify-center">
+          <MarkdownViewer
+            markdown={{ content: md?.content }}
+            codeStyle={codeStyle}></MarkdownViewer>
+        </div>
       </div>
     </MainWrapper>
   );
