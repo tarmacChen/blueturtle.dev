@@ -74,8 +74,8 @@
   @apply cursor-pointer text-blue-600 underline font-medium;
 }
 
-.markdown-navigation .title-anchor:active {
-  @apply font-bold;
+[class*='title-level'].active {
+  @apply font-medium bg-blue-50;
 }
 
 .markdown-navigation .title-level1 {
