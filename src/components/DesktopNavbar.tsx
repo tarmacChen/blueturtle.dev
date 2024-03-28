@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/navigation-menu';
 import React from 'react';
 import { useMobile } from '@/hooks/useMobile';
+import Link from 'next/link';
 
 const mergeClassNames = (...classNames: string[]) =>
   classNames.filter(Boolean).join(' ');
@@ -24,26 +25,38 @@ export function DesktopNavbar() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuLink
+            <Link
               href="/posts"
-              className={linkClasses}>
-              Posts
-            </NavigationMenuLink>
-            <NavigationMenuLink
+              legacyBehavior
+              passHref>
+              <NavigationMenuLink className={linkClasses}>
+                Posts
+              </NavigationMenuLink>
+            </Link>
+            <Link
               href="/snippets"
-              className={linkClasses}>
-              Snippets
-            </NavigationMenuLink>
-            <NavigationMenuLink
+              legacyBehavior
+              passHref>
+              <NavigationMenuLink className={linkClasses}>
+                Snippets
+              </NavigationMenuLink>
+            </Link>
+            <Link
               href="/projects"
-              className={linkClasses}>
-              Projects
-            </NavigationMenuLink>
-            <NavigationMenuLink
+              legacyBehavior
+              passHref>
+              <NavigationMenuLink className={linkClasses}>
+                Projects
+              </NavigationMenuLink>
+            </Link>
+            <Link
               href="/contact"
-              className={linkClasses}>
-              Contact
-            </NavigationMenuLink>
+              legacyBehavior
+              passHref>
+              <NavigationMenuLink className={linkClasses}>
+                Contact
+              </NavigationMenuLink>
+            </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
