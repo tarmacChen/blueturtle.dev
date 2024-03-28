@@ -65,7 +65,7 @@ export default function Page({
           source={md?.content || ''}
           ordered={true}
           headingTopOffset={64}
-          className="invisible md:visible w-64 fixed overflow-hidden"
+          className="invisible md:visible w-64 fixed overflow-hidden bg-gray-100/40"
         />
         <div className="w-full flex justify-center">
           <MarkdownViewer

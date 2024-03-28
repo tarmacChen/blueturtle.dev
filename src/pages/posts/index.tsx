@@ -42,16 +42,29 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
           {mdFiles.map((file) => {
             const createdTime = moment(file.metadata.createdTime).format('ll');
             const url = `/posts/${file.metadata?.title}`;
+            const tags = file.metadata?.tags
+              ? file.metadata?.tags.join(', ')
+              : '';
 
             return (
               <div
-                className="flex flex-row w-full"
+                className="flex flex-row w-full hover:bg-blue-50"
                 key={file.filename}>
                 <Link
                   href={url}
-                  className="flex flex-row w-full border-b-2 p-2 border-dotted hover:text-blue-600 hover:border-b-blue-600 justify-between">
-                  <div>{file.metadata.title}</div>
-                  <div>{createdTime}</div>
+                  className="flex flex-row w-full border-b-2 p-2 border-dotted hover:border-b-blue-600 justify-between">
+                  <div className="flex flex-col">
+                    <div>{file.metadata.title}</div>
+                    <div className="text-sm font-light text-gray-600">
+                      {file.metadata.description}
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <div className="text-sm ">{createdTime}</div>
+                    <div className="text-sm font-light text-gray-600">
+                      {tags}
+                    </div>
+                  </div>
                 </Link>
               </div>
             );

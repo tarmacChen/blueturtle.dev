@@ -3,7 +3,7 @@
 }
 
 .markdown-navigation .title-anchor {
-  @apply text-base font-light border-b-2 border-dotted border-gray-400;
+  @apply text-base font-light border-b-2 mx-2 border-dotted border-gray-400;
 }
 
 .markdown-navigation .title-anchor small {
