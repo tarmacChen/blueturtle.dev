@@ -10,7 +10,7 @@ export const MainWrapper = ({
 }) => {
   return (
     <>
-      <header className="w-full lg:w-2/3 mx-auto">
+      <header className="w-full lg:w-3/4 mx-auto">
         <nav className="overflow-hidden">
           <NavbarSection />
         </nav>
