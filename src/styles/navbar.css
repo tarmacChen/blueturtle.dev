@@ -1,0 +1,31 @@
+.markdown-navigation {
+  @apply flex flex-col gap-1 pl-2 border-l-2 border-l-blue-600;
+}
+
+.markdown-navigation .title-anchor {
+  @apply text-base font-light border-b-2 border-dotted border-gray-400;
+}
+
+.markdown-navigation .title-anchor small {
+  @apply hidden;
+}
+
+.markdown-navigation .title-anchor:hover {
+  @apply cursor-pointer text-blue-600 underline font-medium;
+}
+
+[class*='title-level'].active {
+  @apply font-medium bg-gray-100;
+}
+
+.markdown-navigation .title-level1 {
+  @apply font-medium;
+}
+
+.markdown-navigation .title-level2 {
+  @apply ml-4;
+}
+
+.markdown-navigation .title-level3 {
+  @apply ml-8;
+}
