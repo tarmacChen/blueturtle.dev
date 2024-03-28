@@ -14,7 +14,10 @@ const mergeClassNames = (...classNames: string[]) =>
 
 export function DesktopNavbar() {
   const { isMobile } = useMobile();
-  const linkClasses = mergeClassNames(navigationMenuTriggerStyle());
+  const linkClasses = mergeClassNames(
+    navigationMenuTriggerStyle(),
+    'bg-white rounded-none border-0'
+  );
 
   const Navbar = () => {
     return (

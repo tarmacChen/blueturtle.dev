@@ -11,6 +11,7 @@ import { a11yDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/
 import { MainWrapper } from '../../components/MainWrapper';
 import { useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
+import MarkdownNavbar from 'markdown-navbar';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();
@@ -59,7 +60,12 @@ export default function Page({
 
   return (
     <MainWrapper showMobileNavbar={isScrollingUp}>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-row">
+        <MarkdownNavbar
+          source={md?.content || ''}
+          ordered={true}
+          className="w-64 fixed overflow-hidden"
+        />
         <MarkdownViewer
           markdown={{ content: md?.content }}
           codeStyle={codeStyle}></MarkdownViewer>

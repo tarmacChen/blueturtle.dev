@@ -1,16 +1,14 @@
 ---
-title: "Authentication 驗證"
+title: 'Authentication 驗證'
 category: posts
 author: tarmac
-description: ""
+description: ''
 tags: [Security, Authentication]
-createdTime: "2024-01-26T14:37:40+08:00"
+createdTime: '2024-01-26T14:37:40+08:00'
 draft: true
 ---
 
 # Authentication 驗證
-
-## Table of Contents
 
 ## 妥善保存使用者的密碼
 
@@ -78,14 +76,14 @@ draft: true
 
 ```js
 document.cookie =
-  "user_session=d23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb"
+  'user_session=d23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb';
 ```
 
 ```js
 localStorage.setItem(
-  "user_session",
-  "d23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb"
-)
+  'user_session',
+  'd23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb'
+);
 ```
 
 > 通常這種用途的 token 具有時效性且必須在同一個客戶端底下才能使用，我們才會稱這種 token 為 sessionToken 而不是普通的 token，也因為這樣我們可以利用這種特性判斷使用者是否已經在其他地方登入過，若在不同的地方登入會讓既有的 token 被覆蓋掉，進而實現重置登入狀態的效果。
