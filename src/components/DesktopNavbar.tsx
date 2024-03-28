@@ -10,51 +10,51 @@ import React from 'react';
 import { useMobile } from '@/hooks/useMobile';
 import Link from 'next/link';
 import { mergeClassNames } from '@/lib/helper';
+import { usePathname } from 'next/navigation';
 
 export function DesktopNavbar() {
+  const pathname = usePathname();
   const { isMobile } = useMobile();
-  const linkClasses = mergeClassNames(
-    navigationMenuTriggerStyle(),
-    'bg-white rounded-none border-0'
-  );
+
+  const LinkItem = ({ href, name }: { href: string; name: string }) => {
+    const isActive = href == pathname;
+    const linkClasses = mergeClassNames(
+      navigationMenuTriggerStyle(),
+      'bg-white rounded-none border-0 ',
+      isActive ? 'border-primary border-b-2' : ''
+    );
+
+    return (
+      <Link
+        href={href}
+        legacyBehavior
+        passHref>
+        <NavigationMenuLink className={linkClasses}>{name}</NavigationMenuLink>
+      </Link>
+    );
+  };
 
   const Navbar = () => {
     return (
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link
+            <LinkItem
               href="/posts"
-              legacyBehavior
-              passHref>
-              <NavigationMenuLink className={linkClasses}>
-                Posts
-              </NavigationMenuLink>
-            </Link>
-            <Link
+              name="Posts"
+            />
+            <LinkItem
               href="/snippets"
-              legacyBehavior
-              passHref>
-              <NavigationMenuLink className={linkClasses}>
-                Snippets
-              </NavigationMenuLink>
-            </Link>
-            <Link
+              name="Snippets"
+            />
+            <LinkItem
               href="/projects"
-              legacyBehavior
-              passHref>
-              <NavigationMenuLink className={linkClasses}>
-                Projects
-              </NavigationMenuLink>
-            </Link>
-            <Link
+              name="Projects"
+            />
+            <LinkItem
               href="/contact"
-              legacyBehavior
-              passHref>
-              <NavigationMenuLink className={linkClasses}>
-                Contact
-              </NavigationMenuLink>
-            </Link>
+              name="Contact"
+            />
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

@@ -8,6 +8,7 @@ import { useScroll } from '@/hooks/useScroll';
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
   const mdFiles = files.filter((file) => file.metadata.category == 'posts');
+
   return { props: { mdFiles: mdFiles } };
 }
 
