@@ -3,7 +3,7 @@
 }
 
 .markdown-navigation .title-anchor {
-  @apply text-base font-light border-b-2 mx-2 border-dotted border-gray-400;
+  @apply text-base font-medium border-b-2 mx-2 border-dotted border-gray-400;
 }
 
 .markdown-navigation .title-anchor small {
@@ -19,7 +19,7 @@
 }
 
 .markdown-navigation .title-level1 {
-  @apply font-medium;
+  @apply font-medium text-blue-600;
 }
 
 .markdown-navigation .title-level2 {
@@ -27,5 +27,5 @@
 }
 
 .markdown-navigation .title-level3 {
-  @apply ml-8;
+  @apply ml-8 font-light;
 }

@@ -13,11 +13,11 @@ import { mergeClassNames } from '@/lib/helper';
 import { usePathname } from 'next/navigation';
 
 export function DesktopNavbar() {
-  const pathname = usePathname();
+  const pathname = usePathname().split('/')[1];
   const { isMobile } = useMobile();
 
   const LinkItem = ({ href, name }: { href: string; name: string }) => {
-    const isActive = href == pathname;
+    const isActive = href.split('/')[1] == pathname;
     const linkClasses = mergeClassNames(
       navigationMenuTriggerStyle(),
       'mx-2 rounded-none',

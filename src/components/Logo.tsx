@@ -5,7 +5,7 @@ import Link from 'next/link';
 export function Logo({ className }: { className?: string }) {
   const logoClasses = mergeClassNames(
     className || '',
-    'hover:bg-primary/80 hover:shadow-md hover:font-semibold'
+    'hover:bg-primary/80 hover:shadow-md hover:font-semibold active:bg-primary active:shadow-none active:font-medium'
   );
   return (
     <Button

@@ -33,7 +33,7 @@ export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
           <div className="flex flex-col gap-2">
             <div>{meta?.description}</div>
             <div className="flex flex-row justify-end">
-              <div>{createdTime.format('ll')}</div>
+              <div className="text-sm">{createdTime.format('ll')}</div>
             </div>
           </div>
         </CardContent>
