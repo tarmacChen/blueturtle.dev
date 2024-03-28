@@ -3,7 +3,7 @@ import type {
   GetStaticPaths,
   GetStaticProps,
 } from 'next';
-import { getMarkdownFiles } from '@/lib/helper';
+import { getMarkdownFiles } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import type { GetStaticPathsResult } from 'next';
 import { MarkdownViewer } from '@/components/MarkdownViewer';

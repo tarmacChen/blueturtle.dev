@@ -1,10 +1,17 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Button } from '@/components/ui/button';
+import { mergeClassNames } from '@/lib/helper';
+import Link from 'next/link';
 
 export function Logo({ className }: { className?: string }) {
+  const logoClasses = mergeClassNames(
+    className || '',
+    'hover:bg-primary/80 hover:shadow-md'
+  );
   return (
-    <Button asChild className={className}>
+    <Button
+      asChild
+      className={logoClasses}>
       <Link href="/">blueturtle.dev</Link>
     </Button>
-  )
+  );
 }

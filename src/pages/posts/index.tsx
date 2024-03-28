@@ -1,4 +1,4 @@
-import { getMarkdownFiles, sortByCreatedTime } from '@/lib/helper';
+import { getMarkdownFiles, sortByCreatedTime } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import moment from 'moment';
 import { MainWrapper } from '../../components/MainWrapper';

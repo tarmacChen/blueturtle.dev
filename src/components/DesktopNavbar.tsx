@@ -9,9 +9,7 @@ import {
 import React from 'react';
 import { useMobile } from '@/hooks/useMobile';
 import Link from 'next/link';
-
-const mergeClassNames = (...classNames: string[]) =>
-  classNames.filter(Boolean).join(' ');
+import { mergeClassNames } from '@/lib/helper';
 
 export function DesktopNavbar() {
   const { isMobile } = useMobile();

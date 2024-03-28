@@ -1,5 +1,5 @@
 import { PostCard } from '@/components/PostCard';
-import { getMarkdownFiles, sortByCreatedTime } from '@/lib/helper';
+import { getMarkdownFiles, sortByCreatedTime } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import { useEffect, useState } from 'react';
 import { MainWrapper } from '../components/MainWrapper';
