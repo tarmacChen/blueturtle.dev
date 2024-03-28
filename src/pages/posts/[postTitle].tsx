@@ -64,6 +64,7 @@ export default function Page({
         <MarkdownNavbar
           source={md?.content || ''}
           ordered={true}
+          headingTopOffset={64}
           className="invisible md:visible w-64 fixed overflow-hidden"
         />
         <div className="w-full flex justify-center">
