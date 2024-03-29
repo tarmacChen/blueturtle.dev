@@ -100,7 +100,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
 
   return (
     <Markdown
-      className="w-full prose lg:prose-lg prose-blue my-4 overflow-scroll"
+      className="w-full prose lg:prose-lg prose-blue"
       rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkGeomoji]}
       components={MarkdownComponent}>

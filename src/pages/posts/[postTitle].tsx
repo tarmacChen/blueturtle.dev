@@ -72,10 +72,10 @@ export default function Page({
           <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}
-            headingTopOffset={70}
+            headingTopOffset={84}
             className="lg:fixed max-md:w-full max-lg:w-prose lg:w-80 mx-auto overflow-auto bg-gray-100"
           />
-          <div className="lg:ml-96 w-full flex justify-center">
+          <div className="flex lg:ml-96 w-full justify-center mb-32">
             <MarkdownViewer
               markdown={{ content: md?.content }}
               codeStyle={codeStyle}
@@ -83,7 +83,6 @@ export default function Page({
           </div>
         </div>
       </MainWrapper>
-
       {showBackToTopButton && (
         <ScrollToTop className="fixed bottom-16 right-4 gap-1">
           <ArrowUpIcon />

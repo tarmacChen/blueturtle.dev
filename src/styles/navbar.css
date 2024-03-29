@@ -14,18 +14,26 @@
   @apply cursor-pointer text-blue-600 underline font-medium;
 }
 
-[class*='title-level'].active {
-  @apply font-medium bg-gray-100;
-}
-
-.markdown-navigation .title-level1 {
-  @apply font-medium text-blue-600;
-}
-
 .markdown-navigation .title-level2 {
-  @apply ml-4;
+  @apply ml-4 font-light;
 }
 
 .markdown-navigation .title-level3 {
   @apply ml-8 font-light;
+}
+
+.markdown-navigation .title-level4 {
+  @apply ml-12 font-light;
+}
+
+.markdown-navigation .title-level5 {
+  @apply ml-16 font-light;
+}
+
+.markdown-navigation .title-level6 {
+  @apply ml-20 font-light;
+}
+
+[class*='title-level'].active {
+  @apply text-blue-600 border-b-blue-600 font-medium;
 }

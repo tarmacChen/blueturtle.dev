@@ -38,7 +38,7 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   return (
     <>
       <MainWrapper>
-        <div className="flex flex-col mb-24 gap-4 overflow-scroll items-center">
+        <div className="flex flex-col mb-24 gap-4 items-center">
           {mdFiles.map((file) => {
             return (
               <div
