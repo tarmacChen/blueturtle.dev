@@ -12,7 +12,8 @@ import { MainWrapper } from '../../components/MainWrapper';
 import { useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
 import MarkdownNavbar from 'markdown-navbar';
-import { Separator } from '@/components/ui/separator';
+import { ScrollToTop } from '@/components/ScrollToTop';
+import { ArrowUpIcon } from '@radix-ui/react-icons';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();
@@ -75,6 +76,13 @@ export default function Page({
           />
         </div>
       </div>
+
+      {isScrollingUp && scrollY > window.outerHeight && (
+        <ScrollToTop className="fixed bottom-16 right-4 gap-1">
+          <ArrowUpIcon />
+          Back to top
+        </ScrollToTop>
+      )}
     </MainWrapper>
   );
 }
