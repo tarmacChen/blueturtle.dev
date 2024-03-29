@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
 import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';
+import { FooterSection } from '@/components/FooterSection';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -48,17 +49,21 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
     });
 
     return (
-      <MainWrapper showMobileNavbar={isScrollingUp}>
-        <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
-          All Posts
-        </h1>
-        <div className="flex flex-col gap-1 mx-auto ">
-          {withListItemDecorator(NavItems, {
-            oddItemClasses: oddItemClasses,
-            evenItemClasses: evenItemClasses,
-          })}
-        </div>
-      </MainWrapper>
+      <>
+        <MainWrapper>
+          <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
+            All Posts
+          </h1>
+          <div className="flex flex-col gap-1 mx-auto ">
+            {withListItemDecorator(NavItems, {
+              oddItemClasses: oddItemClasses,
+              evenItemClasses: evenItemClasses,
+            })}
+          </div>
+        </MainWrapper>
+
+        {isScrollingUp && <FooterSection />}
+      </>
     );
   }
 }
