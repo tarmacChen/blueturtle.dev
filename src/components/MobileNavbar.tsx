@@ -20,15 +20,17 @@ export function MobileNavbar() {
     children: ReactNode;
   }) => {
     const navbarItemContainerClasses =
-      'py-2 text-sm flex flex-col w-full justify-center items-center hover:bg-primary hover:text-secondary hover:cursor-pointer hover:font-bold';
+      'py-2 text-sm flex flex-col w-full justify-center items-center hover:bg-primary hover:text-secondary hover:cursor-pointer ';
     const navbarItemClasses = 'flex flex-col items-center';
 
     return (
-      <div className={navbarItemContainerClasses}>
-        <Link href={href}>
+      <Link
+        href={href}
+        className="w-full">
+        <div className={navbarItemContainerClasses}>
           <div className={navbarItemClasses}>{children}</div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   };
 
