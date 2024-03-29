@@ -12,6 +12,7 @@ import { MainWrapper } from '../../components/MainWrapper';
 import { useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
 import MarkdownNavbar from 'markdown-navbar';
+import { Separator } from '@/components/ui/separator';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();
@@ -60,14 +61,14 @@ export default function Page({
 
   return (
     <MainWrapper showMobileNavbar={isScrollingUp}>
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row ">
         <MarkdownNavbar
           source={md?.content || ''}
           ordered={true}
           headingTopOffset={64}
-          className="lg:fixed max-lg:w-prose lg:w-80 mx-auto overflow-auto bg-gray-100"
+          className="lg:fixed max-md:w-full max-lg:w-prose lg:w-96 mx-auto overflow-auto bg-gray-100 "
         />
-        <div className="lg:ml-96 w-full flex justify-center">
+        <div className="max-lg:mt-4 lg:ml-96 w-full flex justify-center">
           <MarkdownViewer
             markdown={{ content: md?.content }}
             codeStyle={codeStyle}

@@ -9,7 +9,14 @@ import { MarkdownTypes, MarkdownNode } from '@/type';
 
 export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
-    code({
+    h1: ({ children, ...props }: { children: React.ReactNode }) => {
+      return (
+        <h1 className="underline decoration-2 underline-offset-8 ">
+          {children}
+        </h1>
+      );
+    },
+    code: ({
       node,
       inline,
       className,
@@ -19,7 +26,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
       inline: boolean;
       className: string;
       [key: string]: any;
-    }) {
+    }) => {
       const hasLang = /language-(\w+)/.exec(className || '');
       const hasMeta = node?.data?.meta;
       const snippetStyle = [
