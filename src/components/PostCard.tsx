@@ -17,7 +17,7 @@ export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const createdTime = moment(meta.createdTime);
   const tags = meta.tags ? meta.tags.join(', ') : '';
 
-  const DraftBadge = () => <Badge className="bg-red-600">Draft</Badge>;
+  const DraftBadge = () => <Badge className="bg-red-600 h-6">Draft</Badge>;
 
   return (
     <Link href={linkUrl}>
