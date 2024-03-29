@@ -60,14 +60,14 @@ export default function Page({
 
   return (
     <MainWrapper showMobileNavbar={isScrollingUp}>
-      <div className="flex flex-row">
+      <div className="flex flex-col lg:flex-row">
         <MarkdownNavbar
           source={md?.content || ''}
           ordered={true}
           headingTopOffset={64}
-          className="invisible md:visible w-64 fixed overflow-hidden bg-gray-100/40"
+          className="lg:fixed overflow-auto w-full lg:w-80 mx-auto lg:left-16 bg-gray-100"
         />
-        <div className="w-full flex justify-center">
+        <div className="lg:ml-96 w-full flex justify-center">
           <MarkdownViewer
             markdown={{ content: md?.content }}
             codeStyle={codeStyle}></MarkdownViewer>

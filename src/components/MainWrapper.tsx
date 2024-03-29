@@ -12,7 +12,7 @@ export const MainWrapper = ({
     <>
       <header className="w-full mx-auto">
         <NavbarSection />
-        <div className="my-4 px-8 overflow-scroll">{children}</div>
+        <div className="my-4 px-8 ">{children}</div>
       </header>
       <FooterSection visible={showMobileNavbar} />
     </>
