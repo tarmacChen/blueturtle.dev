@@ -6,6 +6,7 @@ import { useScroll } from '@/hooks/useScroll';
 import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';
 import { FooterSection } from '@/components/FooterSection';
+import { useMobile } from '@/hooks/useMobile';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -17,6 +18,7 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   {
     const [scrollY, setScrollY] = useState(0);
     const { isScrollingUp, updatePosition } = useScroll();
+    const { isMobile } = useMobile();
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -61,8 +63,7 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
             })}
           </div>
         </MainWrapper>
-
-        {isScrollingUp && <FooterSection />}
+        {isMobile && isScrollingUp && <FooterSection />}
       </>
     );
   }

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { MainWrapper } from '../components/MainWrapper';
 import { useScroll } from '@/hooks/useScroll';
 import { FooterSection } from '@/components/FooterSection';
+import { useMobile } from '@/hooks/useMobile';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -16,6 +17,7 @@ export async function getStaticProps() {
 export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   const [scrollY, setScrollY] = useState(0);
   const { isScrollingUp, updatePosition } = useScroll();
+  const { isMobile } = useMobile();
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
@@ -49,7 +51,7 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
         </div>
       </MainWrapper>
 
-      {isScrollingUp && <FooterSection />}
+      {isMobile && isScrollingUp && <FooterSection />}
     </>
   );
 }

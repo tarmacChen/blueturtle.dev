@@ -91,7 +91,7 @@ export default function Page({
         </ScrollToTop>
       )}
       {isMobile && <div className="h-16"></div>}
-      {isScrollingUp && <FooterSection />}
+      {isMobile && isScrollingUp && <FooterSection />}
     </>
   );
 }
