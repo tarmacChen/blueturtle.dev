@@ -65,7 +65,7 @@ export default function Page({
           source={md?.content || ''}
           ordered={true}
           headingTopOffset={64}
-          className="lg:fixed overflow-auto w-full lg:w-80 mx-auto lg:left-16 bg-gray-100"
+          className="lg:fixed overflow-auto w-full lg:w-80 mx-auto lg:left-16 md:mb-4 bg-gray-100"
         />
         <div className="lg:ml-96 w-full flex justify-center">
           <MarkdownViewer

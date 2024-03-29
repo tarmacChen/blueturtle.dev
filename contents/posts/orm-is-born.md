@@ -10,8 +10,6 @@ draft: false
 
 # ORM 的誕生及了解 JPA, Hibernate 與 Spring Data JPA 之間的關係
 
-## Table of contents
-
 ## 在沒有 ORM 之前應用程式是怎麼跟資料庫交流的
 
 我們必須透過 JDBC API(Java Database Connectivity API)的介面搭配該資料庫適用的 JDBC Driver 去跟資料庫連接

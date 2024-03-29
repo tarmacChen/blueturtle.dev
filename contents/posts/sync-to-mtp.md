@@ -10,8 +10,6 @@ draft: true
 
 # 同步 MTP Device 裡的資料
 
-## Table of Contents
-
 ## 使用情境
 
 有個儲存裝置透過 USB 連接到電腦，他的連接協定不是用`USB MSC` (Usb Mass Storage Device Class)而是`MTP`，如果想讓裝置內的某個資料夾與本機的資料夾同步，可以怎麼做?

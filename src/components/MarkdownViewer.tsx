@@ -1,7 +1,6 @@
 import Markdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import remarkToc from 'remark-toc';
 import remarkGeomoji from 'remark-gemoji';
 import rehypeSlug from 'rehype-slug';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -96,7 +95,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
     <Markdown
       className="w-full prose lg:prose-lg prose-blue my-4 overflow-scroll"
       rehypePlugins={[rehypeRaw, rehypeSlug]}
-      remarkPlugins={[remarkGfm, remarkToc, remarkGeomoji]}
+      remarkPlugins={[remarkGfm, remarkGeomoji]}
       components={MarkdownComponent}>
       {markdown?.content ?? ''}
     </Markdown>

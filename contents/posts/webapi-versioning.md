@@ -1,16 +1,14 @@
 ---
-title: "Web API 版本控制"
+title: 'Web API 版本控制'
 author: tarmac
-description: "為什麼要替 Web API 做版本控制"
+description: '為什麼要替 Web API 做版本控制'
 tags: [web, api]
 category: posts
-createdTime: "2023-12-17T05:59:51+08:00"
+createdTime: '2023-12-17T05:59:51+08:00'
 draft: false
 ---
 
 # Web API 版本控制
-
-## Table of Contents
 
 ## 為什麼要替 Web API 做版本控制?
 
@@ -162,11 +160,11 @@ access-control-allow-origin: company.com
 > 這邊用 Node.js 的 Express 做為代碼範例
 
 ```js
-const express = require("express")
-const app = express()
+const express = require('express');
+const app = express();
 
-app.get("/customer/:id", function (req, res) {
-  let apiVersion = req.query.v
+app.get('/customer/:id', function (req, res) {
+  let apiVersion = req.query.v;
   if (apiVersion == 1) {
     // do something
   }
@@ -175,7 +173,7 @@ app.get("/customer/:id", function (req, res) {
   }
 
   // when apiVersion is empty or other value, need to do something else to handle
-})
+});
 ```
 
 這個解決方案有什麼副作用？
