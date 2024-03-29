@@ -4,6 +4,7 @@ import { MarkdownFile } from 'mdman';
 import { useEffect, useState } from 'react';
 import { MainWrapper } from '../components/MainWrapper';
 import { useScroll } from '@/hooks/useScroll';
+import { FooterSection } from '@/components/FooterSection';
 
 export async function getStaticProps() {
   const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
@@ -33,18 +34,22 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   }, [scrollY]);
 
   return (
-    <MainWrapper showMobileNavbar={isScrollingUp}>
-      <div className="flex flex-col mb-24 gap-4 overflow-scroll items-center">
-        {mdFiles.map((file) => {
-          return (
-            <div
-              key={file.filename}
-              className="w-full lg:w-1/2">
-              <PostCard mdFile={file}></PostCard>
-            </div>
-          );
-        })}
-      </div>
-    </MainWrapper>
+    <>
+      <MainWrapper>
+        <div className="flex flex-col mb-24 gap-4 overflow-scroll items-center">
+          {mdFiles.map((file) => {
+            return (
+              <div
+                key={file.filename}
+                className="w-full lg:w-1/2">
+                <PostCard mdFile={file}></PostCard>
+              </div>
+            );
+          })}
+        </div>
+      </MainWrapper>
+
+      {isScrollingUp && <FooterSection />}
+    </>
   );
 }

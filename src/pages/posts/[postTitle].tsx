@@ -68,28 +68,28 @@ export default function Page({
   return (
     <>
       <MainWrapper>
-        <div className="flex flex-col lg:flex-row ">
+        <div className="flex flex-col lg:flex-row">
           <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}
             headingTopOffset={70}
-            className="mt-4 lg:fixed max-md:w-full max-lg:w-prose lg:w-80 mx-auto overflow-auto bg-gray-100"
+            className="lg:fixed max-md:w-full max-lg:w-prose lg:w-80 mx-auto overflow-auto bg-gray-100"
           />
-          <div className="max-lg:mt-4 lg:ml-96 w-full flex justify-center">
+          <div className="lg:ml-96 w-full flex justify-center">
             <MarkdownViewer
               markdown={{ content: md?.content }}
               codeStyle={codeStyle}
             />
           </div>
         </div>
-
-        {showBackToTopButton && (
-          <ScrollToTop className="fixed bottom-16 right-4 gap-1">
-            <ArrowUpIcon />
-            Back to top
-          </ScrollToTop>
-        )}
       </MainWrapper>
+
+      {showBackToTopButton && (
+        <ScrollToTop className="fixed bottom-16 right-4 gap-1">
+          <ArrowUpIcon />
+          Back to top
+        </ScrollToTop>
+      )}
       {isMobile && <div className="h-16"></div>}
       {isScrollingUp && <FooterSection />}
     </>
