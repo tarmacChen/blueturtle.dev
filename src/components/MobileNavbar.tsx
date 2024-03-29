@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export function MobileNavbar() {
   const containerClasses =
-    'flex flex-row flex-1 justify-around bg-background text-foreground';
+    'flex flex-row flex-1 justify-around bg-background text-foreground border-t-2 border-gray-100';
 
   const NavbarItem = ({
     href,
@@ -20,7 +20,7 @@ export function MobileNavbar() {
     children: ReactNode;
   }) => {
     const navbarItemContainerClasses =
-      'py-2 text-sm flex flex-col w-full justify-center items-center hover:bg-primary hover:text-secondary hover:cursor-pointer';
+      'py-2 text-sm flex flex-col w-full justify-center items-center hover:bg-primary hover:text-secondary hover:cursor-pointer hover:font-bold';
     const navbarItemClasses = 'flex flex-col items-center';
 
     return (
