@@ -12,7 +12,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
   const posts = mdFiles;
-  const postGroups = paginateElements<MarkdownFile>(posts, 10);
+  const postGroups = paginateElements<MarkdownFile>(posts, 5);
   const pageIndex = 0;
 
   return { props: { mdFiles: postGroups } };
