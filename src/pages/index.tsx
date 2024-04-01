@@ -56,6 +56,7 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[][] }) {
           <PostPagination
             groups={mdFiles}
             baseUrl="/page"
+            currentIndex={1}
           />
         </div>
       </MainWrapper>

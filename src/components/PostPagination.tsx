@@ -13,9 +13,11 @@ import { MarkdownFile } from 'mdman';
 export function PostPagination({
   groups,
   baseUrl,
+  currentIndex,
 }: {
   groups: MarkdownFile[][];
   baseUrl: string;
+  currentIndex: number;
 }) {
   const items = groups.map((group, index) => {
     const pageIndex = index + 1;
@@ -23,21 +25,33 @@ export function PostPagination({
 
     return (
       <PaginationItem key={pageIndex}>
-        <Link href={url}>{pageIndex}</Link>
+        <Link
+          href={pageIndex == currentIndex ? '/' : url}
+          className={pageIndex == currentIndex ? 'font-bold' : ''}>
+          {pageIndex}
+        </Link>
       </PaginationItem>
     );
   });
 
+  const PreviousItem = () => (
+    <PaginationItem>
+      <PaginationPrevious href="#"></PaginationPrevious>
+    </PaginationItem>
+  );
+
+  const NextItem = () => (
+    <PaginationItem>
+      <PaginationNext href="#"></PaginationNext>
+    </PaginationItem>
+  );
+
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href="#"></PaginationPrevious>
-        </PaginationItem>
+        {currentIndex - 1 > 1 && <PreviousItem />}
         {items}
-        <PaginationItem>
-          <PaginationNext href="#"></PaginationNext>
-        </PaginationItem>
+        {currentIndex + 1 <= groups.length && <NextItem />}
       </PaginationContent>
     </Pagination>
   );

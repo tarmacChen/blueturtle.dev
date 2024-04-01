@@ -40,7 +40,7 @@ export const getStaticProps = (async (ctx) => {
   md: MarkdownFile | undefined;
 }>;
 
-export default function Page({
+export default function PostPage({
   md,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [scrollY, setScrollY] = useState(0);
