@@ -1,5 +1,5 @@
 import { PostCard } from '@/components/PostCard';
-import { getMarkdownFiles, sortByCreatedTime } from '@/lib/mdHelper';
+import { getMarkdownFiles, paginateElements, sortByCreatedTime } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import { useEffect, useState } from 'react';
 import { MainWrapper } from '../components/MainWrapper';
@@ -8,16 +8,17 @@ import { FooterSection } from '@/components/FooterSection';
 import { useMobile } from '@/hooks/useMobile';
 
 export async function getStaticProps() {
-  const files = getMarkdownFiles().sort(sortByCreatedTime).reverse();
-  const mdFiles = files.filter((file) => file.metadata.category == 'posts');
-
-  return { props: { mdFiles: mdFiles } };
+  const mdFiles = getMarkdownFiles();
+  const posts = mdFiles
+  const postGroups = paginateElements<MarkdownFile>(posts, 10)
+  const pageIndex = 0;
+  return {props: {mdFiles: postGroups[pageIndex]}};
 }
 
-export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
+export default function HomePage({mdFiles}: { mdFiles: MarkdownFile[] }) {
   const [scrollY, setScrollY] = useState(0);
-  const { isScrollingUp, updatePosition } = useScroll();
-  const { isMobile } = useMobile();
+  const {isScrollingUp, updatePosition} = useScroll();
+  const {isMobile} = useMobile();
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
@@ -51,7 +52,7 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
         </div>
       </MainWrapper>
 
-      {isMobile && isScrollingUp && <FooterSection />}
+      {isMobile && isScrollingUp && <FooterSection/>}
     </>
   );
 }
