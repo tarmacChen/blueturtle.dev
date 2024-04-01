@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MarkdownFile, MarkdownMetadata } from 'mdman';
 import moment from 'moment';
+import { MarkdownFileSortOrder } from "@/type";
 
 const envName = 'MARKDOWN_FILES_LOCATION';
 const envValue = process.env[envName];
@@ -18,8 +19,8 @@ export function getMarkdownFiles(): MarkdownFile[] {
     return [];
   }
 
-  const foundFiles = fs.readdirSync(placeLocation, { recursive: true });
-  const files: MarkdownFile[] = [];
+  const foundFiles = fs.readdirSync(placeLocation, {recursive: true});
+  const mdFiles: MarkdownFile[] = [];
 
   foundFiles.map((filename) => {
     const name = path.join(rootDir, filename.toString());
@@ -28,13 +29,13 @@ export function getMarkdownFiles(): MarkdownFile[] {
     const content = fs.readFileSync(name, 'utf-8');
     const matterResults = matter(content);
 
-    files.push({
+    mdFiles.push({
       filename: name,
       content: matterResults.content,
       metadata: matterResults.data,
     });
-  });
-  return files;
+  })
+  return mdFiles.sort(sortByCreatedTimeDescend);
 }
 
 export function createMarkdownFile(name: string, content?: string) {
@@ -78,15 +79,29 @@ export function saveMarkdownFile(
 
 export function cleanTestDirectory() {
   const dir = path.join(rootDir, 'test');
-  fs.rmSync(dir, { force: true, recursive: true });
+  fs.rmSync(dir, {force: true, recursive: true});
 }
 
-export const sortByCreatedTime = (a: MarkdownFile, b: MarkdownFile): number => {
+export const sortByCreatedTime = (a: MarkdownFile, b: MarkdownFile, order: MarkdownFileSortOrder): number => {
+  if (order == MarkdownFileSortOrder.Descend) return sortByCreatedTimeDescend(a, b)
+  if (order == MarkdownFileSortOrder.Ascend) return sortByCreatedTimeAscend(a, b)
+  return 0
+};
+
+const sortByCreatedTimeDescend = (a: MarkdownFile, b: MarkdownFile): number => {
+  const aTime = moment(a.metadata.createdTime);
+  const bTime = moment(b.metadata.createdTime);
+
+  if (aTime.isBefore(bTime)) return 1;
+  if (aTime.isAfter(bTime)) return -1;
+  return 0;
+}
+
+const sortByCreatedTimeAscend = (a: MarkdownFile, b: MarkdownFile): number => {
   const aTime = moment(a.metadata.createdTime);
   const bTime = moment(b.metadata.createdTime);
 
   if (aTime.isBefore(bTime)) return -1;
   if (aTime.isAfter(bTime)) return 1;
   return 0;
-};
-
+}

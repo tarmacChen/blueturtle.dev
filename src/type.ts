@@ -12,6 +12,7 @@ export type NavbarProps = {
 
 export interface MarkdownNode {
   [key: string]: any
+
   type: string
   value: string
 }
@@ -19,4 +20,14 @@ export interface MarkdownNode {
 export interface MarkdownTypes {
   markdown: { content?: string }
   codeStyle: { [key: string]: React.CSSProperties }
+}
+
+export type FetchMarkdownFileProps = {
+  pageIndex: number
+  pageSize: number
+}
+
+export enum MarkdownFileSortOrder {
+  Ascend,
+  Descend
 }
