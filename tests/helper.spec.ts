@@ -1,4 +1,4 @@
-import { mergeClassNames } from '@/lib/mdHelper';
+import { mergeClassNames } from '@/lib/helper';
 import { expect, test } from '@playwright/test';
 
 test.describe('mergeClassNames', () => {

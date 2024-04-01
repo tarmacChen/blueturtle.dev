@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { mergeClassNames } from '@/lib/helper';
 import { usePathname } from 'next/navigation';
 
+
 export function DesktopNavbar() {
   const pathname = usePathname().split('/')[1];
   const { isMobile } = useMobile();
