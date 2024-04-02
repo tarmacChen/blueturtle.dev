@@ -68,7 +68,7 @@ export default function PostPage({
   return (
     <>
       <MainWrapper>
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col lg:flex-row gap-8">
           <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}
