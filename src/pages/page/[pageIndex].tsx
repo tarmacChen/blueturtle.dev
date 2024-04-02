@@ -6,7 +6,7 @@ import type {
 } from 'next';
 import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
-import HomePage from '@/pages/index';
+import PostCardsPage from '@/pages/index';
 import { useParams, useSearchParams } from 'next/navigation';
 
 export const getStaticPaths = (async () => {
@@ -45,7 +45,7 @@ export default function Page({
   mdFiles,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <HomePage
+    <PostCardsPage
       pageIndex={pageIndex}
       mdFiles={mdFiles}
     />

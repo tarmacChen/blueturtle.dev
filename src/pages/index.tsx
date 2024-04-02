@@ -13,7 +13,7 @@ export const getStaticProps = (() => {
   return { props: { mdFiles: postGroups } };
 }) satisfies GetStaticProps;
 
-export default function HomePage({
+export default function PostCardsPage({
   mdFiles,
   pageIndex = 1,
 }: {

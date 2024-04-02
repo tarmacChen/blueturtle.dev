@@ -34,7 +34,7 @@ export const getStaticProps = (async (ctx) => {
   md: MarkdownFile | undefined;
 }>;
 
-export default function PostPage({
+export default function PostViewPage({
   md,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (

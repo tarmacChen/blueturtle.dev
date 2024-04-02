@@ -12,7 +12,7 @@ export async function getStaticProps() {
   return { props: { mdFiles: postGroups[pageIndex] } };
 }
 
-export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
+export default function PostListPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   {
     const oddItemClasses = 'bg-white';
     const evenItemClasses = 'bg-gray-50';
