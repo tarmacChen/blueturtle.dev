@@ -1,4 +1,8 @@
-import { getMarkdownFiles, paginateElements, sortByCreatedTime } from '@/lib/mdHelper';
+import {
+  getMarkdownFiles,
+  paginateElements,
+  sortByCreatedTime,
+} from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import { MainWrapper } from '../../components/MainWrapper';
 import React, { useEffect, useState } from 'react';
@@ -7,20 +11,21 @@ import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';
 import { FooterSection } from '@/components/FooterSection';
 import { useMobile } from '@/hooks/useMobile';
+import { useSearchParams } from 'next/navigation';
 
 export async function getStaticProps() {
   const mdFiles = getMarkdownFiles();
   const posts = mdFiles.filter((file) => file.metadata.category == 'posts');
-  const postGroups = paginateElements<MarkdownFile>(posts, 10)
+  const postGroups = paginateElements<MarkdownFile>(posts, 10);
   const pageIndex = 0;
-  return {props: {mdFiles: postGroups[pageIndex]}};
+  return { props: { mdFiles: postGroups[pageIndex] } };
 }
 
-export default function PostsPage({mdFiles}: { mdFiles: MarkdownFile[] }) {
+export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   {
     const [scrollY, setScrollY] = useState(0);
-    const {isScrollingUp, updatePosition} = useScroll();
-    const {isMobile} = useMobile();
+    const { isScrollingUp, updatePosition } = useScroll();
+    const { isMobile } = useMobile();
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -65,7 +70,7 @@ export default function PostsPage({mdFiles}: { mdFiles: MarkdownFile[] }) {
             })}
           </div>
         </MainWrapper>
-        {isMobile && isScrollingUp && <FooterSection/>}
+        {isMobile && isScrollingUp && <FooterSection />}
       </>
     );
   }
