@@ -18,11 +18,17 @@ export const getStaticProps = (() => {
   return { props: { mdFiles: postGroups } };
 }) satisfies GetStaticProps;
 
-export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[][] }) {
+export default function HomePage({
+  mdFiles,
+  pageIndex = 1,
+}: {
+  mdFiles: MarkdownFile[][];
+  pageIndex?: number;
+}) {
   const [scrollY, setScrollY] = useState(0);
   const { isScrollingUp, updatePosition } = useScroll();
   const { isMobile } = useMobile();
-  const posts = mdFiles[0];
+  const posts = mdFiles[pageIndex - 1];
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
@@ -56,7 +62,7 @@ export default function HomePage({ mdFiles }: { mdFiles: MarkdownFile[][] }) {
           <PostPagination
             groups={mdFiles}
             baseUrl="/page"
-            currentIndex={1}
+            currentIndex={pageIndex}
           />
         </div>
       </MainWrapper>
