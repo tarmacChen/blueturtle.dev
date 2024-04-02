@@ -1,13 +1,9 @@
 import { PostCard } from '@/components/PostCard';
 import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
-import { useEffect, useState } from 'react';
-import { MainWrapper } from '../components/MainWrapper';
-import { useScroll } from '@/hooks/useScroll';
-import { FooterSection } from '@/components/FooterSection';
-import { useMobile } from '@/hooks/useMobile';
 import { PostPagination } from '@/components/PostPagination';
-import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticProps } from 'next';
+import { BasicPage } from '@/components/BasicPage';
 
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
@@ -24,49 +20,26 @@ export default function HomePage({
   mdFiles: MarkdownFile[][];
   pageIndex?: number;
 }) {
-  const [scrollY, setScrollY] = useState(0);
-  const { isScrollingUp, updatePosition } = useScroll();
-  const { isMobile } = useMobile();
   const posts = mdFiles[pageIndex - 1];
 
-  const handleScroll = () => {
-    setScrollY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    updatePosition(scrollY);
-  }, [scrollY]);
-
   return (
-    <>
-      <MainWrapper>
-        <div className="flex flex-col mb-24 gap-4 items-center">
-          {posts.map((file) => {
-            return (
-              <div
-                key={file.filename}
-                className="w-full lg:w-1/2">
-                <PostCard mdFile={file}></PostCard>
-              </div>
-            );
-          })}
-          <PostPagination
-            groups={mdFiles}
-            baseUrl="/page"
-            currentIndex={pageIndex}
-          />
-        </div>
-      </MainWrapper>
-
-      {isMobile && isScrollingUp && <FooterSection />}
-    </>
+    <BasicPage>
+      <div className="flex flex-col mb-24 gap-4 items-center">
+        {posts.map((file) => {
+          return (
+            <div
+              key={file.filename}
+              className="w-full lg:w-1/2">
+              <PostCard mdFile={file}></PostCard>
+            </div>
+          );
+        })}
+        <PostPagination
+          groups={mdFiles}
+          baseUrl="/page"
+          currentIndex={pageIndex}
+        />
+      </div>
+    </BasicPage>
   );
 }

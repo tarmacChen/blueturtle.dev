@@ -1,4 +1,4 @@
-import { BasicPage } from '@/pages/BasicPage';
+import { BasicPage } from '@/components/BasicPage';
 
 export default function ContactPage() {
   return (
