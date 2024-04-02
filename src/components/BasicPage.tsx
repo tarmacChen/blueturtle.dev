@@ -3,7 +3,7 @@ import { useScroll } from '@/hooks/useScroll';
 import { useMobile } from '@/hooks/useMobile';
 import { FooterSection } from '@/components/FooterSection';
 import { NavbarSection } from '@/components/NavbarSection';
-import { ScrollToTop } from '@/components/ScrollToTop';
+import { BackToTopButton } from '@/components/BackToTopButton';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
 
 export function BasicPage({ children }: { children: React.ReactNode }) {
@@ -35,10 +35,10 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
         <div className="mt-8 px-8">{children}</div>
       </div>
       {backButtonVisible && (
-        <ScrollToTop className="fixed bottom-16 right-4 gap-1">
+        <BackToTopButton className="fixed bottom-16 right-4 gap-1">
           <ArrowUpIcon />
           Back to top
-        </ScrollToTop>
+        </BackToTopButton>
       )}
       {isMobile && isScrollingUp && <FooterSection />}
     </>

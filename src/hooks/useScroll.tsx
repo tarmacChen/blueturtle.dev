@@ -13,5 +13,9 @@ export const useScroll = () => {
     previousScrollY.current = scrollY;
   };
 
-  return { isScrollingUp, updatePosition };
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return { isScrollingUp, updatePosition, scrollToTop };
 };

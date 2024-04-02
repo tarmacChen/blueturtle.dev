@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { mergeClassNames } from '@/lib/helper';
+import { useScroll } from '@/hooks/useScroll';
 
-export const ScrollToTop = ({
+export const BackToTopButton = ({
   className,
   children,
 }: {
@@ -9,13 +10,11 @@ export const ScrollToTop = ({
   children?: React.ReactNode;
 }) => {
   const buttonClasses = mergeClassNames(className || '');
-  const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const { scrollToTop } = useScroll();
 
   return (
     <Button
-      onClick={handleClick}
+      onClick={scrollToTop}
       className={buttonClasses}>
       {children}
     </Button>
