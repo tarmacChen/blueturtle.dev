@@ -29,7 +29,7 @@ export default function PostCardsPage({
           return (
             <div
               key={file.filename}
-              className="w-full lg:w-1/2">
+              className="max-md:w-full w-2/3 xl:w-1/2 ">
               <PostCard mdFile={file}></PostCard>
             </div>
           );

@@ -44,7 +44,7 @@ export default function PostViewPage({
           source={md?.content || ''}
           ordered={true}
           headingTopOffset={84}
-          className="lg:fixed xl:left-16 2xl:left-32 max-md:w-full max-lg:w-prose lg:w-80 xl:w-96 2xl:w-128 mx-auto overflow-auto bg-gray-100"
+          className="lg:fixed xl:left-12 2xl:left-32 max-md:w-full max-lg:w-prose lg:w-80 xl:w-96 2xl:w-128 mx-auto overflow-auto bg-gray-100"
         />
         <div className="flex lg:ml-96 xl:ml-128 2xl:ml-144 lg:w-[calc(60%)] justify-center mb-32">
           <MarkdownViewer

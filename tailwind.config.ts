@@ -77,7 +77,7 @@ const config = {
         prose: '655px',
         'prose-lg': '735px',
       },
-      spacing: { '128': '32rem', '144': '36rem' },
+      spacing: { '128': '28rem', '144': '32rem' },
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
