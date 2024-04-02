@@ -1,17 +1,8 @@
-import {
-  getMarkdownFiles,
-  paginateElements,
-  sortByCreatedTime,
-} from '@/lib/mdHelper';
+import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
-import { MainWrapper } from '../../components/MainWrapper';
-import React, { useEffect, useState } from 'react';
-import { useScroll } from '@/hooks/useScroll';
 import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';
-import { FooterSection } from '@/components/FooterSection';
-import { useMobile } from '@/hooks/useMobile';
-import { useSearchParams } from 'next/navigation';
+import { BasicPage } from '@/components/BasicPage';
 
 export async function getStaticProps() {
   const mdFiles = getMarkdownFiles();
@@ -23,26 +14,6 @@ export async function getStaticProps() {
 
 export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   {
-    const [scrollY, setScrollY] = useState(0);
-    const { isScrollingUp, updatePosition } = useScroll();
-    const { isMobile } = useMobile();
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
-
-    useEffect(() => {
-      updatePosition(scrollY);
-    }, [scrollY]);
-
     const oddItemClasses = 'bg-white';
     const evenItemClasses = 'bg-gray-50';
 
@@ -58,20 +29,17 @@ export default function PostsPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
     });
 
     return (
-      <>
-        <MainWrapper>
-          <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
-            All Posts
-          </h1>
-          <div className="flex flex-col gap-1 mx-auto ">
-            {withListItemDecorator(NavItems, {
-              oddItemClasses: oddItemClasses,
-              evenItemClasses: evenItemClasses,
-            })}
-          </div>
-        </MainWrapper>
-        {isMobile && isScrollingUp && <FooterSection />}
-      </>
+      <BasicPage>
+        <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
+          All Posts
+        </h1>
+        <div className="flex flex-col gap-1 mx-auto ">
+          {withListItemDecorator(NavItems, {
+            oddItemClasses: oddItemClasses,
+            evenItemClasses: evenItemClasses,
+          })}
+        </div>
+      </BasicPage>
     );
   }
 }
