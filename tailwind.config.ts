@@ -9,13 +9,14 @@ const config = {
     './src/pages/**/*.{ts,tsx}',
   ],
   prefix: '',
+  screens: {
+    '2xl': '1400px',
+  },
   theme: {
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
+      screens: {},
     },
     extend: {
       colors: {

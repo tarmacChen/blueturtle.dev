@@ -4,6 +4,7 @@ import { MarkdownFile } from 'mdman';
 import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps } from 'next';
 import { BasicPage } from '@/components/BasicPage';
+import { useTailwind } from '@/hooks/useTailwind';
 
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
@@ -21,6 +22,9 @@ export default function PostCardsPage({
   pageIndex?: number;
 }) {
   const posts = mdFiles[pageIndex - 1];
+
+  const { getScreenSizes } = useTailwind();
+  console.log(getScreenSizes());
 
   return (
     <BasicPage>
