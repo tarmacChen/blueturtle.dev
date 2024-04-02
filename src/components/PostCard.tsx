@@ -21,7 +21,7 @@ export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
 
   return (
     <Link href={linkUrl}>
-      <Card className="hover:border-blue-600 hover:bg-blue-50">
+      <Card className="hover:border-blue-600 hover:bg-blue-50 hover:shadow-md">
         <CardHeader>
           <div className="flex flex-row justify-between">
             <CardTitle>{meta?.title}</CardTitle>

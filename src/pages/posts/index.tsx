@@ -33,7 +33,7 @@ export default function PostListPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
         <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
           All Posts
         </h1>
-        <div className="flex flex-col gap-1 mx-auto ">
+        <div className="flex flex-col gap-1 mx-auto">
           {withListItemDecorator(NavItems, {
             oddItemClasses: oddItemClasses,
             evenItemClasses: evenItemClasses,

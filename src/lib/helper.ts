@@ -8,7 +8,7 @@ export const withListItemDecorator = (
   {
     oddItemClasses,
     evenItemClasses,
-  }: { oddItemClasses: string; evenItemClasses: string }
+  }: { oddItemClasses: string; evenItemClasses: string },
 ) => {
   return elements.map((ele, index) => {
     const isEven = index % 2 != 0;

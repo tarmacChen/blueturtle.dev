@@ -1,27 +1,17 @@
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '@/../tailwind.config';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export const useTailwind = () => {
   const fullConfig = resolveConfig(tailwindConfig);
-  const innerWidth = useRef(0);
-  const [currentBreakpoint, setCurrentBreakpoint] = useState('');
+  const previousPageWidth = useRef(0);
 
-  const resizeHandler = () => {
-    innerWidth.current = window.innerWidth;
+  const updatePageWidth = (width: number) => {
+    previousPageWidth.current = width;
   };
 
-  useEffect(() => {
-    resizeHandler();
-    window.addEventListener('resize', resizeHandler);
-
-    return () => {
-      window.removeEventListener('resize', resizeHandler);
-    };
-  }, []);
-
   const getScreenSizes = () => {
-    const mapping: { [key: string]: number } = {};
+    const mapping: { [key: string]: number }[] = [];
 
     (() => {
       const {
@@ -30,7 +20,7 @@ export const useTailwind = () => {
 
       for (const [key, val] of Object.entries(screens)) {
         const value = +val.slice(0, val.indexOf('px'));
-        mapping[key] = value;
+        mapping.push({ [key]: value });
       }
     })();
 
@@ -39,8 +29,10 @@ export const useTailwind = () => {
 
       for (const [key, val] of Object.entries(screens)) {
         const value = +val.slice(0, val.indexOf('px'));
-        if (mapping[key]) {
-          mapping[key] = value;
+        const index = mapping.indexOf({ [key]: value });
+        const isExisted = index != -1;
+        if (isExisted) {
+          mapping.splice(index, 1);
         }
       }
     })();
@@ -48,5 +40,26 @@ export const useTailwind = () => {
     return mapping;
   };
 
-  return { currentBreakpoint, getScreenSizes };
+  const findCurrentBreakpoint = (width: number) => {
+    const screens = getScreenSizes();
+    let maxWidth = 0;
+
+    for (let i = 0; i <= screens.length; i++) {
+      const screen = screens[i];
+      const screenName = Object.keys(screen)[0];
+      const screenWidth = Object.values(screen)[0];
+
+      if (maxWidth <= screenWidth) maxWidth = screenWidth;
+      if (width >= maxWidth && width <= screenWidth) {
+        return screenName;
+      }
+    }
+  };
+
+  return {
+    getScreenSizes,
+    findCurrentBreakpoint,
+    previousPageWidth,
+    updatePageWidth,
+  };
 };
