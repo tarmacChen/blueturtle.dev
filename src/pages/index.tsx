@@ -13,7 +13,6 @@ export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
   const posts = mdFiles;
   const postGroups = paginateElements<MarkdownFile>(posts, 5);
-  const pageIndex = 0;
 
   return { props: { mdFiles: postGroups } };
 }) satisfies GetStaticProps;

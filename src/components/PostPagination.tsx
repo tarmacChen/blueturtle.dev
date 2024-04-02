@@ -3,9 +3,6 @@ import {
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from '@/components/ui/pagination';
 import Link from 'next/link';
 import { MarkdownFile } from 'mdman';
@@ -19,7 +16,7 @@ export function PostPagination({
   baseUrl: string;
   currentIndex: number;
 }) {
-  const paginationItems = groups.map((group, index) => {
+  const items = groups.map((group, index) => {
     const pageIndex = index + 1;
     const currentPageIsActive = pageIndex == currentIndex;
     const activeUrl = currentPageIsActive ? '/' : `${baseUrl}/${pageIndex}`;
@@ -47,11 +44,17 @@ export function PostPagination({
 
   const PreviousItem = () => {
     const url = `${baseUrl}/${currentIndex - 1}`;
+    const LinkItem = () => (
+      <div className="flex flex-row gap-2">
+        <div>{'<'}</div>
+        <div>Previous</div>
+      </div>
+    );
 
     return (
       <PaginationItem>
         <Link href={url}>
-          <PaginationPrevious />
+          <LinkItem />
         </Link>
       </PaginationItem>
     );
@@ -59,11 +62,17 @@ export function PostPagination({
 
   const NextItem = () => {
     const url = `${baseUrl}/${currentIndex + 1}`;
+    const LinkItem = () => (
+      <div className="flex flex-row gap-2">
+        <div>Next</div>
+        <div>{'>'}</div>
+      </div>
+    );
 
     return (
       <PaginationItem>
         <Link href={url}>
-          <PaginationNext />
+          <LinkItem />
         </Link>
       </PaginationItem>
     );
@@ -76,7 +85,7 @@ export function PostPagination({
     <Pagination>
       <PaginationContent className="flex flex-row gap-4 text-md">
         {hasPreviousPage && <PreviousItem />}
-        {paginationItems}
+        {items}
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
