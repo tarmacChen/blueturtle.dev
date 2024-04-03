@@ -8,7 +8,7 @@ createdTime: '2023-03-22T20:03:18+08:00'
 draft: false
 ---
 
-# ORM 的誕生及了解 JPA, Hibernate 與 Spring Data JPA 之間的關係
+# {{ title }}
 
 ## 在沒有 ORM 之前應用程式是怎麼跟資料庫交流的
 

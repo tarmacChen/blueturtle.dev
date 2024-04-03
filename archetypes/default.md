@@ -8,6 +8,5 @@ keywords: [""]
 draft: true
 ---
 
-# title
+# {{ title }}
 
-## Table of Contents

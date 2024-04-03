@@ -1,9 +1,34 @@
 import { BasicPage } from '@/components/BasicPage';
+import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/mdHelper';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { MarkdownViewer } from '@/components/MarkdownViewer';
+import { a11yDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-export default function ContactPage() {
+export const getStaticProps = (() => {
+  const mdFiles = getMarkdownFiles();
+  const md = mdFiles.find((md) => md.filename.includes('contact'));
+  md && TranspileMarkdownFile(md);
+
+  if (md == undefined) {
+    return { props: {} };
+  } else {
+    return { props: { mdFile: md } };
+  }
+}) satisfies GetStaticProps;
+
+export default function ContactPage({
+  mdFile,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  // mdFile && console.log(mdFile.filename);
+
   return (
     <BasicPage>
-      <div>Contact</div>
+      {mdFile && (
+        <MarkdownViewer
+          md={mdFile}
+          codeStyle={codeStyle}
+        />
+      )}
     </BasicPage>
   );
 }

@@ -8,7 +8,7 @@ createdTime: "2023-08-28T07:56:54+08:00"
 draft: true
 ---
 
-# App is Damaged
+# {{ title }}
 
 ## Table of Contents
 

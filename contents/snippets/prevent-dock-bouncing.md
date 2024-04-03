@@ -8,7 +8,7 @@ createdTime: "2023-07-19T10:53:15+08:00"
 draft: true
 ---
 
-# Prevent Dock Bouncing
+# {{ title }}
 
 ## Table of Contents
 

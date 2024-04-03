@@ -8,7 +8,7 @@ createdTime: '2024-01-26T14:37:40+08:00'
 draft: true
 ---
 
-# Authentication 驗證
+# {{ title }}
 
 ## 妥善保存使用者的密碼
 

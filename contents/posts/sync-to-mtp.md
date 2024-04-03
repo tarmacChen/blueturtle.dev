@@ -8,7 +8,7 @@ createdTime: "2023-04-26T07:29:25+08:00"
 draft: true
 ---
 
-# 同步 MTP Device 裡的資料
+# {{ title }}
 
 ## 使用情境
 

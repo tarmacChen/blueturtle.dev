@@ -8,7 +8,7 @@ createdTime: '2023-02-23T07:15:39+08:00'
 draft: false
 ---
 
-# 避免注意力分散 Avoid space out
+# {{ title }}
 
 ## 前言
 
