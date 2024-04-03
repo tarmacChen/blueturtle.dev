@@ -1,7 +1,7 @@
 ---
-category: posts
-title: postName
+title: post
 author: tarmac
+category: posts
 description: ""
 tags: [""]
 keywords: [""]

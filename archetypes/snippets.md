@@ -1,8 +1,8 @@
 ---
-title: trick
+title: snippet post
+author: tarmac
 category: snippets
 description: ""
-author: tarmac
 tags: [""]
 keywords: [""]
 draft: true

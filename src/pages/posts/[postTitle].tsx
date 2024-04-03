@@ -3,7 +3,7 @@ import type {
   GetStaticPaths,
   GetStaticProps,
 } from 'next';
-import { getMarkdownFiles } from '@/lib/mdHelper';
+import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import type { GetStaticPathsResult } from 'next';
 import { MarkdownViewer } from '@/components/MarkdownViewer';
@@ -28,6 +28,7 @@ export const getStaticProps = (async (ctx) => {
   const mdFiles = getMarkdownFiles();
   const title = ctx.params?.['postTitle'];
   const foundFile = mdFiles.find((file) => file.metadata?.title == title);
+  foundFile && TranspileMarkdownFile(foundFile);
 
   return { props: { md: foundFile } };
 }) satisfies GetStaticProps<{
@@ -47,10 +48,12 @@ export default function PostViewPage({
           className="lg:fixed xl:left-12 2xl:left-32 max-md:w-full max-lg:w-prose lg:w-80 xl:w-96 2xl:w-128 mx-auto overflow-auto bg-gray-100"
         />
         <div className="flex lg:ml-96 xl:ml-128 2xl:ml-144 lg:w-[calc(60%)] justify-center mb-32">
-          <MarkdownViewer
-            markdown={{ content: md?.content }}
-            codeStyle={codeStyle}
-          />
+          {md && (
+            <MarkdownViewer
+              md={md}
+              codeStyle={codeStyle}
+            />
+          )}
         </div>
       </div>
     </BasicPage>

@@ -3,7 +3,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MarkdownFile, MarkdownMetadata } from 'mdman';
 import moment from 'moment';
-import { MarkdownFileSortOrder } from "@/type";
+import { MarkdownFileSortOrder } from '@/type';
+import { expect } from '@playwright/test';
 
 const envName = 'MARKDOWN_FILES_LOCATION';
 const envValue = process.env[envName];
@@ -19,7 +20,7 @@ export function getMarkdownFiles(): MarkdownFile[] {
     return [];
   }
 
-  const foundFiles = fs.readdirSync(placeLocation, {recursive: true});
+  const foundFiles = fs.readdirSync(placeLocation, { recursive: true });
   const mdFiles: MarkdownFile[] = [];
 
   foundFiles.map((filename) => {
@@ -34,17 +35,17 @@ export function getMarkdownFiles(): MarkdownFile[] {
       content: matterResults.content,
       metadata: matterResults.data,
     });
-  })
+  });
   return mdFiles.sort(sortByCreatedTimeDescend);
 }
 
 export function paginateElements<T>(elements: any[], pageSize: number) {
-  const groups = []
-  const pages = elements.length / pageSize
-  let index = 0
+  const groups = [];
+  const pages = elements.length / pageSize;
+  let index = 0;
 
   while (index < pages) {
-    groups.push(elements.slice((index * pageSize), pageSize + (index * pageSize)))
+    groups.push(elements.slice(index * pageSize, pageSize + index * pageSize));
     index++;
   }
   return groups as T[][];
@@ -76,7 +77,7 @@ export function getMarkdownFileSaveLocation(mdFile: MarkdownFile) {
 
 export function saveMarkdownFile(
   mdFile: MarkdownFile,
-  replace: boolean = false
+  replace: boolean = false,
 ) {
   const fullName = getMarkdownFileSaveLocation(mdFile);
   const dirName = path.dirname(fullName);
@@ -91,13 +92,19 @@ export function saveMarkdownFile(
 
 export function cleanTestDirectory() {
   const dir = path.join(rootDir, 'test');
-  fs.rmSync(dir, {force: true, recursive: true});
+  fs.rmSync(dir, { force: true, recursive: true });
 }
 
-export const sortByCreatedTime = (a: MarkdownFile, b: MarkdownFile, order: MarkdownFileSortOrder): number => {
-  if (order == MarkdownFileSortOrder.Descend) return sortByCreatedTimeDescend(a, b)
-  if (order == MarkdownFileSortOrder.Ascend) return sortByCreatedTimeAscend(a, b)
-  return 0
+export const sortByCreatedTime = (
+  a: MarkdownFile,
+  b: MarkdownFile,
+  order: MarkdownFileSortOrder,
+): number => {
+  if (order == MarkdownFileSortOrder.Descend)
+    return sortByCreatedTimeDescend(a, b);
+  if (order == MarkdownFileSortOrder.Ascend)
+    return sortByCreatedTimeAscend(a, b);
+  return 0;
 };
 
 const sortByCreatedTimeDescend = (a: MarkdownFile, b: MarkdownFile): number => {
@@ -107,7 +114,7 @@ const sortByCreatedTimeDescend = (a: MarkdownFile, b: MarkdownFile): number => {
   if (aTime.isBefore(bTime)) return 1;
   if (aTime.isAfter(bTime)) return -1;
   return 0;
-}
+};
 
 const sortByCreatedTimeAscend = (a: MarkdownFile, b: MarkdownFile): number => {
   const aTime = moment(a.metadata.createdTime);
@@ -116,4 +123,28 @@ const sortByCreatedTimeAscend = (a: MarkdownFile, b: MarkdownFile): number => {
   if (aTime.isBefore(bTime)) return -1;
   if (aTime.isAfter(bTime)) return 1;
   return 0;
-}
+};
+
+export const TranspileMarkdownFile = (md: MarkdownFile) => {
+  const scopePattern = /{{[\w \t]+}}/g;
+  const wordPattern = /[\w\-_]+/g;
+  const scopes = md.content.match(scopePattern);
+
+  scopes?.map((scope) => {
+    const words = scope.match(wordPattern);
+    const word = words != null ? words[0] : '';
+    const existed = Object.keys(md.metadata).includes(word);
+    if (existed == false) return;
+
+    Object.entries(md.metadata).map((pair) => {
+      const key = pair[0];
+      const val = pair[1];
+
+      if (key == word) {
+        md.content = md.content.replace(scope, val.toString());
+      }
+    });
+  });
+
+  return md;
+};

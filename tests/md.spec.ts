@@ -4,9 +4,11 @@ import {
   createMarkdownFile,
   getMarkdownFileSaveLocation,
   saveMarkdownFile,
+  TranspileMarkdownFile,
 } from '@/lib/mdHelper';
 import moment from 'moment';
 import fs from 'fs';
+import { MarkdownFile } from 'mdman';
 
 test.afterAll(() => {
   cleanTestDirectory();
@@ -142,6 +144,49 @@ const getRandomMarkdownFileName = () => {
   const max = 10000;
   const randomNumber = (Math.random() * max).toFixed(0);
   return ['test', '/', randomNumber.toString().padStart(5, '0'), '.md'].join(
-    ''
+    '',
   );
 };
+
+test.describe('TranspileMarkdownFile', () => {
+  test('title', () => {
+    const md: MarkdownFile = {
+      filename: '',
+      content: `# {{title}}`,
+      metadata: { title: 'post' },
+    };
+
+    TranspileMarkdownFile(md);
+
+    const expected = '# post';
+    expect(md.content).toBe(expected);
+  });
+
+  test('author', () => {
+    const md: MarkdownFile = {
+      filename: '',
+      content: `- {{ author }}`,
+      metadata: { title: 'post', author: 'john' },
+    };
+
+    TranspileMarkdownFile(md);
+
+    const expected = '- john';
+    expect(md.content).toBe(expected);
+  });
+
+  test('multiple', () => {
+    const md: MarkdownFile = {
+      filename: '',
+      content: `# {{title}}
+- {{ author }}`,
+      metadata: { title: 'post', author: 'john' },
+    };
+
+    TranspileMarkdownFile(md);
+
+    const expected = `# post
+- john`;
+    expect(md.content).toBe(expected);
+  });
+});

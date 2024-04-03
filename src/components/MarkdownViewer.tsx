@@ -7,7 +7,7 @@ import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import rangeParser from 'parse-numeric-range';
 import { MarkdownTypes, MarkdownNode } from '@/type';
 
-export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
+export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
     h1: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
@@ -104,7 +104,7 @@ export const MarkdownViewer = ({ markdown, codeStyle }: MarkdownTypes) => {
       rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkGeomoji]}
       components={MarkdownComponent}>
-      {markdown?.content ?? ''}
+      {md?.content ?? ''}
     </Markdown>
   );
 };
