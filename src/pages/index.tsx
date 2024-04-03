@@ -7,7 +7,7 @@ import { BasicPage } from '@/components/BasicPage';
 
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
-  const posts = mdFiles;
+  const posts = mdFiles.filter((md) => md.metadata.category != 'ignore');
   const postGroups = paginateElements<MarkdownFile>(posts, 5);
 
   return { props: { mdFiles: postGroups } };

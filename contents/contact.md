@@ -1,7 +1,7 @@
 ---
 title: 聯絡方式
 author: tarmac
-category: default
+category: ignore
 description: ''
 tags:
   - ''

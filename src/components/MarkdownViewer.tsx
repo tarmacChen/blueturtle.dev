@@ -6,6 +6,7 @@ import rehypeSlug from 'rehype-slug';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import rangeParser from 'parse-numeric-range';
 import { MarkdownTypes, MarkdownNode } from '@/type';
+import Image from 'next/image';
 
 export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
@@ -76,12 +77,14 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
       src,
       inline,
       className,
+      alt,
       ...props
     }: {
       node: MarkdownNode;
       src: string;
       inline: boolean;
       className: string;
+      alt: string;
       [key: string]: any;
     }) => {
       // remove 'public' in static file url
@@ -90,9 +93,13 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
         : src;
 
       return (
-        <img
+        <Image
           src={imageSource}
-          {...props}
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="w-full h-auto"
+          alt={alt}
         />
       );
     },
