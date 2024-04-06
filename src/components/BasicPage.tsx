@@ -31,7 +31,7 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
   return (
     <div className="">
       <NavbarSection />
-      <div className="mt-8">{children}</div>
+      <div className="px-8 mt-8">{children}</div>
       {backButtonVisible && (
         <BackToTopButton className="fixed bottom-16 right-4 gap-1">
           <ArrowUpIcon />

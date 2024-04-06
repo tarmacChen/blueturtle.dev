@@ -41,7 +41,7 @@ export default function PostViewPage({
   return (
     <BasicPage>
       <div className="flex flex-col lg:flex-row gap-8">
-        <div className="block shrink-0 lg:px-8 max-md:px-8 max-lg:px-16">
+        <div className="block shrink-0">
           <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}
