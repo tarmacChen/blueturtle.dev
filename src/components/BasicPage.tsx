@@ -29,11 +29,9 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
   }, [scrollY]);
 
   return (
-    <main>
-      <div className="w-full mx-auto">
-        <NavbarSection />
-        <div className="mt-8 px-8">{children}</div>
-      </div>
+    <div className="">
+      <NavbarSection />
+      <div className="mt-8">{children}</div>
       {backButtonVisible && (
         <BackToTopButton className="fixed bottom-16 right-4 gap-1">
           <ArrowUpIcon />
@@ -41,6 +39,6 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
         </BackToTopButton>
       )}
       {isMobile && isScrollingUp && <FooterSection />}
-    </main>
+    </div>
   );
 }

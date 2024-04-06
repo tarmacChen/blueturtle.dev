@@ -41,13 +41,15 @@ export default function PostViewPage({
   return (
     <BasicPage>
       <div className="flex flex-col lg:flex-row gap-8">
-        <MarkdownNavbar
-          source={md?.content || ''}
-          ordered={true}
-          headingTopOffset={84}
-          className="lg:fixed xl:left-12 2xl:left-32 max-md:w-full max-lg:w-prose lg:w-80 xl:w-96 2xl:w-128 mx-auto overflow-auto bg-gray-100"
-        />
-        <div className="flex lg:ml-96 xl:ml-128 2xl:ml-144 lg:w-[calc(60%)] justify-center mb-32">
+        <div className="hidden md:block shrink-0 px-8 max-lg:px-16 max-md:px-16">
+          <MarkdownNavbar
+            source={md?.content || ''}
+            ordered={true}
+            headingTopOffset={84}
+            className="xl:sticky xl:top-24 xl:left-0 bg-gray-100"
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center mx-auto w-full max-md:px-8">
           {md && (
             <MarkdownViewer
               md={md}
