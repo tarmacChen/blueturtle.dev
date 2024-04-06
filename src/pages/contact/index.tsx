@@ -19,8 +19,6 @@ export const getStaticProps = (() => {
 export default function ContactPage({
   mdFile,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // mdFile && console.log(mdFile.filename);
-
   return (
     <BasicPage>
       {mdFile && (

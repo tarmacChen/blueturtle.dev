@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { mergeClassNames } from '@/lib/helper';
 import { usePathname } from 'next/navigation';
 
-
 export function DesktopNavbar() {
   const pathname = usePathname().split('/')[1];
   const { isMobile } = useMobile();
@@ -22,7 +21,7 @@ export function DesktopNavbar() {
     const linkClasses = mergeClassNames(
       navigationMenuTriggerStyle(),
       'mx-2 rounded-none',
-      isActive ? 'border-b-2 border-b-blue-600' : ''
+      isActive ? 'border-b-2 border-b-blue-600' : '',
     );
 
     return (

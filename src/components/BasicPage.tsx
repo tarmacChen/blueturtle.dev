@@ -29,7 +29,7 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
   }, [scrollY]);
 
   return (
-    <>
+    <main>
       <div className="w-full mx-auto">
         <NavbarSection />
         <div className="mt-8 px-8">{children}</div>
@@ -41,6 +41,6 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
         </BackToTopButton>
       )}
       {isMobile && isScrollingUp && <FooterSection />}
-    </>
+    </main>
   );
 }

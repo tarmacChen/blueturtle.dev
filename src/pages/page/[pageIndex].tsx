@@ -29,7 +29,7 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (ctx) => {
   const mdFiles = getMarkdownFiles();
   const routes: GetStaticPathsResult = { paths: [], fallback: false };
-  const posts = mdFiles;
+  const posts = mdFiles.filter((md) => md.metadata.category != 'ignore');
   const postGroups = paginateElements<MarkdownFile>(posts, 5);
   // const index = ctx.params?.['pageIndex'] || '1';
   const index = Array.isArray(ctx.params?.['pageIndex'])

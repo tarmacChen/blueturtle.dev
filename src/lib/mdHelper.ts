@@ -30,11 +30,13 @@ export function getMarkdownFiles(): MarkdownFile[] {
     const content = fs.readFileSync(name, 'utf-8');
     const matterResults = matter(content);
 
-    mdFiles.push({
+    const newFile: MarkdownFile = {
       filename: name,
       content: matterResults.content,
       metadata: matterResults.data,
-    });
+    };
+
+    mdFiles.push(newFile);
   });
   return mdFiles.sort(sortByCreatedTimeDescend);
 }
