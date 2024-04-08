@@ -22,11 +22,12 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, []);
 
   useEffect(() => {
     updatePosition(scrollY);
-  }, [scrollY, updatePosition]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scrollY]);
 
   return (
     <div className="">
