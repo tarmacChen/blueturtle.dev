@@ -22,11 +22,11 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  });
 
   useEffect(() => {
     updatePosition(scrollY);
-  }, [scrollY]);
+  }, [scrollY, updatePosition]);
 
   return (
     <div className="">
