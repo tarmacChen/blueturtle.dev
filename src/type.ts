@@ -1,4 +1,5 @@
 import { MarkdownFile } from 'mdman';
+
 export type NavigationMenuProps = {
   title: string;
   href: string;
@@ -13,7 +14,6 @@ export type NavbarProps = {
 
 export interface MarkdownNode {
   [key: string]: any;
-
   type: string;
   value: string;
 }

@@ -7,7 +7,6 @@ import type {
 import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import PostCardsPage from '@/pages/index';
-import { useParams, useSearchParams } from 'next/navigation';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();

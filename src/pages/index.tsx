@@ -7,7 +7,25 @@ import { BasicPage } from '@/components/BasicPage';
 
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
-  const posts = mdFiles.filter((md) => md.metadata.category != 'ignore');
+  const env = process.env.NODE_ENV;
+  const posts = mdFiles.filter((md) => {
+    const isNotIgnore = md.metadata.category != 'ignore';
+    const isNotDraft = md.metadata.draft == false;
+    const env = process.env.NODE_ENV;
+
+    switch (env) {
+      case 'development':
+        return isNotIgnore;
+        break;
+      case 'production':
+        return isNotIgnore && isNotDraft;
+        break;
+      default:
+        return isNotIgnore;
+        break;
+    }
+  });
+
   const postGroups = paginateElements<MarkdownFile>(posts, 5);
 
   return { props: { mdFiles: postGroups } };

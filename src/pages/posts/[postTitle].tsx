@@ -49,7 +49,7 @@ export default function PostViewPage({
             className="xl:sticky xl:top-24 xl:left-0 bg-gray-100"
           />
         </div>
-        <div className="flex flex-col justify-center items-center mx-auto w-full max-md:px-8">
+        <div className="flex flex-col justify-center items-center mx-auto w-full max-md:px-8 mb-32">
           {md && (
             <MarkdownViewer
               md={md}
