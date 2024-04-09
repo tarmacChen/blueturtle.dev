@@ -5,10 +5,12 @@ description: ""
 author: tarmac
 tags: [macOS]
 createdTime: "2023-08-28T07:56:54+08:00"
-draft: true
+draft: false
 ---
 
 # {{ title }}
+
+![APPISDAMAGED](/public/img/app-is-damaged.png)
 
 ## How to resolve "is damaged and can't be opened" when open some app on macOS
 

@@ -1,12 +1,7 @@
 import { BasicPage } from '@/components/BasicPage';
 import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
-import type {
-  GetStaticPaths,
-  GetStaticPathsResult,
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from 'next';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { SnippetCard } from '@/components/SnippetCard';
 
 export const getStaticProps = (() => {
@@ -45,7 +40,7 @@ export default function SnippetsPage({
   return (
     <BasicPage>
       <div className="flex flex-row gap-4 justify-center">
-        {snippets.map((snippet) => (
+        {snippets?.map((snippet) => (
           <SnippetCard
             mdFile={snippet}
             key={snippet.filename}
