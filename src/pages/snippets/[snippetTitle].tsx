@@ -1,11 +1,12 @@
-import type {
-  InferGetStaticPropsType,
-  GetStaticPaths,
-  GetStaticProps,
-} from 'next';
 import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/mdHelper';
+import type {
+  GetStaticPaths,
+  GetStaticPathsResult,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from 'next';
 import { MarkdownFile } from 'mdman';
-import type { GetStaticPathsResult } from 'next';
+import { getStaticProps as getMarkdownProps } from '@/pages/posts/[postTitle]';
 import MarkdownViewPage from '@/components/MarkdownViewPage';
 
 export const getStaticPaths = (async () => {
@@ -14,7 +15,7 @@ export const getStaticPaths = (async () => {
 
   mdFiles.map((file) => {
     result.paths.push({
-      params: { postTitle: file.metadata?.title },
+      params: { snippetTitle: file.metadata?.title },
     });
   });
 
@@ -23,7 +24,7 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (ctx) => {
   const mdFiles = getMarkdownFiles();
-  const title = ctx.params?.['postTitle'];
+  const title = ctx.params?.['snippetTitle'];
   const foundFile = mdFiles.find((file) => file.metadata?.title == title);
   foundFile && TranspileMarkdownFile(foundFile);
 
@@ -32,8 +33,8 @@ export const getStaticProps = (async (ctx) => {
   md: MarkdownFile | undefined;
 }>;
 
-export default function PostViewPage({
+export default function SnippetViewPage({
   md,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetStaticPropsType<typeof getMarkdownProps>) {
   return <MarkdownViewPage md={md} />;
 }
