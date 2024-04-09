@@ -10,8 +10,6 @@ draft: true
 
 # {{ title }}
 
-## Table of Contents
-
 ## How to resolve "is damaged and can't be opened" when open some app on macOS
 
 ### Allow applications downloaded from "Anywhere"

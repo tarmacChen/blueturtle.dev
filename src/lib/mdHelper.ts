@@ -57,6 +57,7 @@ export function createMarkdownFile(name: string, content?: string) {
   const metadata: MarkdownMetadata = {
     createdTime: moment().toISOString(),
   };
+
   md.data = {
     ...md.data,
     ...metadata,

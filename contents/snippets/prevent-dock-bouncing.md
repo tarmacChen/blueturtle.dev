@@ -10,8 +10,6 @@ draft: true
 
 # {{ title }}
 
-## Table of Contents
-
 ```bash
 defaults write com.apple.dock no-bouncing -bool TRUE
 ```
