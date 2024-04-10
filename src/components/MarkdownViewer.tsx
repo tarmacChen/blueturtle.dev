@@ -3,7 +3,7 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import remarkGeomoji from 'remark-gemoji';
 import rehypeSlug from 'rehype-slug';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import rangeParser from 'parse-numeric-range';
 import { MarkdownTypes, MarkdownNode } from '@/type';
 import Image from 'next/image';
