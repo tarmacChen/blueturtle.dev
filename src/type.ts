@@ -1,3 +1,5 @@
+import { MarkdownFile } from 'mdman';
+
 export type NavigationMenuProps = {
   title: string;
   href: string;
@@ -10,18 +12,24 @@ export type NavbarProps = {
   items: NavigationMenuProps[];
 };
 
-export enum PostCategoryType {
-  General,
-  React,
-  Other,
+export interface MarkdownNode {
+  [key: string]: any;
+  type: string;
+  value: string;
 }
 
-export type PostDescription = {
-  id: string | number;
-  title: string;
-  category: PostCategoryType;
-  tags?: string[];
-  content: string;
-  description?: string;
-  releaseTime?: Date;
+export interface MarkdownTypes {
+  // markdown: { content?: string }
+  md: MarkdownFile;
+  codeStyle: { [key: string]: React.CSSProperties };
+}
+
+export type FetchMarkdownFileProps = {
+  pageIndex: number;
+  pageSize: number;
 };
+
+export enum MarkdownFileSortOrder {
+  Ascend,
+  Descend,
+}

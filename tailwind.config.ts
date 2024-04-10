@@ -3,19 +3,20 @@ import type { Config } from 'tailwindcss';
 const config = {
   darkMode: ['class'],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    './src/pages/**/*.{ts,tsx}',
   ],
   prefix: '',
+  screens: {
+    '2xl': '1400px',
+  },
   theme: {
     container: {
       center: true,
       padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
+      screens: {},
     },
     extend: {
       colors: {
@@ -72,6 +73,11 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      width: {
+        prose: '655px',
+        'prose-lg': '735px',
+      },
+      spacing: { '128': '28rem', '144': '32rem' },
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],

@@ -31,6 +31,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+<<<<<<< HEAD
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -48,11 +49,20 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+=======
+>>>>>>> 2aa8b1e5ec046962812eeb03ba3626dfbb1c2fc0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
+<<<<<<< HEAD
+=======
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+>>>>>>> 2aa8b1e5ec046962812eeb03ba3626dfbb1c2fc0
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -72,9 +82,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
+<<<<<<< HEAD
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+=======
+        run: bun install
+      - name: Build with Next.js
+        run: bun run build
+>>>>>>> 2aa8b1e5ec046962812eeb03ba3626dfbb1c2fc0
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

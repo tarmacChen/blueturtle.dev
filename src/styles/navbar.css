@@ -1,0 +1,39 @@
+.markdown-navigation {
+  @apply flex flex-col gap-1 pl-2 border-l-2 border-l-blue-600;
+}
+
+.markdown-navigation .title-anchor {
+  @apply text-base font-medium border-b-2 mx-2 border-dotted border-gray-400;
+}
+
+.markdown-navigation .title-anchor small {
+  @apply hidden;
+}
+
+.markdown-navigation .title-anchor:hover {
+  @apply cursor-pointer text-blue-600 underline font-medium;
+}
+
+.markdown-navigation .title-level2 {
+  @apply ml-4 font-light;
+}
+
+.markdown-navigation .title-level3 {
+  @apply ml-8 font-light;
+}
+
+.markdown-navigation .title-level4 {
+  @apply ml-12 font-light;
+}
+
+.markdown-navigation .title-level5 {
+  @apply ml-16 font-light;
+}
+
+.markdown-navigation .title-level6 {
+  @apply ml-20 font-light;
+}
+
+[class*='title-level'].active {
+  @apply text-blue-600 border-b-blue-600 font-medium;
+}
