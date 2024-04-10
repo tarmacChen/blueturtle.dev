@@ -17,17 +17,21 @@ export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const createdTime = moment(meta.createdTime);
   const tags = meta.tags ? meta.tags.join(', ') : '';
 
-  const DraftBadge = () => <Badge className="bg-red-600 h-6">Draft</Badge>;
+  const DraftBadge = () => (
+    <Badge className="bg-red-600 h-6 dark:text-white">Draft</Badge>
+  );
 
   return (
     <Link href={linkUrl}>
-      <Card className="hover:border-blue-600 hover:bg-blue-50 hover:shadow-md">
+      <Card className="border-gray-400 dark:border-gray-300 dark:bg-gray-800 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md dark:hover:border-blue-500 dark:hover:bg-gray-700">
         <CardHeader>
           <div className="flex flex-row justify-between">
             <CardTitle>{meta?.title}</CardTitle>
             {meta.draft && <DraftBadge />}
           </div>
-          <CardDescription>{tags}</CardDescription>
+          <CardDescription className="dark:text-gray-300">
+            {tags}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2">

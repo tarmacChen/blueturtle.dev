@@ -31,8 +31,9 @@ export async function getStaticProps() {
 
 export default function PostListPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
   {
-    const oddItemClasses = 'bg-white';
-    const evenItemClasses = 'bg-gray-100';
+    const oddItemClasses = 'dark:bg-gray-800 dark:hover:bg-gray-700';
+    const evenItemClasses =
+      'bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600';
 
     const NavItems = mdFiles.map((file) => {
       const url = `/posts/${file.metadata?.title}`;

@@ -1,7 +1,10 @@
 import { BasicPage } from '@/components/BasicPage';
 import MarkdownNavbar from 'markdown-navbar';
 import { MarkdownViewer } from '@/components/MarkdownViewer';
-import { a11yDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import {
+  vscDarkPlus as darkStyle,
+  materialLight as lightStyle,
+} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { InferGetStaticPropsType } from 'next';
 import { getStaticProps as getMarkdownProps } from '@/pages/posts/[postTitle]';
 
@@ -16,14 +19,14 @@ export default function MarkdownViewPage({
             source={md?.content || ''}
             ordered={true}
             headingTopOffset={84}
-            className="xl:sticky xl:top-24 xl:left-0 bg-gray-100"
+            className="bg-gray-100 dark:bg-gray-800 xl:sticky xl:top-24 xl:left-0"
           />
         </div>
         <div className="flex flex-col justify-center items-center mx-auto w-full mb-32">
           {md && (
             <MarkdownViewer
               md={md}
-              codeStyle={codeStyle}
+              codeStyle={darkStyle}
             />
           )}
         </div>

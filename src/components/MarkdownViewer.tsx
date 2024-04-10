@@ -12,9 +12,34 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
     h1: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
-        <h1 className="underline decoration-2 underline-offset-8 ">
+        <h1 className="underline decoration-2 underline-offset-8 text-primary bg-background">
           {children}
         </h1>
+      );
+    },
+    h2: ({ children, ...props }: { children: React.ReactNode }) => {
+      return <h2 className="text-primary bg-background">{children}</h2>;
+    },
+    h3: ({ children, ...props }: { children: React.ReactNode }) => {
+      return <h3 className="text-primary bg-background">{children}</h3>;
+    },
+    h4: ({ children, ...props }: { children: React.ReactNode }) => {
+      return <h4 className="text-primary bg-background">{children}</h4>;
+    },
+    h5: ({ children, ...props }: { children: React.ReactNode }) => {
+      return <h5 className="text-primary bg-background">{children}</h5>;
+    },
+    h6: ({ children, ...props }: { children: React.ReactNode }) => {
+      return <h6 className="text-primary bg-background">{children}</h6>;
+    },
+    a: ({ children, ...props }: { children: React.ReactNode }) => {
+      return <a className="text-primary bg-background">{children}</a>;
+    },
+    blockquote: ({ children, ...props }: { children: React.ReactNode }) => {
+      return (
+        <blockquote className="text-primary bg-background">
+          {children}
+        </blockquote>
       );
     },
     code: ({
@@ -107,7 +132,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
 
   return (
     <Markdown
-      className="w-full prose lg:prose-lg prose-blue"
+      className="w-full prose lg:prose-lg text-primary bg-background"
       rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkGeomoji]}
       components={MarkdownComponent}>
