@@ -39,7 +39,7 @@ export default function SnippetsPage({
 
   return (
     <BasicPage>
-      <div className="flex flex-row gap-4 justify-center">
+      <div className="flex flex-col gap-2 justify-center">
         {snippets?.map((snippet) => (
           <SnippetCard
             mdFile={snippet}

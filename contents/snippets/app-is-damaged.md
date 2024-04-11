@@ -1,5 +1,5 @@
 ---
-title: "App is Damaged"
+title: "How to resolve App is Damaged when open on macOS"
 category: snippets
 description: ""
 author: tarmac
@@ -12,9 +12,7 @@ draft: false
 
 ![APPISDAMAGED](/public/img/app-is-damaged.png)
 
-## How to resolve "is damaged and can't be opened" when open some app on macOS
-
-### Allow applications downloaded from "Anywhere"
+## Allow applications downloaded from "Anywhere"
 
 ```bash
 show anywhere
@@ -24,7 +22,7 @@ set default
 > sudo spctl --master-enable
 ```
 
-### Create a fake sign for unknown app
+## Create a fake sign for unknown app
 
 ```bash
 xattr -rc /Applications/RyuSAK.app && codesign --force --deep --sign - /Applications/RyuSAK.app

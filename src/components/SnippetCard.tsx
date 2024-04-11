@@ -22,9 +22,8 @@ export const SnippetCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
           <CardTitle>{mdFile.metadata.title}</CardTitle>
           <CardDescription>{tags}</CardDescription>
         </CardHeader>
-        <CardContent>{mdFile.metadata.description}</CardContent>
-        <CardFooter className="w-full justify-end">
-          {createdTime.format('ll')}
+        <CardFooter className="flex w-full justify-end">
+          <div>{createdTime.format('ll')}</div>
         </CardFooter>
       </Card>
     </Link>

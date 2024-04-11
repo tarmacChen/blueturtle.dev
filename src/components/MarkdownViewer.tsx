@@ -35,6 +35,20 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
     a: ({ children, ...props }: { children: React.ReactNode }) => {
       return <a className="text-primary bg-background">{children}</a>;
     },
+    th: ({ children, ...props }: { children: React.ReactNode }) => {
+      return (
+        <th className="text-primary font-medium not-italic bg-gray-100 border-2 dark:border-gray-400 dark:bg-gray-700 dark:border-white">
+          {children}
+        </th>
+      );
+    },
+    td: ({ children, ...props }: { children: React.ReactNode }) => {
+      return (
+        <td className="text-primary bg-background text-center border-2 dark:border-gray-400 dark:border-white">
+          {children}
+        </td>
+      );
+    },
     blockquote: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
         <blockquote className="text-primary bg-background">

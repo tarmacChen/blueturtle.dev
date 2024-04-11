@@ -1,10 +1,7 @@
 import { BasicPage } from '@/components/BasicPage';
 import MarkdownNavbar from 'markdown-navbar';
 import { MarkdownViewer } from '@/components/MarkdownViewer';
-import {
-  vscDarkPlus as darkStyle,
-  materialLight as lightStyle,
-} from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { a11yDark as darkStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { InferGetStaticPropsType } from 'next';
 import { getStaticProps as getMarkdownProps } from '@/pages/posts/[postTitle]';
 

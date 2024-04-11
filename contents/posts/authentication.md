@@ -1,89 +1,174 @@
 ---
-title: 'Authentication 驗證'
+title: 'Authentication 身份驗證與密碼保存'
 category: posts
 author: tarmac
 description: ''
-tags: [Security, Authentication]
+tags: [Security, Authentication, Authorization]
 createdTime: '2024-01-26T14:37:40+08:00'
-draft: true
+draft: false
 ---
 
 # {{ title }}
 
-## 妥善保存使用者的密碼
+## 什麼是 Authentication
 
-### 不要也不應該直接保存使用者的密碼
+Authentication 是用來驗證使用者的身份，最常見的就是帳號密碼登入或是透過憑證、生物辨識等方式確認用戶或訪客的身份，確認對方是否有存取資料的權限。
 
-> | username | password |
-> | -------- | -------- |
-> | jessica  | 123      |
+## Authentication 與 Authorization 的區別
 
-直接保存使用者的密碼是一件很危險的事情，一旦選擇幫客戶保存密碼，後續就要做很多機制來防範資料外洩或其他資安問題，同時讓系統管理者能直接看到客戶的密碼也不是正確的事情，一勞永逸的方法是讓使用者自行保管密碼，服務器永遠不替使用者保存記憶，服務器只保存用來驗證密碼正確性的公鑰。
+另一個很相似的單字 Authorization 是確認使用者是否擁有使用各個功能的權限，簡單解釋起來就是
 
----
+| Authentication<br/>(驗證/認證) | Authorization<br/>(授權) |
+|-----------------------|-------------------|
+| 你是誰？                  | 你可以做什麼？           |
 
-### Salt
+## 實作 Authentication (帳號密碼登入)
 
-我們可以在使用者註冊帳號時先產生一組公鑰，這組公鑰主要用來驗證之後使用者嘗試登入時密碼的正確性，像這種用途的公鑰我們稱為 salt，salt 必須為隨機生成的一組文字通常用 base64 的編碼方式產生，在註冊成功時連同使用者資料一起保存下來，並在必要時才做異動(變更密碼)。
+### 不要直接保存使用者的密碼
 
-```json
-{
-  "username": "Jessica",
-  "salt": "PyihcMvQPJqRagzZ+SDHcwmCZWwtWATjqOUKwc7Wus8zRAiaAq22p2C9VjBFjJM5omVh9yrtYK9s92zXS7NBvBk701fjqf/PBgiYs7UpfOYQi2FHU61zH9q9Uvqa/MmETSzi8f7YETQT4/AfjNNJ9gO1LCxaBRake/xXtZMo+tI="
-}
-```
+> 使用者嘗試註冊帳號，帳號密碼分別為 jessica 及 123
 
-### Hash
+| username | password |
+| -------- | -------- |
+| jessica  | 123      |
 
-```json
-{
-  "username": "Jessica",
-  "salt": "PyihcMvQPJqRagzZ+SDHcwmCZWwtWATjqOUKwc7Wus8zRAiaAq22p2C9VjBFjJM5omVh9yrtYK9s92zXS7NBvBk701fjqf/PBgiYs7UpfOYQi2FHU61zH9q9Uvqa/MmETSzi8f7YETQT4/AfjNNJ9gO1LCxaBRake/xXtZMo+tI=",
-  "password" : "ea627a55bbd5b29066e5debc714943b2303fc28043caec714ea58390ccf23767""
-}
-```
+直接保存使用者的密碼是一件很危險的事情，一旦選擇幫使用者保存密碼，後續就要做很多機制來防範資料外洩及其他問題，同時讓系統管理者能直接看到客戶的密碼也不是正確的事情，一勞永逸的方法是讓使用者自己記住密碼(私鑰)，永遠不替使用者保存。
 
-我們利用使用者的 salt 與註冊時設定的密碼，加上後續的加密計算後後會得到一組文字我們稱為 hash(雜湊值)，hash 也會保存在使用者帳戶的資料內，用來驗證之後的嘗試登入。
+如果不保存使用者的密碼那要怎麼確認登入時帳號密碼的正確性呢？
 
-### 驗證密碼的正確性
+### Password + Salt = Hash
 
-當使用者註冊完成後要登入帳號時，我們拿使用者的 salt 加上嘗試登入輸入的密碼去做計算，看得到的 hash 是不是和當初註冊帳號時計算出來的 hash 相同，就能夠推斷出密碼是否輸入正確。
+#### Salt
 
-## 記住使用者的登入狀態
-
-使用者的帳號密碼搞定了，現在我們來思考要怎麼讓客戶端(通常是瀏覽器)在登入完成後記住登入狀態，才不用在每次加載頁面後還要再做一次登入才能使用。
-
-### SessionToken
-
-我們前面利用註冊時得到的 Salt 加上使用者設定的密碼，得到了一組可以用來驗證密碼是否正確的 Hash 對吧？
-
-同樣的，我們可以在每次登入時先取得一組隨機產生的 salt ，與使用者帳號(最好是 unique key)做計算來產生一組新的 hash，這組 hash 可以用來驗證使用者是否已經登入過，像這種用途的 hash 我們稱為 sessionToken。
+在使用者註冊帳號時產生一組加密文字可以用 base64 或其他編碼方式產生，註冊成功後 Server 協助保存到帳戶資料。
 
 ```json
 {
-  "username": "Jessica",
-  "salt": "PyihcMvQPJqRagzZ+SDHcwmCZWwtWATjqOUKwc7Wus8zRAiaAq22p2C9VjBFjJM5omVh9yrtYK9s92zXS7NBvBk701fjqf/PBgiYs7UpfOYQi2FHU61zH9q9Uvqa/MmETSzi8f7YETQT4/AfjNNJ9gO1LCxaBRake/xXtZMo+tI=",
-  "password": "ea627a55bbd5b29066e5debc714943b2303fc28043caec714ea58390ccf23767",
-  "sessionToken": "d23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb"
+  "username": "jessica",
+  "salt": "PyihcMvQ"
 }
 ```
 
-> 使用者帳戶資料裡的 salt 是註冊帳號時得到的，只用來驗證後續嘗試登入時輸入的密碼是否正確。
+#### Hash 雜湊值
 
-> 從客戶端登入帳號時得到的 salt 不會做任何保存動作，每次的登入都會產生不同的 salt，產生後只用來做一次嘗試登入，無倫登入是否成功使用完都會直接拋棄，客戶端只會保存登入成功後得到的 sessionToken
+接著利用使用者的 salt 與註冊時設定的密碼，計算得到 hash 將其保存在帳戶資料內，用來驗證之後的登入嘗試。
 
-#### 用 cookie 或 localStorage 在瀏覽器內保存 token
+```json
+{
+  "username": "jessica",
+  "salt": "PyihcMvQ",
+  "hash" : "ea627a"
+}
+```
+
+#### 確認後續登入密碼是否輸入正確
+
+之後使用者嘗試登入時我們拿輸入的密碼與該帳號擁有的 salt 去做計算，看算出來的 hash 是不是與該帳號保存的 hash 相同，如果完全一致可以將這個結果視為密碼輸入正確成功登入。
+
+#### 記得更新 hash
+
+使用者變更密碼時會利用帳號擁有的 salt 與設定的密碼去算出新的 hash，若密碼變更成功要記得更新資料。 
+
+### 記住使用者的登入狀態
+
+使用者成功登入帳號之後，可以加入記住登入狀態的功能提升使用者體驗，才不用在每次重新加載頁面後還要重新登入才能操作。
+
+#### SessionToken
+
+回顧先前註冊帳號時得到的 salt 加上使用者設定的密碼，得到了可以用來驗證密碼的 hash。
+
+```json
+{
+  "username": "jessica",
+  "salt": "PyihcMvQ",
+  "hash": "ea627a"
+}
+```
+
+同樣的，我們可以在每次登入帳號時產生一次性的 salt ，將其與使用者輸入的密碼做計算產生新的 hash，這組 hash 可以用來驗證使用者是否已經登入過，為了避免搞混我們將這種用途的 hash 稱為 sessionToken。
+
+```json
+{
+  "_salt": "AoiRJckS",
+  "username": "jessica",
+  "sessionToken": "d23b0f"
+}
+```
+
+在 Server 與 Client 各保存一份
+
+```json
+// Server side
+
+{
+    "sessions": [
+      {
+        "sessionToken": "d23b0f",
+        "username": "jessica"
+      },
+      {
+        "sessionToken": "ts0a26",
+        "username": "tom"
+      }
+    ]
+}
+```
 
 ```js
+// Client side
+
+// 透過 Cookie 保存 sessionToken
 document.cookie =
-  'user_session=d23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb';
-```
+  'user_session=d23b0f';
 
-```js
+// 透過 LocalStorage 保存 sessionToken
 localStorage.setItem(
   'user_session',
-  'd23b0f67ec8f30def212893e5b0f859a1602ac58f9cfe37c721cf22625990afb'
+  'd23b0f',
 );
 ```
 
-> 通常這種用途的 token 具有時效性且必須在同一個客戶端底下才能使用，我們才會稱這種 token 為 sessionToken 而不是普通的 token，也因為這樣我們可以利用這種特性判斷使用者是否已經在其他地方登入過，若在不同的地方登入會讓既有的 token 被覆蓋掉，進而實現重置登入狀態的效果。
+當 Server 收到請求時，檢索看有沒有匹配的 sessionToken，如果有則自動登入擁有該 sessionToken 的使用者帳號。
+
+#### 暴力破解依然沒有收穫
+
+使用 hash 這種保存密碼的方式就算在資料外洩的情況下也讓攻擊者很難知道密碼到底是什麼，就算拿到了該帳號的 salt 及 hash 也只能用暴力破解嘗試算出密碼，簡單加上密碼輸入錯誤次數限制的設計就能有效保護帳號遭受暴力破解的攻擊。
+
+### Cookbook
+
+#### 防止使用者無限擁有登入狀態
+
+若在 sessionToken 上加入時效性的機制可以防止擁有該 sessionToken 的使用者無限擁有登入狀態，若不幸 sessionToken 資料外洩了攻擊者也只能在一定的時間內操作該使用者帳號。
+
+#### 通知使用者是否已經在其他裝置登入過、登出其他裝置的登入狀態
+
+Server 只替每個使用者記錄一份 sessionToken ，這種設計可以實作「通知使用者是否已經在其他裝置登入過」的功能，若使用者在不同的裝置登入帳號會讓舊的 sessionToken 紀錄被覆蓋掉間接實現登出其他裝置登入狀態的功能。
+ 
+### 不正確的處理方式
+
+也許你有看過直接將密碼做一次編碼就保存的方式，這樣的使用者密碼只是經過加密處理過的，攻擊者拿到這串文字就能回推密碼原有的模樣，若熟悉密碼學甚至不需要嘗試破解，光看長度及模樣就能猜出密碼分別是用 base64、MD5、SHA1 處理過的加密文字。
+
+```json
+// base64
+{
+  "username": "jessica", 
+  "password": "MTIz"
+  // 使用 base64 解密得到密碼 "123"
+}
+```
+
+```json
+{
+  "username": "jessica",
+  "password": "202cb962ac59075b964b07152d234b70"
+  // 使用 MD5 解密得到密碼 "123"
+}
+```
+
+```json
+{
+  "username": "jessica",
+  "password": "40bd001563085fc35165329ea1ff5c5ecbdbbeef"
+  // 使用 SHA1 解密得到密碼 "123"
+}
+```
