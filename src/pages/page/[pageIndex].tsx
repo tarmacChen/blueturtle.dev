@@ -26,11 +26,14 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (async (ctx) => {
+  const env = process.env.NODE_ENV;
   const mdFiles = getMarkdownFiles();
-  const routes: GetStaticPathsResult = { paths: [], fallback: false };
-  const posts = mdFiles.filter((md) => md.metadata.category != 'ignore');
+  const prodPosts = mdFiles.filter(
+    (md) => md.metadata.category != 'ignore' && md.metadata.draft == false,
+  );
+  const devPosts = mdFiles.filter((md) => md.metadata.category != 'ignore');
+  const posts = env == 'development' ? devPosts : prodPosts;
   const postGroups = paginateElements<MarkdownFile>(posts, 5);
-  // const index = ctx.params?.['pageIndex'] || '1';
   const index = Array.isArray(ctx.params?.['pageIndex'])
     ? ctx.params?.['pageIndex'][0]
     : ctx.params?.['pageIndex'] || '1';

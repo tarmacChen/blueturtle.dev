@@ -1,34 +1,12 @@
 import { PostCard } from '@/components/PostCard';
-import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps } from 'next';
 import { BasicPage } from '@/components/BasicPage';
+import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 
-export const getStaticProps = (() => {
-  const mdFiles = getMarkdownFiles();
-  const env = process.env.NODE_ENV;
-  const posts = mdFiles.filter((md) => {
-    const isNotIgnore = md.metadata.category != 'ignore';
-    const isNotDraft = md.metadata.draft == false;
-    const env = process.env.NODE_ENV;
-
-    switch (env) {
-      case 'development':
-        return isNotIgnore;
-        break;
-      case 'production':
-        return isNotIgnore && isNotDraft;
-        break;
-      default:
-        return isNotIgnore;
-        break;
-    }
-  });
-
-  const postGroups = paginateElements<MarkdownFile>(posts, 5);
-
-  return { props: { mdFiles: postGroups } };
+export const getStaticProps = (async (ctx) => {
+  return pageIndexStaticProps(ctx);
 }) satisfies GetStaticProps;
 
 export default function PostCardsPage({
