@@ -9,21 +9,28 @@ import {
 } from '@/components/ui/card';
 import Link from 'next/link';
 import moment from 'moment';
+import { Badge } from '@/components/ui/badge';
 
 export const SnippetCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const linkUrl = `/snippets/${mdFile.metadata.title}`;
   const createdTime = moment(mdFile.metadata.createdTime);
   const tags = mdFile.metadata.tags ? mdFile.metadata.tags.join(', ') : '';
+  const SnippetBadge = () => (
+    <Badge className="bg-orange-600 text-white h-6">Snippet</Badge>
+  );
 
   return (
     <Link href={linkUrl}>
-      <Card className="bg-yellow-50 dark:bg-gray-800 border-primary hover:bg-yellow-100 hover:border-blue-600">
+      <Card className="bg-yellow-50 dark:bg-gray-800 border-gray-400 hover:bg-yellow-100 hover:border-black hover:shadow-md">
         <CardHeader>
-          <CardTitle>{mdFile.metadata.title}</CardTitle>
+          <div className="flex flex-row justify-between gap-2">
+            <CardTitle>{mdFile.metadata.title}</CardTitle>
+            <SnippetBadge />
+          </div>
           <CardDescription>{tags}</CardDescription>
         </CardHeader>
         <CardFooter className="flex w-full justify-end">
-          <div>{createdTime.format('ll')}</div>
+          <div className="text-sm">{createdTime.format('ll')}</div>
         </CardFooter>
       </Card>
     </Link>

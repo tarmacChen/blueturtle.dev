@@ -4,6 +4,7 @@ import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps } from 'next';
 import { BasicPage } from '@/components/BasicPage';
 import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
+import { SnippetCard } from '@/components/SnippetCard';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -26,7 +27,11 @@ export default function PostCardsPage({
             <div
               key={file.filename}
               className="max-md:w-full w-2/3 xl:w-1/2 ">
-              <PostCard mdFile={file}></PostCard>
+              {file.metadata.category == 'posts' ? (
+                <PostCard mdFile={file} />
+              ) : (
+                <SnippetCard mdFile={file} />
+              )}
             </div>
           );
         })}
