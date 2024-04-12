@@ -1,5 +1,5 @@
 ---
-title: "同步MTP Device裡的資料"
+title: "同步 MTP Device 裡的資料"
 author: tarmac
 description: ""
 category: posts

@@ -6,6 +6,8 @@ description: ""
 tags: [""]
 keywords: [""]
 draft: true
+cover: ""
+coverFigure: ""
 ---
 
 # {{ title }}

@@ -1,5 +1,5 @@
 ---
-title: '在PowerShell底下使用Jabba來管理JDK'
+title: '在 PowerShell 底下使用 Jabba 來管理 JDK'
 category: posts
 author: tarmac
 tags: [Java, JDK, Jabba, PowerShell]

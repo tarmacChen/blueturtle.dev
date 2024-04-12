@@ -1,13 +1,15 @@
 ---
-title: post
+title: projectName
 author: tarmac
-category: posts
+category: projects
 description: ""
 tags: [""]
 keywords: [""]
 draft: true
 cover: ""
 coverFigure: ""
+sourceUrl: ""
+demoUrl: ""
 ---
 
 # {{ title }}

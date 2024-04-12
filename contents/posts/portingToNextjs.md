@@ -1,5 +1,5 @@
 ---
-title: 從Hugo遷移至Next.js
+title: 從 Hugo 遷移至 Next.js
 author: tarmac
 category: posts
 description: '用Next.js開發個人技術分享網站的紀錄'
