@@ -1,7 +1,6 @@
 import { PostCard } from '@/components/PostCard';
-import { MarkdownFile } from 'mdman';
 import { PostPagination } from '@/components/PostPagination';
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { BasicPage } from '@/components/BasicPage';
 import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 import { SnippetCard } from '@/components/SnippetCard';
@@ -13,10 +12,7 @@ export const getStaticProps = (async (ctx) => {
 export default function PostCardsPage({
   mdFiles,
   pageIndex = 1,
-}: {
-  mdFiles: MarkdownFile[][];
-  pageIndex?: number;
-}) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const posts = mdFiles[pageIndex - 1];
 
   return (

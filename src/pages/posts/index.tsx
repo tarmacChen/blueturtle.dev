@@ -1,10 +1,10 @@
 import { getMarkdownFiles } from '@/lib/mdHelper';
-import { MarkdownFile } from 'mdman';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';
 import { BasicPage } from '@/components/BasicPage';
 
-export async function getStaticProps() {
+export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
   const env = process.env.NODE_ENV;
   const devPosts = mdFiles.filter((md) => md.metadata.category == 'posts');
@@ -14,15 +14,12 @@ export async function getStaticProps() {
   const posts = env == 'development' ? devPosts : prodPosts;
 
   return { props: { mdFiles: posts, title: 'All Posts' } };
-}
+}) satisfies GetStaticProps;
 
 export default function PostListPage({
   mdFiles,
   title,
-}: {
-  mdFiles: MarkdownFile[];
-  title: string;
-}) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   {
     const oddItemClasses =
       'hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-800';
