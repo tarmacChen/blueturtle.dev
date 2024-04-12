@@ -26,7 +26,7 @@ export default function ProjectsPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <BasicPage>
-      <div className="flex flex-row max-md:w-full w-2/3 xl:w-1/2 justify-center mx-auto gap-4">
+      <div className="flex flex-row w-full justify-center mx-auto gap-4 flex-wrap">
         {mdFiles?.map((md) => {
           return (
             <ProjectCard

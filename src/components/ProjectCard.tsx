@@ -36,7 +36,7 @@ const DemoButton = ({ url }: { url: string }) => (
 
 export const ProjectCard = ({ md }: { md: MarkdownFile }) => {
   return (
-    <Card className="relative w-64 border-gray-500 dark:bg-gray-800 dark:hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
+    <Card className="w-64 border-gray-500 dark:bg-gray-800 dark:hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
       <CardHeader>
         <div className="flex flex-row gap-2 justify-between">
           <CardTitle>{md.metadata.title}</CardTitle>
@@ -46,7 +46,7 @@ export const ProjectCard = ({ md }: { md: MarkdownFile }) => {
         <CardContent></CardContent>
       </CardHeader>
       <CardFooter>
-        <div className="absolute flex flex-row gap-2 bottom-4 w-full h-32 items-end">
+        <div className="flex flex-row gap-2">
           {md.metadata.sourceUrl && (
             <SourceButton url={md.metadata.sourceUrl} />
           )}
