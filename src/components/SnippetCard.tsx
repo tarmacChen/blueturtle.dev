@@ -11,13 +11,16 @@ import Link from 'next/link';
 import moment from 'moment';
 import { Badge } from '@/components/ui/badge';
 
+export const SnippetBadge = () => (
+  <Badge className="bg-orange-600 text-white h-6 hover:bg-orange-600">
+    Snippet
+  </Badge>
+);
+
 export const SnippetCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const linkUrl = `/snippets/${mdFile.metadata.title}`;
   const createdTime = moment(mdFile.metadata.createdTime);
   const tags = mdFile.metadata.tags ? mdFile.metadata.tags.join(', ') : '';
-  const SnippetBadge = () => (
-    <Badge className="bg-orange-600 text-white h-6">Snippet</Badge>
-  );
 
   return (
     <Link href={linkUrl}>

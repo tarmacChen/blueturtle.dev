@@ -12,10 +12,10 @@ import moment from 'moment';
 import Link from 'next/link';
 
 export const DraftBadge = () => (
-  <Badge className="bg-red-600 h-6 text-white">Draft</Badge>
+  <Badge className="bg-red-600 h-6 text-white hover:bg-red-600">Draft</Badge>
 );
 export const PostBadge = () => (
-  <Badge className="bg-blue-600 h-6 text-white">Post</Badge>
+  <Badge className="bg-blue-600 h-6 text-white hover:bg-blue-600">Post</Badge>
 );
 
 export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
