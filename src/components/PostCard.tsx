@@ -11,18 +11,18 @@ import { MarkdownFile } from 'mdman';
 import moment from 'moment';
 import Link from 'next/link';
 
+export const DraftBadge = () => (
+  <Badge className="bg-red-600 h-6 text-white">Draft</Badge>
+);
+export const PostBadge = () => (
+  <Badge className="bg-blue-600 h-6 text-white">Post</Badge>
+);
+
 export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
   const meta = mdFile.metadata;
   const linkUrl = `/posts/${meta?.title}`;
   const createdTime = moment(meta.createdTime);
   const tags = meta.tags ? meta.tags.join(', ') : '';
-
-  const DraftBadge = () => (
-    <Badge className="bg-red-600 h-6 text-white">Draft</Badge>
-  );
-  const PostBadge = () => (
-    <Badge className="bg-blue-600 h-6 text-white">Post</Badge>
-  );
 
   return (
     <Link href={linkUrl}>

@@ -11,10 +11,10 @@ import PostCardsPage from '@/pages/index';
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();
   const routes: GetStaticPathsResult = { paths: [], fallback: false };
-  const posts = mdFiles;
+  const posts = mdFiles.filter((md) => md.metadata.category != 'projects');
   const postGroups = paginateElements<MarkdownFile>(posts, 5);
 
-  postGroups.map((group, index) => {
+  postGroups?.map((group, index) => {
     const pageIndex = (index + 1).toString();
 
     routes.paths.push({
