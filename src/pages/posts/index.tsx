@@ -42,7 +42,7 @@ export default function PostListPage({
         <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
           {title}
         </h1>
-        <div className="flex flex-col mx-auto">
+        <div className="flex flex-col">
           {withListItemDecorator(PostItems, {
             oddItemClasses: oddItemClasses,
             evenItemClasses: evenItemClasses,

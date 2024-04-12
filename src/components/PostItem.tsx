@@ -25,10 +25,10 @@ export const PostItem = ({
       key={file.filename}>
       <Link
         href={href}
-        className="p-2 flex flex-row w-full border-gray-400 justify-between">
+        className="flex flex-col w-full border-gray-400 justify-between px-2 py-1">
         <div>{file.metadata.title}</div>
+        <div className="text-right text-sm">{createdTime}</div>
       </Link>
-      <div className="p-2 text-right text-sm">{createdTime}</div>
     </div>
   );
 };
