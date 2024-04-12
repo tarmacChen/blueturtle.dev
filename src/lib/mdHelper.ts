@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MarkdownFile, MarkdownMetadata } from 'mdman';
 import moment from 'moment';
+import { sortByCreatedTime } from '@/lib/mdSorting';
 import { MarkdownFileSortOrder } from '@/type';
 
 const envName = 'MARKDOWN_FILES_LOCATION';
@@ -37,7 +38,9 @@ export function getMarkdownFiles(): MarkdownFile[] {
 
     mdFiles.push(newFile);
   });
-  return mdFiles.sort(sortByCreatedTimeDescend);
+  return mdFiles.sort((a, b) =>
+    sortByCreatedTime(a, b, MarkdownFileSortOrder.Descend),
+  );
 }
 
 export function paginateElements<T>(elements: any[], pageSize: number) {
@@ -96,36 +99,6 @@ export function cleanTestDirectory() {
   const dir = path.join(rootDir, 'test');
   fs.rmSync(dir, { force: true, recursive: true });
 }
-
-export const sortByCreatedTime = (
-  a: MarkdownFile,
-  b: MarkdownFile,
-  order: MarkdownFileSortOrder,
-): number => {
-  if (order == MarkdownFileSortOrder.Descend)
-    return sortByCreatedTimeDescend(a, b);
-  if (order == MarkdownFileSortOrder.Ascend)
-    return sortByCreatedTimeAscend(a, b);
-  return 0;
-};
-
-const sortByCreatedTimeDescend = (a: MarkdownFile, b: MarkdownFile): number => {
-  const aTime = moment(a.metadata.createdTime);
-  const bTime = moment(b.metadata.createdTime);
-
-  if (aTime.isBefore(bTime)) return 1;
-  if (aTime.isAfter(bTime)) return -1;
-  return 0;
-};
-
-const sortByCreatedTimeAscend = (a: MarkdownFile, b: MarkdownFile): number => {
-  const aTime = moment(a.metadata.createdTime);
-  const bTime = moment(b.metadata.createdTime);
-
-  if (aTime.isBefore(bTime)) return -1;
-  if (aTime.isAfter(bTime)) return 1;
-  return 0;
-};
 
 export const TranspileMarkdownFile = (md: MarkdownFile) => {
   const scopePattern = /{{[\w \t]+}}/g;

@@ -2,9 +2,13 @@ import { BasicPage } from '@/components/BasicPage';
 import { getMarkdownFiles } from '@/lib/mdHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ProjectCard } from '@/components/ProjectCard';
+import { sortByOrder } from '@/lib/mdSorting';
+import { MarkdownFileSortOrder } from '@/type';
 
 export const getStaticProps = (() => {
-  const mdFiles = getMarkdownFiles();
+  const mdFiles = getMarkdownFiles().sort((a, b) =>
+    sortByOrder(a, b, MarkdownFileSortOrder.Ascend),
+  );
   const env = process.env.NODE_ENV;
   const devProjects = mdFiles.filter(
     (md) => md.metadata.category == 'projects',
