@@ -148,7 +148,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
 
   return (
     <Markdown
-      className="w-full prose lg:prose-lg text-primary bg-background"
+      className="w-full prose lg:prose-lg text-primary"
       rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkGeomoji]}
       components={MarkdownComponent}>

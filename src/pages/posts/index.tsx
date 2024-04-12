@@ -22,9 +22,9 @@ export default function PostListPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   {
     const oddItemClasses =
-      'hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-800';
+      'hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-800 hover:border-2 border-blue-500';
     const evenItemClasses =
-      'hover:bg-blue-100 bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-700';
+      'hover:bg-blue-100 bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-700 hover:border-2 border-blue-500';
 
     const NavItems = mdFiles.map((file) => {
       const url = `/posts/${file.metadata?.title}`;
