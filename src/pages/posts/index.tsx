@@ -1,4 +1,4 @@
-import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
+import { getMarkdownFiles } from '@/lib/mdHelper';
 import { MarkdownFile } from 'mdman';
 import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';
@@ -12,6 +12,7 @@ export async function getStaticProps() {
     (md) => md.metadata.category == 'posts' && md.metadata.draft == false,
   );
   const posts = env == 'development' ? devPosts : prodPosts;
+
   return { props: { mdFiles: posts, title: 'All Posts' } };
 }
 
