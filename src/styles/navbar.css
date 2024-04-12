@@ -3,7 +3,7 @@
 }
 
 .markdown-navigation .title-anchor {
-  @apply text-base font-medium border-b-2 mx-2 border-gray-400;
+  @apply text-base font-medium mx-2 border-gray-400;
 }
 
 .markdown-navigation .title-anchor small {
@@ -11,7 +11,11 @@
 }
 
 .markdown-navigation .title-anchor:hover {
-  @apply cursor-pointer text-blue-600 underline font-medium;
+  @apply cursor-pointer underline;
+}
+
+.markdown-navigation .title-level1 {
+  @apply text-lg;
 }
 
 .markdown-navigation .title-level2 {
@@ -35,5 +39,5 @@
 }
 
 [class*='title-level'].active {
-  @apply border-b-4 border-b-blue-600 font-medium text-lg;
+  @apply border-b-4 border-b-blue-600 font-medium;
 }

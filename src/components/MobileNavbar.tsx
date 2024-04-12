@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export function MobileNavbar() {
   const containerClasses =
-    'flex flex-row flex-1 justify-around bg-background text-foreground border-t-2 border-gray-100';
+    'flex flex-row flex-1 justify-around bg-background text-foreground';
 
   const NavbarItem = ({
     href,
