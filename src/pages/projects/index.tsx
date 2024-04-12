@@ -1,19 +1,7 @@
 import { BasicPage } from '@/components/BasicPage';
 import { getMarkdownFiles } from '@/lib/mdHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { MarkdownFile } from 'mdman';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-  CardHeader,
-  CardFooter,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { ExternalLinkIcon, LayersIcon } from '@radix-ui/react-icons';
-import { DraftBadge } from '@/components/PostCard';
+import { ProjectCard } from '@/components/ProjectCard';
 
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles();
@@ -28,50 +16,6 @@ export const getStaticProps = (() => {
 
   return { props: { mdFiles: projects } };
 }) satisfies GetStaticProps;
-
-const SourceButton = ({ url }: { url: string }) => (
-  <Link
-    href={url}
-    target="_blank">
-    <Button className="flex flex-row rounded-md gap-2">
-      Source
-      <ExternalLinkIcon />
-    </Button>
-  </Link>
-);
-
-const DemoButton = ({ url }: { url: string }) => (
-  <Link
-    href={url}
-    target="_blank">
-    <Button className="flex flex-row rounded-md gap-2">
-      Demo
-      <LayersIcon />
-    </Button>
-  </Link>
-);
-
-const ProjectCard = ({ md }: { md: MarkdownFile }) => {
-  return (
-    <Card className="w-64 border-gray-500 dark:bg-gray-800 dark:hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
-      <CardHeader>
-        <div className="flex flex-row gap-2 justify-between">
-          <CardTitle>{md.metadata.title}</CardTitle>
-          {md.metadata.draft && <DraftBadge />}
-        </div>
-        <CardDescription>{md.metadata.description}</CardDescription>
-      </CardHeader>
-      <CardFooter>
-        <div className="flex flex-row gap-2">
-          {md.metadata.sourceUrl && (
-            <SourceButton url={md.metadata.sourceUrl} />
-          )}
-          {md.metadata.demoUrl && <DemoButton url={md.metadata.demoUrl} />}
-        </div>
-      </CardFooter>
-    </Card>
-  );
-};
 
 export default function ProjectsPage({
   mdFiles,
