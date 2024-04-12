@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import './navbar.css';
+@import 'toc.css';
 @import 'notebookPaper.css';
 
 

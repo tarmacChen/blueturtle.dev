@@ -25,9 +25,9 @@ export const PostItem = ({
       key={file.filename}>
       <Link
         href={href}
-        className="py-2 flex flex-row w-full border-gray-400 hover:border-blue-600 justify-between hover:bg-blue-100">
+        className="p-2 flex flex-row w-full border-gray-400 hover:border-blue-600 justify-between dark:hover:border-2 dark:hover:border-blue-500">
         <div>{file.metadata.title}</div>
-        <div className="text-right">{createdTime}</div>
+        <div className="text-right text-sm">{createdTime}</div>
       </Link>
     </div>
   );

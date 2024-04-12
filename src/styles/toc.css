@@ -39,5 +39,5 @@
 }
 
 [class*='title-level'].active {
-  @apply border-b-4 border-b-blue-600 font-medium;
+  @apply border-b-2 border-b-blue-600 font-medium;
 }

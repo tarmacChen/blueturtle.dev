@@ -21,7 +21,7 @@ export const SnippetCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
 
   return (
     <Link href={linkUrl}>
-      <Card className="bg-yellow-50 dark:bg-gray-800 border-gray-400 hover:bg-yellow-100 hover:border-black hover:shadow-md">
+      <Card className="bg-yellow-50 dark:bg-gray-800 border-gray-400 dark:hover:border-blue-500 hover:bg-yellow-100 hover:border-black hover:shadow-md">
         <CardHeader>
           <div className="flex flex-row justify-between gap-2">
             <CardTitle>{mdFile.metadata.title}</CardTitle>

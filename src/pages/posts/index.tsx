@@ -6,34 +6,27 @@ import { BasicPage } from '@/components/BasicPage';
 
 export async function getStaticProps() {
   const mdFiles = getMarkdownFiles();
-  // const posts = mdFiles.filter((file) => file.metadata.category == 'posts');
-  const posts = mdFiles.filter((md) => {
-    const isPost = md.metadata.category == 'posts';
-    const isNotDraft = md.metadata.draft == false;
-    const env = process.env.NODE_ENV;
-
-    switch (env) {
-      case 'development':
-        return isPost;
-        break;
-      case 'production':
-        return isPost && isNotDraft;
-        break;
-      default:
-        return isPost;
-        break;
-    }
-  });
-  const postGroups = paginateElements<MarkdownFile>(posts, 10);
-  const pageIndex = 0;
-  return { props: { mdFiles: postGroups[pageIndex] } };
+  const env = process.env.NODE_ENV;
+  const devPosts = mdFiles.filter((md) => md.metadata.category == 'posts');
+  const prodPosts = mdFiles.filter(
+    (md) => md.metadata.category == 'posts' && md.metadata.draft == false,
+  );
+  const posts = env == 'development' ? devPosts : prodPosts;
+  return { props: { mdFiles: posts, title: 'All Posts' } };
 }
 
-export default function PostListPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
+export default function PostListPage({
+  mdFiles,
+  title,
+}: {
+  mdFiles: MarkdownFile[];
+  title: string;
+}) {
   {
-    const oddItemClasses = 'dark:bg-gray-800 dark:hover:bg-gray-700';
+    const oddItemClasses =
+      'hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-800';
     const evenItemClasses =
-      'bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600';
+      'hover:bg-blue-100 bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-700';
 
     const NavItems = mdFiles.map((file) => {
       const url = `/posts/${file.metadata?.title}`;
@@ -49,7 +42,7 @@ export default function PostListPage({ mdFiles }: { mdFiles: MarkdownFile[] }) {
     return (
       <BasicPage>
         <h1 className="text-2xl border-b-2 pl-2 mb-2 border-b-gray-300">
-          All Posts
+          {title}
         </h1>
         <div className="flex flex-col mx-auto">
           {withListItemDecorator(NavItems, {
