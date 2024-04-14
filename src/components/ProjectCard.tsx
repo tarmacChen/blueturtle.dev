@@ -37,7 +37,7 @@ const DemoButton = ({ url }: { url: string }) => (
 export const ProjectCard = ({ md }: { md: MarkdownFile }) => {
   return (
     <Card className="w-64 border-gray-500 dark:bg-gray-800 dark:hover:border-blue-500 bg-gray-50 hover:bg-blue-50">
-      <CardHeader>
+      <CardHeader className="h-2/3">
         <div className="flex flex-row gap-2 justify-between">
           <CardTitle>{md.metadata.title}</CardTitle>
           {md.metadata.draft && <DraftBadge />}
