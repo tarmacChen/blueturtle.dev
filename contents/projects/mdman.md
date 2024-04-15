@@ -2,7 +2,7 @@
 title: mdman
 author: tarmac
 category: projects
-description: ''
+description: 'Markdown file generate helper'
 tags:
   - 'Node.js'
   - 'npm package'

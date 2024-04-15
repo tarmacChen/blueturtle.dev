@@ -1,5 +1,5 @@
 import { BasicPage } from '@/components/BasicPage';
-import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/mdHelper';
+import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/staticHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { MarkdownViewer } from '@/components/MarkdownViewer';
 import { a11yDark as codeStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';

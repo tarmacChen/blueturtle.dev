@@ -1,4 +1,4 @@
-import { getMarkdownFiles } from '@/lib/mdHelper';
+import { getMarkdownFiles } from '@/lib/staticHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { withListItemDecorator } from '@/lib/helper';
 import { PostItem } from '@/components/PostItem';

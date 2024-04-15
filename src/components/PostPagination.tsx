@@ -6,17 +6,19 @@ import {
 } from '@/components/ui/pagination';
 import Link from 'next/link';
 import { MarkdownFile } from 'mdman';
+import { paginateElements } from '@/lib/helper';
 
 export function PostPagination({
-  groups,
+  posts,
   baseUrl,
   currentIndex,
 }: {
-  groups: MarkdownFile[][];
+  posts: MarkdownFile[];
   baseUrl: string;
   currentIndex: number;
 }) {
-  const items = groups.map((group, index) => {
+  const group = paginateElements<MarkdownFile>(posts, 5);
+  const items = group.map((group, index) => {
     const pageIndex = index + 1;
     const currentPageIsActive = pageIndex == currentIndex;
     const activeUrl = currentPageIsActive ? '/' : `${baseUrl}/${pageIndex}`;
@@ -79,7 +81,7 @@ export function PostPagination({
   };
 
   const hasPreviousPage = currentIndex - 1 >= 1;
-  const hasNextPage = currentIndex + 1 <= groups.length;
+  const hasNextPage = currentIndex + 1 <= group.length;
 
   return (
     <Pagination>

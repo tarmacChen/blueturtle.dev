@@ -1,4 +1,4 @@
-import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/mdHelper';
+import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/staticHelper';
 import type {
   GetStaticPaths,
   GetStaticPathsResult,

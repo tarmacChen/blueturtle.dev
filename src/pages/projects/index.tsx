@@ -3,7 +3,7 @@ import {
   getMarkdownFiles,
   groupByYear,
   MarkdownFileGroup,
-} from '@/lib/mdHelper';
+} from '@/lib/staticHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ProjectCard } from '@/components/ProjectCard';
 import { sortByOrder } from '@/lib/mdSorting';

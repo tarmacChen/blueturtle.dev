@@ -4,7 +4,8 @@ import type {
   GetStaticProps,
   InferGetStaticPropsType,
 } from 'next';
-import { getMarkdownFiles, paginateElements } from '@/lib/mdHelper';
+import { getMarkdownFiles } from '@/lib/staticHelper';
+import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import PostCardsPage from '@/pages/index';
 
@@ -34,23 +35,22 @@ export const getStaticProps = (async (ctx) => {
   const prodPosts = mdFiles.filter((md) => md.metadata.draft == false);
   const devPosts = mdFiles;
   const posts = env == 'development' ? devPosts : prodPosts;
-  const postGroups = paginateElements<MarkdownFile>(posts, 5);
   const index = Array.isArray(ctx.params?.['pageIndex'])
     ? ctx.params?.['pageIndex'][0]
     : ctx.params?.['pageIndex'] || '1';
   const pageIndex = parseInt(index);
 
-  return { props: { pageIndex: pageIndex, mdFiles: postGroups } };
+  return { props: { pageIndex: pageIndex, posts: posts } };
 }) satisfies GetStaticProps;
 
 export default function Page({
   pageIndex,
-  mdFiles,
+  posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <PostCardsPage
       pageIndex={pageIndex}
-      mdFiles={mdFiles}
+      posts={posts}
     />
   );
 }
