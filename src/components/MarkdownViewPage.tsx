@@ -16,7 +16,7 @@ export default function MarkdownViewPage({
             source={md?.content || ''}
             ordered={true}
             headingTopOffset={84}
-            className="bg-gray-100 dark:bg-gray-700 xl:sticky xl:top-24 xl:left-0"
+            className="bg-gray-100 dark:bg-gray-800 xl:sticky xl:top-24 xl:left-0"
           />
         </div>
         <div className="flex flex-col justify-center items-center mx-auto w-full mb-32">
