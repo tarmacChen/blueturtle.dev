@@ -4,13 +4,22 @@ import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { BasicPage } from '@/components/BasicPage';
 import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 import { SnippetCard } from '@/components/SnippetCard';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { getAllPostTags } from '@/lib/helper';
 import { TagInfo } from '@/type';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -58,28 +67,32 @@ export default function PostCardsPage({
   const tags = getAllPostTags(posts);
   const showPaginates = search == '' && selectedTag == allPostsTagName;
 
-  const Combobox = ({ tags }: { tags: TagInfo[] }) => {
-    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-      setSelectedTag(event.target.value);
-    };
-
+  const TagSelector = ({ tags }: { tags: TagInfo[] }) => {
     return (
-      <div className="flex flex-row gap-1">
-        <select
-          className="border-[1px] p-2 rounded-md border-gray-400"
-          id="selectedTag"
-          value={selectedTag}
-          onChange={handleChange}>
-          <option defaultValue={allPostsTagName}>{allPostsTagName}</option>
-          {tags?.map((tag, index) => (
-            <option
-              value={tag.value}
-              key={index}>
-              {tag.label}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Select
+        onValueChange={(event) => {
+          setSelectedTag(event);
+          return event;
+        }}
+        value={selectedTag}>
+        <SelectTrigger className="border-gray-400">
+          <SelectValue placeholder="tags filter"></SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectItem value={allPostsTagName}>{allPostsTagName}</SelectItem>
+            {tags.map((tag, index) => {
+              return (
+                <SelectItem
+                  value={tag.value}
+                  key={tag.label}>
+                  {tag.label}
+                </SelectItem>
+              );
+            })}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     );
   };
 
@@ -87,8 +100,8 @@ export default function PostCardsPage({
     <BasicPage>
       <div className="flex flex-col mb-24 gap-4 items-center">
         <div className="flex flex-row w-full max-md:w-full w-2/3 xl:w-1/2 gap-2">
-          <Combobox tags={tags} />
-          <div className="flex flex-row gap-2 justify-center items-center w-full">
+          <TagSelector tags={tags} />
+          <div className="flex flex-row gap-2 justify-center items-center">
             <MagnifyingGlassIcon
               width={iconSize}
               height={iconSize}
@@ -98,7 +111,7 @@ export default function PostCardsPage({
               placeholder="Search..."
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              className="border-gray-500 focus-visible:border-none focus-visible:ring-offset-0 focus-visible:ring-blue-500 text-md"
+              className="border-gray-400 focus-visible:border-none focus-visible:ring-offset-0 focus-visible:ring-blue-500"
             />
           </div>
         </div>
