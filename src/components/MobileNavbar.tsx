@@ -40,9 +40,9 @@ export function MobileNavbar() {
         <HomeIcon />
         Home
       </NavbarItem>
-      <NavbarItem href="/contact">
+      <NavbarItem href="/about">
         <PersonIcon />
-        Contact
+        About
       </NavbarItem>
       <NavbarItem href="/projects">
         <RocketIcon />

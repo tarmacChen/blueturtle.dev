@@ -32,8 +32,22 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
     h6: ({ children, ...props }: { children: React.ReactNode }) => {
       return <h6 className="text-primary bg-background">{children}</h6>;
     },
-    a: ({ children, ...props }: { children: React.ReactNode }) => {
-      return <a className="text-primary bg-background">{children}</a>;
+    a: ({
+      href,
+      children,
+      ...props
+    }: {
+      href: string;
+      children: React.ReactNode;
+    }) => {
+      return (
+        <a
+          className="text-primary bg-background"
+          href={href}
+          target="_blank">
+          {children}
+        </a>
+      );
     },
     th: ({ children, ...props }: { children: React.ReactNode }) => {
       return (

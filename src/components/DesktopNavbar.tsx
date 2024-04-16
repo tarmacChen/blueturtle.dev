@@ -53,8 +53,8 @@ export function DesktopNavbar() {
               name="Projects"
             />
             <LinkItem
-              href="/contact"
-              name="Contact"
+              href="/about"
+              name="About"
             />
           </NavigationMenuItem>
         </NavigationMenuList>
