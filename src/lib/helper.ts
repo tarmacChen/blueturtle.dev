@@ -1,4 +1,7 @@
 import { cloneElement } from 'react';
+import { MarkdownFile } from 'mdman';
+import { TagInfo } from '@/type';
+import { is } from 'unist-util-is';
 
 export const mergeClassNames = (...classNames: string[]) =>
   classNames.filter(Boolean).join(' ');
@@ -30,3 +33,24 @@ export function paginateElements<T>(elements: any[], pageSize: number) {
   }
   return groups as T[][];
 }
+
+export const getAllPostTags = (posts: MarkdownFile[]) => {
+  const tagsCollection: TagInfo[] = [];
+
+  posts.map((post) => {
+    const tags = post.metadata.tags || [''];
+
+    tags.map((tag) => {
+      const tagValue = tag.charAt(0).toUpperCase() + tag.slice(1);
+      const tagLabel = tag;
+
+      if (
+        tagsCollection.find((findTag) => findTag.label == tagLabel) == undefined
+      ) {
+        tagsCollection.push({ value: tagLabel, label: tagLabel });
+      }
+    });
+  });
+
+  return tagsCollection;
+};
