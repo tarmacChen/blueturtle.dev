@@ -1,40 +1,9 @@
 import { BasicPage } from '@/components/BasicPage';
-import {
-  getMarkdownFiles,
-  groupByYear,
-  MarkdownFileGroup,
-} from '@/lib/staticHelper';
+import { getMarkdownFiles } from '@/lib/staticHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ProjectCard } from '@/components/ProjectCard';
 import { sortByOrder } from '@/lib/mdSorting';
 import { MarkdownFileSortOrder } from '@/type';
-
-const ProjectGroup = ({ group }: { group: MarkdownFileGroup }) => {
-  return Object.keys(group)
-    .reverse()
-    .map((year) => {
-      return (
-        <>
-          <h1
-            key={year}
-            className="m-1 text-2xl">
-            {year}
-          </h1>
-
-          <div className="flex flex-row w-full gap-4 flex-wrap justify-center">
-            {group[year].map((md) => {
-              return (
-                <ProjectCard
-                  md={md}
-                  key={md.filename}
-                />
-              );
-            })}
-          </div>
-        </>
-      );
-    });
-};
 
 export const getStaticProps = (() => {
   const mdFiles = getMarkdownFiles().sort((a, b) =>
@@ -48,18 +17,26 @@ export const getStaticProps = (() => {
     (md) => md.metadata.category == 'projects' && md.metadata.draft == false,
   );
   const projects = env == 'development' ? devProjects : prodProjects;
-  const group = groupByYear(projects);
 
-  return { props: { mdGroup: group } };
+  return { props: { projects: projects } };
 }) satisfies GetStaticProps;
 
 export default function ProjectsPage({
-  mdGroup,
+  projects,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <BasicPage>
       <div className="mx-auto max-md:w-full w-2/3 xl:w-1/2">
-        <ProjectGroup group={mdGroup} />
+        <div className="flex flex-row w-full gap-4 flex-wrap justify-center">
+          {projects.map((project) => {
+            return (
+              <ProjectCard
+                project={project}
+                key={project.filename}
+              />
+            );
+          })}
+        </div>
       </div>
     </BasicPage>
   );

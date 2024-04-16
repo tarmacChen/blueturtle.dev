@@ -5,7 +5,7 @@ author: tarmac
 tags: [Java, JDK, Jabba, PowerShell]
 description: '介紹如何安裝及使用 Jabba 來管理你的 Java JDK'
 createdTime: '2023-03-16T19:30:16+08:00'
-draft: true
+draft: false
 ---
 
 # {{ title }}

@@ -5,7 +5,7 @@ description: ""
 category: posts
 tags: [mtpcopy, scoop]
 createdTime: "2023-04-26T07:29:25+08:00"
-draft: true
+draft: false
 ---
 
 # {{ title }}
