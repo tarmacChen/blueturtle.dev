@@ -1,7 +1,8 @@
 ---
 title: mdman
 author: tarmac
-category: projects
+category: Node.js
+type: project
 description: 'Markdown file generate helper'
 tags:
   - 'Node.js'
@@ -13,7 +14,7 @@ keywords:
 draft: false
 sourceUrl: 'https://www.npmjs.com/package/mdman'
 createdTime: '2024-04-12T07:54:03.638Z'
-order: 1
+weight: 1
 ---
 
 # {{ title }}

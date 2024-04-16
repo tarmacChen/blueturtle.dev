@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 import { MarkdownFile, MarkdownMetadata } from 'mdman';
 import moment from 'moment';
 import { sortByCreatedTime } from '@/lib/mdSorting';
-import { MarkdownFileSortOrder, TagInfo } from '@/type';
+import { MarkdownFileSortOrder } from '@/type';
 
 const envName = 'MARKDOWN_FILES_LOCATION';
 const envValue = process.env[envName];

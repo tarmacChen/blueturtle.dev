@@ -11,7 +11,7 @@ import MarkdownViewPage from '@/components/MarkdownViewPage';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles().filter(
-    (md) => md.metadata.category == 'snippets',
+    (md) => md.metadata.type == 'snippet',
   );
   const result: GetStaticPathsResult = { paths: [], fallback: false };
 

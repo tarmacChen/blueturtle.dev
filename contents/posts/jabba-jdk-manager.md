@@ -1,6 +1,7 @@
 ---
 title: '在 PowerShell 底下使用 Jabba 來管理 JDK'
-category: posts
+category: JDK
+type: post
 author: tarmac
 tags: [Java, JDK, Jabba, PowerShell]
 description: '介紹如何安裝及使用 Jabba 來管理你的 Java JDK'

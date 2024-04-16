@@ -29,8 +29,7 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async (ctx) => {
   const env = process.env.NODE_ENV;
   const mdFiles = getMarkdownFiles().filter(
-    (md) =>
-      md.metadata.category != 'ignore' && md.metadata.category != 'projects',
+    (md) => md.metadata.type == 'post' || md.metadata.type == 'snippet',
   );
   const prodPosts = mdFiles.filter((md) => md.metadata.draft == false);
   const devPosts = mdFiles;

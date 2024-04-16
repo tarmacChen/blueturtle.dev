@@ -1,6 +1,7 @@
 ---
 title: "How to resolve App is Damaged when open on macOS"
-category: snippets
+category: macOS
+type: snippet
 description: ""
 author: tarmac
 tags: [macOS]

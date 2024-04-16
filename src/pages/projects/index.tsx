@@ -2,20 +2,16 @@ import { BasicPage } from '@/components/BasicPage';
 import { getMarkdownFiles } from '@/lib/staticHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ProjectCard } from '@/components/ProjectCard';
-import { sortByOrder } from '@/lib/mdSorting';
+import { sortByWeight } from '@/lib/mdSorting';
 import { MarkdownFileSortOrder } from '@/type';
 
 export const getStaticProps = (() => {
-  const mdFiles = getMarkdownFiles().sort((a, b) =>
-    sortByOrder(a, b, MarkdownFileSortOrder.Ascend),
-  );
+  const mdFiles = getMarkdownFiles()
+    .filter((md) => md.metadata.type == 'project')
+    .sort((a, b) => sortByWeight(a, b, MarkdownFileSortOrder.Ascend));
   const env = process.env.NODE_ENV;
-  const devProjects = mdFiles.filter(
-    (md) => md.metadata.category == 'projects',
-  );
-  const prodProjects = mdFiles.filter(
-    (md) => md.metadata.category == 'projects' && md.metadata.draft == false,
-  );
+  const devProjects = mdFiles;
+  const prodProjects = mdFiles.filter((md) => md.metadata.draft == false);
   const projects = env == 'development' ? devProjects : prodProjects;
 
   return { props: { projects: projects } };

@@ -18,8 +18,8 @@ export const PostBadge = () => (
   <Badge className="bg-blue-600 h-6 text-white hover:bg-blue-600">Post</Badge>
 );
 
-export const PostCard = ({ mdFile }: { mdFile: MarkdownFile }) => {
-  const meta = mdFile.metadata;
+export const PostCard = ({ post }: { post: MarkdownFile }) => {
+  const meta = post.metadata;
   const linkUrl = `/posts/${meta?.title}`;
   const createdTime = moment(meta.createdTime);
   const tags = meta.tags ? meta.tags.join(', ') : '';

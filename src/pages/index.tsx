@@ -26,18 +26,17 @@ export const getStaticProps = (async (ctx) => {
 }) satisfies GetStaticProps;
 
 const PostCards = ({ posts }: { posts: MarkdownFile[] }) => {
-  return posts?.map((file) => {
-    return (
-      <div
-        key={file.filename}
-        className="max-md:w-full w-2/3 xl:w-1/2 ">
-        {file.metadata.category == 'posts' ? (
-          <PostCard mdFile={file} />
+  return posts?.map((post) => {
+    {
+      const card =
+        post.metadata.type == 'post' ? (
+          <PostCard post={post} />
         ) : (
-          <SnippetCard mdFile={file} />
-        )}
-      </div>
-    );
+          <SnippetCard mdFile={post} />
+        );
+
+      return card;
+    }
   });
 };
 
@@ -45,11 +44,11 @@ export default function PostCardsPage({
   posts,
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const allPostsTagName = 'All Posts';
+  const defaultTagName = 'All Posts';
   const [search, setSearch] = useState('');
-  const [selectedTag, setSelectedTag] = useState(allPostsTagName);
+  const [selectedTag, setSelectedTag] = useState(defaultTagName);
   const filteredPosts =
-    selectedTag == allPostsTagName
+    selectedTag == defaultTagName
       ? posts
       : posts.filter((post) => {
           const tags = post.metadata.tags || [];
@@ -65,7 +64,7 @@ export default function PostCardsPage({
   const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
   const iconSize = '20';
   const tags = getAllPostTags(posts);
-  const showPaginates = search == '' && selectedTag == allPostsTagName;
+  const showPaginates = search == '' && selectedTag == defaultTagName;
 
   const TagSelector = ({ tags }: { tags: TagInfo[] }) => {
     return (
@@ -80,7 +79,7 @@ export default function PostCardsPage({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value={allPostsTagName}>{allPostsTagName}</SelectItem>
+            <SelectItem value={defaultTagName}>{defaultTagName}</SelectItem>
             {tags.map((tag, index) => {
               return (
                 <SelectItem
@@ -98,9 +97,13 @@ export default function PostCardsPage({
 
   return (
     <BasicPage>
-      <div className="flex flex-col mb-24 gap-4 items-center">
-        <div className="flex flex-row w-full max-md:w-full w-2/3 xl:w-1/2 gap-2">
-          <TagSelector tags={tags} />
+      <div className="mx-auto flex flex-col w-full max-md:w-full w-2/3 xl:w-1/2 justify-center gap-4">
+        <div className="flex flex-col justify-end gap-2">
+          <div className="flex justify-end">
+            <div className="w-1/4 max-md:w-1/3">
+              <TagSelector tags={tags} />
+            </div>
+          </div>
           <div className="flex flex-row gap-2 justify-center items-center">
             <MagnifyingGlassIcon
               width={iconSize}
@@ -116,11 +119,9 @@ export default function PostCardsPage({
           </div>
         </div>
 
-        {showPaginates ? (
-          <PostCards posts={paginations[pageIndex - 1]} />
-        ) : (
-          <PostCards posts={foundPosts} />
-        )}
+        <PostCards
+          posts={showPaginates ? paginations[pageIndex - 1] : foundPosts}
+        />
 
         {showPaginates && (
           <PostPagination

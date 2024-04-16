@@ -5,12 +5,10 @@ import { PostItem } from '@/components/PostItem';
 import { BasicPage } from '@/components/BasicPage';
 
 export const getStaticProps = (() => {
-  const mdFiles = getMarkdownFiles();
+  const mdFiles = getMarkdownFiles().filter((md) => md.metadata.type == 'post');
   const env = process.env.NODE_ENV;
-  const devPosts = mdFiles.filter((md) => md.metadata.category == 'posts');
-  const prodPosts = mdFiles.filter(
-    (md) => md.metadata.category == 'posts' && md.metadata.draft == false,
-  );
+  const devPosts = mdFiles;
+  const prodPosts = mdFiles.filter((md) => md.metadata.draft == false);
   const posts = env == 'development' ? devPosts : prodPosts;
 
   return { props: { mdFiles: posts, title: 'All Posts' } };

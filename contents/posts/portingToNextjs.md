@@ -1,7 +1,8 @@
 ---
 title: 從 Hugo 遷移至 Next.js
 author: tarmac
-category: posts
+category: Next.js
+type: post
 description: '用Next.js開發個人技術分享網站的紀錄'
 tags:
   - 'Tech blog'
