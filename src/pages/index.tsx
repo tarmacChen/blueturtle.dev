@@ -34,11 +34,12 @@ export default function PostCardsPage({
   posts,
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [searchPattern, setSearchPattern] = useState('');
+  const [search, setSearch] = useState('');
   const foundPosts = posts.filter((md) => {
     const title = md.metadata.title || '';
-    const pattern = new RegExp(searchPattern, 'ig');
-    return title.match(pattern);
+    const desc = md.metadata.description || '';
+    const searchPattern = new RegExp(search, 'ig');
+    return title.match(searchPattern) || desc.match(searchPattern);
   });
   const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
   const iconSize = '20';
@@ -55,20 +56,20 @@ export default function PostCardsPage({
             <Input
               type="text"
               placeholder="Search..."
-              value={searchPattern}
-              onChange={(event) => setSearchPattern(event.target.value)}
-              className="border-gray-500 focus-visible:border-none text-md"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              className="border-gray-500 focus-visible:border-none focus-visible:ring-offset-0 focus-visible:ring-blue-500 text-md"
             />
           </div>
         </div>
 
-        {searchPattern == '' ? (
+        {search == '' ? (
           <PostCards posts={paginations[pageIndex - 1]} />
         ) : (
           <PostCards posts={foundPosts} />
         )}
 
-        {searchPattern == '' && (
+        {search == '' && (
           <PostPagination
             posts={foundPosts}
             baseUrl="/page"
