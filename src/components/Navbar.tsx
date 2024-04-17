@@ -29,13 +29,13 @@ export const NavbarWithSearchBar = ({
       <div className="invisible md:visible flex flex-row justify-center mx-auto">
         <DesktopNavbar />
       </div>
-      <div className="flex flex-row gap-2 justify-between items-center">
+      <div className="flex flex-row gap-2 justify-between items-center max-w-44">
         <SearchBar
           search={search}
           dispatch={dispatch}
         />
-        <ToggleThemeButton />
       </div>
+      <ToggleThemeButton />
     </div>
   );
 };
