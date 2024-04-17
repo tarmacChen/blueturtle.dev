@@ -36,10 +36,6 @@ export function MobileNavbar() {
 
   const Navbar = () => (
     <nav className={containerClasses}>
-      <NavbarItem href="/">
-        <HomeIcon />
-        Home
-      </NavbarItem>
       <NavbarItem href="/about">
         <PersonIcon />
         About
@@ -48,13 +44,9 @@ export function MobileNavbar() {
         <RocketIcon />
         Projects
       </NavbarItem>
-      <NavbarItem href="/snippets">
-        <ScissorsIcon />
-        Snippets
-      </NavbarItem>
-      <NavbarItem href="/posts">
-        <FileIcon />
-        Posts
+      <NavbarItem href="/">
+        <HomeIcon />
+        Home
       </NavbarItem>
     </nav>
   );

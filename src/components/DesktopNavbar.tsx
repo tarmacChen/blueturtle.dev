@@ -41,14 +41,6 @@ export function DesktopNavbar() {
         <NavigationMenuList>
           <NavigationMenuItem>
             <LinkItem
-              href="/posts"
-              name="Posts"
-            />
-            <LinkItem
-              href="/snippets"
-              name="Snippets"
-            />
-            <LinkItem
               href="/projects"
               name="Projects"
             />
