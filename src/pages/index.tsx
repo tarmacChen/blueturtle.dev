@@ -10,15 +10,8 @@ import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { getAllCategories } from '@/lib/helper';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { useCategorySelector } from '@/hooks/useCategorySelector';
+import { PostCategoryGroups } from '@/type';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -43,16 +36,15 @@ export default function PostCardsPage({
   posts,
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const ALL_POSTS = 'All Posts';
-  const ALL_SNIPPETS = 'All Snippets';
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(ALL_POSTS);
+  const { CategorySelector, selectedCategory, setSelectedCategory } =
+    useCategorySelector();
 
   const getFilteredPosts = () => {
-    if (selectedCategory == ALL_POSTS) {
+    if (selectedCategory == PostCategoryGroups['All Posts']) {
       return posts.filter((post) => post.metadata.type == 'post');
     }
-    if (selectedCategory == ALL_SNIPPETS) {
+    if (selectedCategory == PostCategoryGroups['All Snippets']) {
       return posts.filter((post) => post.metadata.type == 'snippet');
     }
     return posts.filter((post) => post.metadata.category == selectedCategory);
@@ -68,41 +60,8 @@ export default function PostCardsPage({
   const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
   const iconSize = '20';
   const categories = getAllCategories(posts);
-  const showPaginates = search == '' && selectedCategory == ALL_POSTS;
-
-  const CategorySelector = ({ categories }: { categories: string[] }) => {
-    return (
-      <Select
-        onValueChange={(event) => {
-          setSelectedCategory(event);
-          return event;
-        }}
-        value={selectedCategory}>
-        <SelectTrigger className="border-gray-400">
-          <SelectValue placeholder="Posts filter"></SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Group</SelectLabel>
-            <SelectItem value={ALL_POSTS}>{ALL_POSTS}</SelectItem>
-            <SelectItem value={ALL_SNIPPETS}>{ALL_SNIPPETS}</SelectItem>
-          </SelectGroup>
-          <SelectGroup>
-            <SelectLabel>Category</SelectLabel>
-            {categories.map((category) => {
-              return (
-                <SelectItem
-                  value={category}
-                  key={category}>
-                  {category}
-                </SelectItem>
-              );
-            })}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    );
-  };
+  const showPaginates =
+    search == '' && selectedCategory == PostCategoryGroups['All Posts'];
 
   return (
     <BasicPage>

@@ -33,3 +33,8 @@ export enum MarkdownFileSortOrder {
   Ascend,
   Descend,
 }
+
+export enum PostCategoryGroups {
+  'All Posts' = 'All Posts',
+  'All Snippets' = 'All Snippets',
+}
