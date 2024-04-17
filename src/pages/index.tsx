@@ -19,6 +19,7 @@ export default function PostCardsPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const defaultCategory = 'Show All';
 
   const getFilteredPosts = () => {
     if (selectedCategory == PostCategoryGroups['All Posts']) {
@@ -26,6 +27,9 @@ export default function PostCardsPage({
     }
     if (selectedCategory == PostCategoryGroups['All Snippets']) {
       return posts.filter((post) => post.metadata.type == 'snippet');
+    }
+    if (selectedCategory == defaultCategory) {
+      return posts;
     }
     return posts.filter((post) => post.metadata.category == selectedCategory);
   };
@@ -59,6 +63,7 @@ export default function PostCardsPage({
           selectedCategory={selectedCategory}
           dispatch={setSelectedCategory}
           posts={showPosts}
+          defaultCategory={defaultCategory}
         />
 
         {showPaginates && (

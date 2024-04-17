@@ -14,10 +14,12 @@ export const CategorySelector = ({
   categories,
   selectedCategory,
   dispatch,
+  defaultValue,
 }: {
   categories: string[];
   selectedCategory: string;
   dispatch: Dispatch<SetStateAction<string>>;
+  defaultValue: string;
 }) => {
   const groups = Object.values(PostCategoryGroups);
   const SelectGroups = () => {
@@ -31,7 +33,7 @@ export const CategorySelector = ({
   };
 
   useEffect(() => {
-    dispatch(groups[0]);
+    dispatch(defaultValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,12 +48,13 @@ export const CategorySelector = ({
         <SelectValue placeholder="Posts filter"></SelectValue>
       </SelectTrigger>
       <SelectContent>
+        <SelectItem value={defaultValue}>{defaultValue}</SelectItem>
         <SelectGroup>
-          <SelectLabel>Group</SelectLabel>
+          <SelectLabel>Groups</SelectLabel>
           <SelectGroups />
         </SelectGroup>
         <SelectGroup>
-          <SelectLabel>Category</SelectLabel>
+          <SelectLabel>Categories</SelectLabel>
           {categories.map((category) => {
             return (
               <SelectItem

@@ -19,7 +19,6 @@ export interface MarkdownNode {
 }
 
 export interface MarkdownTypes {
-  // markdown: { content?: string }
   md: MarkdownFile;
   codeStyle: { [key: string]: React.CSSProperties };
 }

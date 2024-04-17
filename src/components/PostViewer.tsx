@@ -12,11 +12,13 @@ export const PostViewer = ({
   selectedCategory,
   dispatch,
   posts,
+  defaultCategory,
 }: {
   categories: string[];
   selectedCategory: string;
   dispatch: Dispatch<SetStateAction<string>>;
   posts: MarkdownFile[];
+  defaultCategory: string;
 }) => {
   const { isMobile } = useMobile();
 
@@ -28,6 +30,7 @@ export const PostViewer = ({
             categories={categories}
             selectedCategory={selectedCategory}
             dispatch={dispatch}
+            defaultValue={defaultCategory}
           />
         </div>
         <TabsList>
