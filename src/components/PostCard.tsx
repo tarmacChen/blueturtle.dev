@@ -2,7 +2,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -13,7 +12,9 @@ import Link from 'next/link';
 import { SnippetCard } from '@/components/SnippetCard';
 
 export const DraftBadge = () => (
-  <Badge className="bg-red-600 h-6 text-white hover:bg-red-600">Draft</Badge>
+  <Badge className="bg-foreground h-6 text-white hover:bg-foreground">
+    Draft
+  </Badge>
 );
 export const PostBadge = () => (
   <Badge className="bg-blue-600 h-6 text-white hover:bg-blue-600">Post</Badge>
@@ -27,7 +28,7 @@ export const PostCard = ({ post }: { post: MarkdownFile }) => {
 
   return (
     <Link href={linkUrl}>
-      <Card className="bg-gray-50 border-gray-400 dark:border-gray-300 dark:bg-gray-800 hover:border-black hover:bg-blue-50 hover:shadow-md dark:hover:border-blue-500">
+      <Card className="bg-gray-50 border-gray-400 dark:border-gray-300 dark:bg-gray-800 hover:border-black hover:bg-blue-50 hover:shadow-md hover:border-blue-500 hover:border-2">
         <CardHeader>
           <div className="flex flex-row justify-between gap-2">
             <CardTitle>{meta?.title}</CardTitle>
