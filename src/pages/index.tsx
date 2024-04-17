@@ -9,8 +9,7 @@ import { Input } from '@/components/ui/input';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { getAllPostTags } from '@/lib/helper';
-import { TagInfo } from '@/type';
+import { getAllCategories } from '@/lib/helper';
 import {
   Select,
   SelectContent,
@@ -32,7 +31,7 @@ const PostCards = ({ posts }: { posts: MarkdownFile[] }) => {
         post.metadata.type == 'post' ? (
           <PostCard post={post} />
         ) : (
-          <SnippetCard mdFile={post} />
+          <SnippetCard snippet={post} />
         );
 
       return card;
@@ -44,17 +43,22 @@ export default function PostCardsPage({
   posts,
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const defaultTagName = 'All Posts';
+  const ALL_POSTS = 'All Posts';
+  const ALL_SNIPPETS = 'All Snippets';
   const [search, setSearch] = useState('');
-  const [selectedTag, setSelectedTag] = useState(defaultTagName);
-  const filteredPosts =
-    selectedTag == defaultTagName
-      ? posts
-      : posts.filter((post) => {
-          const tags = post.metadata.tags || [];
-          return tags.includes(selectedTag);
-        });
-  const foundPosts = filteredPosts.filter((post) => {
+  const [selectedCategory, setSelectedCategory] = useState(ALL_POSTS);
+
+  const getFilteredPosts = () => {
+    if (selectedCategory == ALL_POSTS) {
+      return posts.filter((post) => post.metadata.type == 'post');
+    }
+    if (selectedCategory == ALL_SNIPPETS) {
+      return posts.filter((post) => post.metadata.type == 'snippet');
+    }
+    return posts.filter((post) => post.metadata.category == selectedCategory);
+  };
+
+  const foundPosts = getFilteredPosts().filter((post) => {
     const title = post.metadata.title || '';
     const desc = post.metadata.description || '';
     const searchPattern = new RegExp(search, 'ig');
@@ -63,29 +67,34 @@ export default function PostCardsPage({
   });
   const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
   const iconSize = '20';
-  const tags = getAllPostTags(posts);
-  const showPaginates = search == '' && selectedTag == defaultTagName;
+  const categories = getAllCategories(posts);
+  const showPaginates = search == '' && selectedCategory == ALL_POSTS;
 
-  const TagSelector = ({ tags }: { tags: TagInfo[] }) => {
+  const CategorySelector = ({ categories }: { categories: string[] }) => {
     return (
       <Select
         onValueChange={(event) => {
-          setSelectedTag(event);
+          setSelectedCategory(event);
           return event;
         }}
-        value={selectedTag}>
+        value={selectedCategory}>
         <SelectTrigger className="border-gray-400">
-          <SelectValue placeholder="tags filter"></SelectValue>
+          <SelectValue placeholder="Posts filter"></SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value={defaultTagName}>{defaultTagName}</SelectItem>
-            {tags.map((tag, index) => {
+            <SelectLabel>Group</SelectLabel>
+            <SelectItem value={ALL_POSTS}>{ALL_POSTS}</SelectItem>
+            <SelectItem value={ALL_SNIPPETS}>{ALL_SNIPPETS}</SelectItem>
+          </SelectGroup>
+          <SelectGroup>
+            <SelectLabel>Category</SelectLabel>
+            {categories.map((category) => {
               return (
                 <SelectItem
-                  value={tag.value}
-                  key={tag.label}>
-                  {tag.label}
+                  value={category}
+                  key={category}>
+                  {category}
                 </SelectItem>
               );
             })}
@@ -100,8 +109,8 @@ export default function PostCardsPage({
       <div className="mx-auto flex flex-col w-full max-md:w-full w-2/3 xl:w-1/2 justify-center gap-4">
         <div className="flex flex-col justify-end gap-2">
           <div className="flex justify-end">
-            <div className="w-1/4 max-md:w-1/3">
-              <TagSelector tags={tags} />
+            <div className="w-1/3 max-sm:w-1/2">
+              <CategorySelector categories={categories} />
             </div>
           </div>
           <div className="flex flex-row gap-2 justify-center items-center">

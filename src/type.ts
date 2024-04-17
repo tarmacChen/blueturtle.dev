@@ -33,8 +33,3 @@ export enum MarkdownFileSortOrder {
   Ascend,
   Descend,
 }
-
-export type TagInfo = {
-  label: string;
-  value: string;
-};

@@ -1,6 +1,6 @@
 ---
 title: "Prevent Dock Bouncing"
-category: macOs
+category: macOS
 type: snippet
 description: ""
 author: tarmac
