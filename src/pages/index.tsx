@@ -13,6 +13,7 @@ import { SearchBar } from '@/components/SearchBar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CardStackIcon, ListBulletIcon } from '@radix-ui/react-icons';
 import { PostList } from '@/components/PostItem';
+import { useMobile } from '@/hooks/useMobile';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -53,6 +54,7 @@ export default function PostCardsPage({
   const showPaginates =
     search == '' && selectedCategory == PostCategoryGroups['All Posts'];
   const showPosts = showPaginates ? paginations[pageIndex - 1] : foundPosts;
+  const { isMobile } = useMobile();
 
   return (
     <BasicPage>
@@ -72,13 +74,13 @@ export default function PostCardsPage({
                 value="card"
                 className="flex gap-2">
                 <CardStackIcon />
-                Card
+                {isMobile || 'Card'}
               </TabsTrigger>
               <TabsTrigger
                 value="compact"
                 className="flex gap-2">
                 <ListBulletIcon />
-                Compact
+                {isMobile || 'Compact'}
               </TabsTrigger>
             </TabsList>
           </div>
