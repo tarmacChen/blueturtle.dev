@@ -1,13 +1,14 @@
 ---
 title: post
 author: tarmac
-category: posts
+type: post
+category: draft
 description: ""
 tags: [""]
 keywords: [""]
-draft: true
 cover: ""
 coverFigure: ""
+draft: true
 ---
 
 # {{ title }}

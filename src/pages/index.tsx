@@ -36,8 +36,7 @@ export default function PostCardsPage({
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState('');
-  const { CategorySelector, selectedCategory, setSelectedCategory } =
-    useCategorySelector();
+  const { CategorySelector, selectedCategory } = useCategorySelector();
 
   const getFilteredPosts = () => {
     if (selectedCategory == PostCategoryGroups['All Posts']) {
@@ -52,9 +51,15 @@ export default function PostCardsPage({
   const foundPosts = getFilteredPosts().filter((post) => {
     const title = post.metadata.title || '';
     const desc = post.metadata.description || '';
+    const tags = post.metadata.tags || [];
+    const tagsText = tags.join('|');
     const searchPattern = new RegExp(search, 'ig');
 
-    return title.match(searchPattern) || desc.match(searchPattern);
+    return (
+      title.match(searchPattern) ||
+      desc.match(searchPattern) ||
+      tagsText.match(searchPattern)
+    );
   });
   const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
   const categories = getAllCategories(posts);

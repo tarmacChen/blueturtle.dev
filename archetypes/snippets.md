@@ -1,13 +1,14 @@
 ---
 title: snippet post
 author: tarmac
-category: snippets
+type: snippet
+category: draft
 description: ""
 tags: [""]
 keywords: [""]
-draft: true
 cover: ""
 coverFigure: ""
+draft: true
 ---
 
 # {{ title }}

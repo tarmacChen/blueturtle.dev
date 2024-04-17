@@ -1,15 +1,16 @@
 ---
 title: default
 author: tarmac
-category: default
+type: post
+category: draft
 description: ""
 tags: [""]
 keywords: [""]
-draft: true
 cover: ""
 coverFigure: ""
 sourceUrl: ""
 demoUrl: ""
+draft: true
 ---
 
 # {{ title }}

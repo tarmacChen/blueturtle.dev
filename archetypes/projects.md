@@ -1,15 +1,16 @@
 ---
 title: projectName
 author: tarmac
-category: projects
+type: project
+category: draft
 description: ""
 tags: [""]
 keywords: [""]
-draft: true
 cover: ""
 coverFigure: ""
 sourceUrl: ""
 demoUrl: ""
+draft: true
 ---
 
 # {{ title }}

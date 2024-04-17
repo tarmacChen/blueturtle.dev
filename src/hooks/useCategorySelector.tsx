@@ -55,5 +55,5 @@ export const useCategorySelector = () => {
     </Select>
   );
 
-  return { CategorySelector, selectedCategory, setSelectedCategory };
+  return { CategorySelector, selectedCategory };
 };
