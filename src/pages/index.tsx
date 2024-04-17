@@ -1,4 +1,3 @@
-import { PostCards } from '@/components/PostCard';
 import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { BasicPage } from '@/components/BasicPage';
@@ -9,11 +8,8 @@ import { MarkdownFile } from 'mdman';
 import { getAllCategories } from '@/lib/helper';
 import { PostCategoryGroups } from '@/type';
 import { SearchBar } from '@/components/SearchBar';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CardStackIcon, ListBulletIcon } from '@radix-ui/react-icons';
-import { PostList } from '@/components/PostItem';
 import { useMobile } from '@/hooks/useMobile';
-import { CategorySelector } from '@/components/CategorySelector';
+import { PostViewer } from '@/components/PostViewer';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -54,7 +50,6 @@ export default function PostCardsPage({
   const showPaginates =
     search == '' && selectedCategory == PostCategoryGroups['All Posts'];
   const showPosts = showPaginates ? paginations[pageIndex - 1] : foundPosts;
-  const { isMobile } = useMobile();
 
   return (
     <BasicPage>
@@ -64,39 +59,12 @@ export default function PostCardsPage({
           dispatch={setSearch}
         />
 
-        <Tabs defaultValue="card">
-          <div className="flex justify-between">
-            <div className="w-1/3 max-sm:w-1/2">
-              <CategorySelector
-                categories={categories}
-                selectedCategory={selectedCategory}
-                dispatch={setSelectedCategory}
-              />
-            </div>
-            <TabsList>
-              <TabsTrigger
-                value="card"
-                className="flex gap-2">
-                <CardStackIcon />
-                {isMobile || 'Card'}
-              </TabsTrigger>
-              <TabsTrigger
-                value="compact"
-                className="flex gap-2">
-                <ListBulletIcon />
-                {isMobile || 'Compact'}
-              </TabsTrigger>
-            </TabsList>
-          </div>
-          <TabsContent value="card">
-            <div className="flex flex-col gap-4">
-              <PostCards posts={showPosts} />
-            </div>
-          </TabsContent>
-          <TabsContent value="compact">
-            <PostList posts={showPosts} />
-          </TabsContent>
-        </Tabs>
+        <PostViewer
+          categories={categories}
+          selectedCategory={selectedCategory}
+          dispatch={setSelectedCategory}
+          posts={showPosts}
+        />
 
         {showPaginates && (
           <PostPagination
