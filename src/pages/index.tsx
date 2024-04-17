@@ -5,13 +5,12 @@ import { BasicPage } from '@/components/BasicPage';
 import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 import { SnippetCard } from '@/components/SnippetCard';
 import { useState } from 'react';
-import { Input } from '@/components/ui/input';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { getAllCategories } from '@/lib/helper';
 import { useCategorySelector } from '@/hooks/useCategorySelector';
 import { PostCategoryGroups } from '@/type';
+import { SearchBar } from '@/components/SearchBar';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -58,7 +57,6 @@ export default function PostCardsPage({
     return title.match(searchPattern) || desc.match(searchPattern);
   });
   const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
-  const iconSize = '20';
   const categories = getAllCategories(posts);
   const showPaginates =
     search == '' && selectedCategory == PostCategoryGroups['All Posts'];
@@ -72,19 +70,11 @@ export default function PostCardsPage({
               <CategorySelector categories={categories} />
             </div>
           </div>
-          <div className="flex flex-row gap-2 justify-center items-center">
-            <MagnifyingGlassIcon
-              width={iconSize}
-              height={iconSize}
-            />
-            <Input
-              type="text"
-              placeholder="Search..."
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              className="border-gray-400 focus-visible:border-none focus-visible:ring-offset-0 focus-visible:ring-blue-500"
-            />
-          </div>
+
+          <SearchBar
+            search={search}
+            dispatch={setSearch}
+          />
         </div>
 
         <PostCards
