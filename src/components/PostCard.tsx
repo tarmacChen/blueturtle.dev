@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { MarkdownFile } from 'mdman';
 import moment from 'moment';
 import Link from 'next/link';
+import { SnippetCard } from '@/components/SnippetCard';
 
 export const DraftBadge = () => (
   <Badge className="bg-red-600 h-6 text-white hover:bg-red-600">Draft</Badge>
@@ -47,4 +48,19 @@ export const PostCard = ({ post }: { post: MarkdownFile }) => {
       </Card>
     </Link>
   );
+};
+
+export const PostCards = ({ posts }: { posts: MarkdownFile[] }) => {
+  return posts?.map((post) => {
+    {
+      const card =
+        post.metadata.type == 'post' ? (
+          <PostCard post={post} />
+        ) : (
+          <SnippetCard snippet={post} />
+        );
+
+      return card;
+    }
+  });
 };

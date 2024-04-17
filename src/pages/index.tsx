@@ -1,9 +1,8 @@
-import { PostCard } from '@/components/PostCard';
+import { PostCards } from '@/components/PostCard';
 import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { BasicPage } from '@/components/BasicPage';
 import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
-import { SnippetCard } from '@/components/SnippetCard';
 import { useState } from 'react';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
@@ -11,25 +10,13 @@ import { getAllCategories } from '@/lib/helper';
 import { useCategorySelector } from '@/hooks/useCategorySelector';
 import { PostCategoryGroups } from '@/type';
 import { SearchBar } from '@/components/SearchBar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { CardStackIcon, ListBulletIcon } from '@radix-ui/react-icons';
+import { PostList } from '@/components/PostItem';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
 }) satisfies GetStaticProps;
-
-const PostCards = ({ posts }: { posts: MarkdownFile[] }) => {
-  return posts?.map((post) => {
-    {
-      const card =
-        post.metadata.type == 'post' ? (
-          <PostCard post={post} />
-        ) : (
-          <SnippetCard snippet={post} />
-        );
-
-      return card;
-    }
-  });
-};
 
 export default function PostCardsPage({
   posts,
@@ -65,26 +52,45 @@ export default function PostCardsPage({
   const categories = getAllCategories(posts);
   const showPaginates =
     search == '' && selectedCategory == PostCategoryGroups['All Posts'];
+  const showPosts = showPaginates ? paginations[pageIndex - 1] : foundPosts;
 
   return (
     <BasicPage>
       <div className="mx-auto flex flex-col w-full max-md:w-full w-2/3 xl:w-1/2 justify-center gap-4">
-        <div className="flex flex-col justify-end gap-2">
-          <div className="flex justify-end">
+        <SearchBar
+          search={search}
+          dispatch={setSearch}
+        />
+
+        <Tabs defaultValue="card">
+          <div className="flex justify-between">
             <div className="w-1/3 max-sm:w-1/2">
               <CategorySelector categories={categories} />
             </div>
+            <TabsList>
+              <TabsTrigger
+                value="card"
+                className="flex gap-2">
+                <CardStackIcon />
+                Card
+              </TabsTrigger>
+              <TabsTrigger
+                value="compact"
+                className="flex gap-2">
+                <ListBulletIcon />
+                Compact
+              </TabsTrigger>
+            </TabsList>
           </div>
-
-          <SearchBar
-            search={search}
-            dispatch={setSearch}
-          />
-        </div>
-
-        <PostCards
-          posts={showPaginates ? paginations[pageIndex - 1] : foundPosts}
-        />
+          <TabsContent value="card">
+            <div className="flex flex-col gap-4">
+              <PostCards posts={showPosts} />
+            </div>
+          </TabsContent>
+          <TabsContent value="compact">
+            <PostList posts={showPosts} />
+          </TabsContent>
+        </Tabs>
 
         {showPaginates && (
           <PostPagination

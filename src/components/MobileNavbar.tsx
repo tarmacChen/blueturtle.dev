@@ -36,17 +36,17 @@ export function MobileNavbar() {
 
   const Navbar = () => (
     <nav className={containerClasses}>
-      <NavbarItem href="/about">
-        <PersonIcon />
-        About
+      <NavbarItem href="/">
+        <HomeIcon />
+        Home
       </NavbarItem>
       <NavbarItem href="/projects">
         <RocketIcon />
         Projects
       </NavbarItem>
-      <NavbarItem href="/">
-        <HomeIcon />
-        Home
+      <NavbarItem href="/about">
+        <PersonIcon />
+        About
       </NavbarItem>
     </nav>
   );
