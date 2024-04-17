@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
 import { useMobile } from '@/hooks/useMobile';
 import { FooterSection } from '@/components/FooterSection';
-import { NavbarSection } from '@/components/NavbarSection';
+import { Navbar, NavbarWithSearchBar } from '@/components/Navbar';
 import { BackToTopButton } from '@/components/BackToTopButton';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
 
-export function BasicPage({ children }: { children: React.ReactNode }) {
+export function BasicPage({
+  children,
+  search = '',
+  dispatch,
+}: {
+  children: React.ReactNode;
+  search?: string;
+  dispatch?: Dispatch<SetStateAction<string>>;
+}) {
   const [scrollY, setScrollY] = useState(0);
   const { isScrollingUp, updatePosition } = useScroll();
   const { isMobile } = useMobile();
@@ -31,7 +39,14 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
-      <NavbarSection />
+      {dispatch ? (
+        <NavbarWithSearchBar
+          search={search}
+          dispatch={dispatch}
+        />
+      ) : (
+        <Navbar />
+      )}
       <div className="px-4 mt-4 mb-8">{children}</div>
       {backButtonVisible && (
         <BackToTopButton className="fixed bottom-16 right-4 gap-1">

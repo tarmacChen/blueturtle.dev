@@ -7,8 +7,6 @@ import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { getAllCategories } from '@/lib/helper';
 import { PostCategoryGroups } from '@/type';
-import { SearchBar } from '@/components/SearchBar';
-import { useMobile } from '@/hooks/useMobile';
 import { PostViewer } from '@/components/PostViewer';
 
 export const getStaticProps = (async (ctx) => {
@@ -45,20 +43,17 @@ export default function PostCardsPage({
       tagsText.match(searchPattern)
     );
   });
-  const paginations = paginateElements<MarkdownFile>(foundPosts, 5);
+  const paginates = paginateElements<MarkdownFile>(foundPosts, 5);
   const categories = getAllCategories(posts);
   const showPaginates =
     search == '' && selectedCategory == PostCategoryGroups['All Posts'];
-  const showPosts = showPaginates ? paginations[pageIndex - 1] : foundPosts;
+  const showPosts = showPaginates ? paginates[pageIndex - 1] : foundPosts;
 
   return (
-    <BasicPage>
+    <BasicPage
+      search={search}
+      dispatch={setSearch}>
       <div className="mx-auto flex flex-col w-full max-md:w-full w-2/3 xl:w-1/2 justify-center gap-4">
-        <SearchBar
-          search={search}
-          dispatch={setSearch}
-        />
-
         <PostViewer
           categories={categories}
           selectedCategory={selectedCategory}

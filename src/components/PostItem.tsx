@@ -55,7 +55,7 @@ export const PostList = ({
   });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col border-foreground">
       {withListItemDecorator(PostItems, {
         oddItemClasses: oddItemClassName,
         evenItemClasses: evenItemClassName,
