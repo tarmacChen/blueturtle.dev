@@ -7,13 +7,13 @@ import { useState } from 'react';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { getAllCategories } from '@/lib/helper';
-import { useCategorySelector } from '@/hooks/useCategorySelector';
 import { PostCategoryGroups } from '@/type';
 import { SearchBar } from '@/components/SearchBar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CardStackIcon, ListBulletIcon } from '@radix-ui/react-icons';
 import { PostList } from '@/components/PostItem';
 import { useMobile } from '@/hooks/useMobile';
+import { CategorySelector } from '@/components/CategorySelector';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -24,7 +24,7 @@ export default function PostCardsPage({
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState('');
-  const { CategorySelector, selectedCategory } = useCategorySelector();
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const getFilteredPosts = () => {
     if (selectedCategory == PostCategoryGroups['All Posts']) {
@@ -67,7 +67,11 @@ export default function PostCardsPage({
         <Tabs defaultValue="card">
           <div className="flex justify-between">
             <div className="w-1/3 max-sm:w-1/2">
-              <CategorySelector categories={categories} />
+              <CategorySelector
+                categories={categories}
+                selectedCategory={selectedCategory}
+                dispatch={setSelectedCategory}
+              />
             </div>
             <TabsList>
               <TabsTrigger

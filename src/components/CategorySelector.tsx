@@ -7,10 +7,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useState } from 'react';
 import { PostCategoryGroups } from '@/type';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
-export const useCategorySelector = () => {
+export const CategorySelector = ({
+  categories,
+  selectedCategory,
+  dispatch,
+}: {
+  categories: string[];
+  selectedCategory: string;
+  dispatch: Dispatch<SetStateAction<string>>;
+}) => {
   const groups = Object.values(PostCategoryGroups);
   const SelectGroups = () => {
     return groups.map((group, index) => (
@@ -22,12 +30,14 @@ export const useCategorySelector = () => {
     ));
   };
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(groups[0]);
+  useEffect(() => {
+    dispatch(groups[0]);
+  }, []);
 
-  const CategorySelector = ({ categories }: { categories: string[] }) => (
+  return (
     <Select
       onValueChange={(value) => {
-        setSelectedCategory(value);
+        dispatch(value);
         return value;
       }}
       value={selectedCategory}>
@@ -54,6 +64,4 @@ export const useCategorySelector = () => {
       </SelectContent>
     </Select>
   );
-
-  return { CategorySelector, selectedCategory };
 };
