@@ -12,9 +12,7 @@ import Link from 'next/link';
 import { SnippetCard } from '@/components/SnippetCard';
 
 export const DraftBadge = () => (
-  <Badge className="bg-foreground h-6 text-white hover:bg-foreground">
-    Draft
-  </Badge>
+  <Badge className="bg-gray-600 h-6 text-white hover:bg-gray-600">Draft</Badge>
 );
 export const PostBadge = () => (
   <Badge className="bg-blue-600 h-6 text-white hover:bg-blue-600">Post</Badge>

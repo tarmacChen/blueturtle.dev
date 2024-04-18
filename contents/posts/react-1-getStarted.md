@@ -1,5 +1,5 @@
 ---
-title: React App 建立新專案 (1)
+title: Learning React - 建立新專案 (1)
 author: tarmac
 type: post
 category: React
