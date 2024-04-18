@@ -51,7 +51,6 @@ amazon-corretto@1.17.0-0.35.1
 openjdk@1.17.0
 openjdk-ri@1.17.0
 zulu@1.17.0-0
-
 ```
 
 ### 安裝openjdk@1.17.0
