@@ -86,11 +86,6 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
     }) => {
       const hasLang = /language-(\w+)/.exec(className || '');
       const hasMeta = node?.data?.meta;
-      const snippetStyle = [
-        className,
-        'mx-1 p-1 rounded-lg bg-gray-700 text-yellow-300',
-      ].join(' ');
-
       const applyHighlight = (lineNumber: number) => {
         if (hasMeta) {
           const RE = /{([\d,-]+)}/;
@@ -129,7 +124,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
         </SyntaxHighlighter>
       ) : (
         <code
-          className={snippetStyle}
+          className="mx-1 px-2 py-1 before:content-none after:content-none bg-gray-700 text-lime-400 rounded-md font-normal"
           {...props}></code>
       );
     },
