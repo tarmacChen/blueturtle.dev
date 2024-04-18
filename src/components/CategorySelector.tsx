@@ -48,7 +48,7 @@ export const CategorySelector = ({
         <SelectValue placeholder="Posts filter"></SelectValue>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={defaultValue}>{defaultValue}</SelectItem>
+        <SelectItem value="Show All">Show All</SelectItem>
         <SelectGroup>
           <SelectLabel>Groups</SelectLabel>
           <SelectGroups />
