@@ -5,18 +5,18 @@ import { mergeClassNames } from '@/lib/helper';
 type TrafficSignalProps = {
   className: string;
   activeStyle: string;
-  signalName: string;
-  currentSignalName: string;
+  state: string;
+  currentState: string;
 };
 
 const TrafficSignal = ({
   className,
   activeStyle,
-  signalName,
-  currentSignalName,
+  state,
+  currentState,
 }: TrafficSignalProps) => {
   const currentActiveStyle =
-    currentSignalName == signalName ? activeStyle : 'bg-gray-500';
+    currentState == state ? activeStyle : 'bg-gray-500';
   const signalClasses = mergeClassNames(className, currentActiveStyle);
 
   return <div className={signalClasses} />;
@@ -52,23 +52,23 @@ export const useTrafficSignalMachine = () => {
       <TrafficSignal
         className={baseSignalClasses}
         activeStyle="bg-red-500"
-        signalName="Red"
+        state="Red"
         key="red"
-        currentSignalName={currentSignalName}
+        currentState={currentSignalName}
       />
       <TrafficSignal
         className={baseSignalClasses}
         activeStyle="bg-green-500"
-        signalName="Green"
+        state="Green"
         key="green"
-        currentSignalName={currentSignalName}
+        currentState={currentSignalName}
       />
       <TrafficSignal
         className={baseSignalClasses}
         activeStyle="bg-yellow-500"
-        signalName="Yellow"
+        state="Yellow"
         key="yellow"
-        currentSignalName={currentSignalName}
+        currentState={currentSignalName}
       />
     </div>
   );

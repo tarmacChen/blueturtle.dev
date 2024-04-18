@@ -2,7 +2,7 @@
 title: "同步 MTP Device 裡的資料"
 author: tarmac
 description: ""
-category: mtp
+category: MTP
 type: snippet
 tags: [mtpcopy, scoop]
 createdTime: "2023-04-26T07:29:25+08:00"

@@ -5,7 +5,7 @@ import {
   getMarkdownFileSaveLocation,
   saveMarkdownFile,
   TranspileMarkdownFile,
-} from '@/lib/mdHelper';
+} from '@/lib/staticHelper';
 import moment from 'moment';
 import fs from 'fs';
 import { MarkdownFile } from 'mdman';

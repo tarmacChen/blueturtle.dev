@@ -29,18 +29,16 @@ export default function AboutPage({
         <h1 className="text-xl font-bold">{info.title}</h1>
         <h2 className="text-lg">聯絡方式</h2>
         <a className="underline text-blue-600">{info.email}</a>
-        <h2 className="text-lg">MBTI</h2>
-        <a
-          href={info.mbtiLinkUrl}
-          target="_blank">
-          <Image
-            src={info.mbtiImageUrl}
-            alt="MBTI Test Result"
-            width={0}
-            height={0}
-            className="mx-auto w-auto h-auto"
-          />
-        </a>
+        <div className="flex flex-row gap-2">
+          <h2 className="text-lg">MBTI</h2>
+          <a
+            href={info.mbtiLinkUrl}
+            target="
+          _blank"
+            className="underline text-blue-600">
+            測驗結果
+          </a>
+        </div>
       </div>
     </BasicPage>
   );

@@ -3,9 +3,9 @@ title: blueturtle.dev
 author: tarmac
 category: blog
 type: project
-description: 'Personal website running on Next.js and Tailwind CSS'
+description: 'The resource of this website that use Next.js and Tailwind CSS, deploy to Github Pages'
 tags:
-  - 'tech blog'
+  - 'blog'
   - 'Next.js'
   - 'Tailwind CSS'
   - 'Github Pages'

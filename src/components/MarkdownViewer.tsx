@@ -110,6 +110,12 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
           return {};
         }
       };
+
+      // Remove empty line on end of code block
+      const codeLines: string[] = props.children.split('\n');
+      if (codeLines[codeLines.length - 1] == '') codeLines.pop();
+      const codeContent = codeLines.join('\n');
+
       return hasLang ? (
         <SyntaxHighlighter
           style={codeStyle}
@@ -119,7 +125,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
           wrapLines={hasMeta}
           useInlineStyles={true}
           lineProps={applyHighlight}>
-          {props.children}
+          {codeContent}
         </SyntaxHighlighter>
       ) : (
         <code

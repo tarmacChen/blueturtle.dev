@@ -3,7 +3,7 @@ title: 'Web API 版本控制'
 author: tarmac
 description: '為什麼要替 Web API 做版本控制'
 tags: [Web API]
-category: web api
+category: Web API
 type: post
 createdTime: '2023-12-17T05:59:51+08:00'
 draft: false
