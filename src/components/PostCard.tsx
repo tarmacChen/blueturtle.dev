@@ -23,24 +23,26 @@ export const PostCard = ({ post }: { post: MarkdownFile }) => {
   const linkUrl = `/posts/${meta?.title}`;
   const createdTime = moment(meta.createdTime);
   const tags = meta.tags ? meta.tags.join(', ') : '';
+  const category = meta.category || '';
 
   return (
     <Link href={linkUrl}>
       <Card className="bg-gray-50 border-gray-400 dark:border-gray-300 dark:bg-gray-800 hover:border-black hover:bg-blue-50 hover:shadow-md hover:border-blue-500 hover:border-2">
         <CardHeader>
           <div className="flex flex-row justify-between gap-2">
-            <CardTitle>{meta?.title}</CardTitle>
+            <CardTitle className="">{meta?.title}</CardTitle>
             {meta.draft ? <DraftBadge /> : <PostBadge />}
           </div>
           <CardDescription className="dark:text-gray-300">
-            {tags}
+            <div className="text-foreground text-lg inline">{category}</div>
+            <div>{tags}</div>
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-2">
             <div>{meta?.description}</div>
             <div className="flex flex-row justify-end">
-              <div className="text-sm">{createdTime.format('ll')}</div>
+              <div className="text-md">{createdTime.format('ll')}</div>
             </div>
           </div>
         </CardContent>
