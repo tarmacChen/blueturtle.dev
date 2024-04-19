@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+/**/ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
 import { useDevice } from '@/hooks/useDevice';
 import { FooterSection } from '@/components/FooterSection';

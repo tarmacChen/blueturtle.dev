@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MarkdownFile } from 'mdman';
-import moment from 'moment';
+import moment, { now } from 'moment';
 import Link from 'next/link';
 import { SnippetCard } from '@/components/SnippetCard';
 
@@ -18,16 +18,36 @@ export const PostBadge = () => (
   <Badge className="bg-blue-600 h-6 text-white hover:bg-blue-600">Post</Badge>
 );
 
+export const RedPoint = () => {
+  return (
+    <span className="flex relative w-3 h-3 top-0 right-0">
+      <span className="absolute animate-ping inline-flex bg-red-500 w-full h-full rounded-full opacity-75" />
+      <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500" />
+    </span>
+  );
+};
+
+export const RedLabel = () => {
+  return (
+    <div className="animate-pulse px-2 flex absolute top-0 -left-4 -rotate-[35deg] bg-red-500 text-white rounded-lg text-sm">
+      <label>New</label>
+    </div>
+  );
+};
+
 export const PostCard = ({ post }: { post: MarkdownFile }) => {
   const meta = post.metadata;
   const linkUrl = `/posts/${meta?.title}`;
   const createdTime = moment(meta.createdTime);
   const tags = meta.tags ? meta.tags.join(', ') : '';
   const category = meta.category || '';
+  const today = moment(now());
+  const isNewPost = today.diff(createdTime, 'months') <= 1;
 
   return (
     <Link href={linkUrl}>
-      <Card className="bg-gray-50 border-gray-400 dark:border-gray-300 dark:bg-gray-800 hover:border-black hover:bg-blue-50 hover:shadow-md hover:border-blue-500 hover:border-2">
+      <Card className="relative bg-gray-50 border-gray-400 dark:bg-gray-800 hover:bg-blue-50 hover:shadow-md hover:border-blue-500 dark:hover:border-blue-500 hover:border-2">
+        {isNewPost && <RedLabel />}
         <CardHeader>
           <div className="flex flex-row justify-between gap-2">
             <CardTitle className="">{meta?.title}</CardTitle>

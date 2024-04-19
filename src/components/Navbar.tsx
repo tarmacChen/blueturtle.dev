@@ -6,7 +6,7 @@ import { SearchBar } from '@/components/SearchBar';
 
 export const Navbar = () => {
   return (
-    <div className="sticky px-4 top-0 flex flex-row h-16 w-full items-center shadow-md bg-background dark:shadow-yellow-300">
+    <div className="sticky px-4 top-0 flex flex-row h-16 w-full items-center shadow-md bg-background dark:shadow-yellow-300 z-10">
       <Logo />
       <div className="invisible md:visible flex flex-row justify-center mx-auto">
         <DesktopNavbar />
@@ -24,7 +24,7 @@ export const NavbarWithSearchBar = ({
   dispatch: Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <div className="sticky px-4 top-0 flex flex-row h-16 w-full items-center shadow-md bg-background dark:shadow-yellow-300">
+    <div className="sticky px-4 top-0 flex flex-row h-16 w-full items-center shadow-md bg-background dark:shadow-yellow-300 z-10">
       <Logo />
       <div className="invisible md:visible flex flex-row justify-center mx-auto">
         <DesktopNavbar />
