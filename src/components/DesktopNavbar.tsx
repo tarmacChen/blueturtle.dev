@@ -7,14 +7,14 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import React from 'react';
-import { useMobile } from '@/hooks/useMobile';
+import { useDevice } from '@/hooks/useDevice';
 import Link from 'next/link';
 import { mergeClassNames } from '@/lib/helper';
 import { usePathname } from 'next/navigation';
 
 export function DesktopNavbar() {
   const pathname = usePathname().split('/')[1];
-  const { isMobile } = useMobile();
+  const { isMobile } = useDevice();
 
   const LinkItem = ({ href, name }: { href: string; name: string }) => {
     const isActive = href.split('/')[1] == pathname;

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
-import { useMobile } from '@/hooks/useMobile';
+import { useDevice } from '@/hooks/useDevice';
 import { FooterSection } from '@/components/FooterSection';
 import { Navbar, NavbarWithSearchBar } from '@/components/Navbar';
 import { BackToTopButton } from '@/components/BackToTopButton';
@@ -17,9 +17,8 @@ export function BasicPage({
 }) {
   const [scrollY, setScrollY] = useState(0);
   const { isScrollingUp, updatePosition } = useScroll();
-  const { isMobile } = useMobile();
+  const { isMobile } = useDevice();
   const backButtonVisible = isScrollingUp && scrollY > window.outerHeight;
-
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };

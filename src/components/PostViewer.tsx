@@ -5,7 +5,7 @@ import { PostCards } from '@/components/PostCard';
 import { PostList } from '@/components/PostItem';
 import { Dispatch, SetStateAction } from 'react';
 import { MarkdownFile } from 'mdman';
-import { useMobile } from '@/hooks/useMobile';
+import { useDevice } from '@/hooks/useDevice';
 
 export const PostViewer = ({
   categories,
@@ -20,7 +20,7 @@ export const PostViewer = ({
   posts: MarkdownFile[];
   defaultCategory: string;
 }) => {
-  const { isMobile } = useMobile();
+  const { isMobile } = useDevice();
 
   return (
     <Tabs defaultValue="card">

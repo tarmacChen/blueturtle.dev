@@ -56,9 +56,15 @@ export const PostCards = ({ posts }: { posts: MarkdownFile[] }) => {
     {
       const card =
         post.metadata.type == 'post' ? (
-          <PostCard post={post} />
+          <PostCard
+            post={post}
+            key={post.filename}
+          />
         ) : (
-          <SnippetCard snippet={post} />
+          <SnippetCard
+            snippet={post}
+            key={post.filename}
+          />
         );
 
       return card;

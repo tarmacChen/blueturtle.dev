@@ -22,6 +22,7 @@ export const SnippetCard = ({ snippet }: { snippet: MarkdownFile }) => {
   const linkUrl = `/snippets/${snippet.metadata.title}`;
   const createdTime = moment(snippet.metadata.createdTime);
   const tags = snippet.metadata.tags ? snippet.metadata.tags.join(', ') : '';
+  const category = snippet.metadata.category || '';
 
   return (
     <Link href={linkUrl}>
@@ -31,7 +32,10 @@ export const SnippetCard = ({ snippet }: { snippet: MarkdownFile }) => {
             <CardTitle>{snippet.metadata.title}</CardTitle>
             {snippet.metadata.draft ? <DraftBadge /> : <SnippetBadge />}
           </div>
-          <CardDescription>{tags}</CardDescription>
+          <CardDescription>
+            <div className="text-foreground text-lg inline">{category}</div>
+            <div>{tags}</div>
+          </CardDescription>
         </CardHeader>
         <CardFooter className="flex w-full justify-end">
           <div className="text-sm">{createdTime.format('ll')}</div>

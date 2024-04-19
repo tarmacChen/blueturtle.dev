@@ -1,39 +1,65 @@
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { MoonIcon, SunIcon, GearIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
+import { createActor, createMachine } from 'xstate';
 
 export const ToggleThemeButton = () => {
-  const { setTheme, theme, systemTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const themeName = theme || 'system';
 
-  const handleToggle = () => {
-    if (theme == 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+  const themeControllerMachine = createMachine({
+    id: 'change',
+    initial: themeName,
+    states: {
+      system: { on: { change: 'light' } },
+      light: { on: { change: 'dark' } },
+      dark: { on: { change: 'system' } },
+    },
+  });
+
+  const themeControllerActor = createActor(themeControllerMachine);
+  themeControllerActor.subscribe((snapshot) => {
+    setTheme(snapshot.value.toString());
+  });
+  themeControllerActor.start();
+
+  const ThemeIcon = ({ iconSize = '24' }: { iconSize?: string }) => {
+    const DarkIcon = () => (
+      <MoonIcon
+        width={iconSize}
+        height={iconSize}
+      />
+    );
+
+    const LightIcon = () => (
+      <SunIcon
+        width={iconSize}
+        height={iconSize}
+      />
+    );
+
+    const SystemIcon = () => (
+      <GearIcon
+        width={iconSize}
+        height={iconSize}
+      />
+    );
+
+    return theme == 'dark' ? (
+      <DarkIcon />
+    ) : theme == 'light' ? (
+      <LightIcon />
+    ) : (
+      <SystemIcon />
+    );
   };
-
-  const iconSize = '24';
-
-  const Dark = () => (
-    <MoonIcon
-      width={iconSize}
-      height={iconSize}
-      className="text-yellow-300"
-    />
-  );
-
-  const Sun = () => (
-    <SunIcon
-      width={iconSize}
-      height={iconSize}
-    />
-  );
 
   return (
     <div
-      onClick={handleToggle}
+      onClick={() => themeControllerActor.send({ type: 'change' })}
       className="hover:cursor-pointer">
-      {theme == 'light' ? <Sun /> : <Dark />}
+      <div className="text-foreground dark:text-yellow-300">
+        <ThemeIcon />
+      </div>
     </div>
   );
 };
