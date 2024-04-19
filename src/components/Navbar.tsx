@@ -6,9 +6,9 @@ import { SearchBar } from '@/components/SearchBar';
 
 export const Navbar = () => {
   return (
-    <div className="sticky px-4 top-0 flex flex-row h-16 w-full items-center shadow-md bg-background dark:shadow-yellow-300 z-10">
+    <div className="sticky top-0 z-10 flex h-16 w-full flex-row items-center bg-background px-4 shadow-md dark:shadow-yellow-300">
       <Logo />
-      <div className="invisible md:visible flex flex-row justify-center mx-auto">
+      <div className="invisible mx-auto flex flex-row justify-center md:visible">
         <DesktopNavbar />
       </div>
       <ToggleThemeButton />
@@ -24,12 +24,12 @@ export const NavbarWithSearchBar = ({
   dispatch: Dispatch<SetStateAction<string>>;
 }) => {
   return (
-    <div className="sticky px-4 top-0 flex flex-row h-16 w-full items-center shadow-md bg-background dark:shadow-yellow-300 z-10">
+    <div className="sticky top-0 z-10 flex h-16 w-full flex-row items-center bg-background px-4 shadow-md dark:shadow-yellow-300">
       <Logo />
-      <div className="invisible md:visible flex flex-row justify-center mx-auto">
+      <div className="invisible mx-auto flex flex-row justify-center md:visible">
         <DesktopNavbar />
       </div>
-      <div className="flex flex-row gap-2 justify-between items-center">
+      <div className="flex flex-row items-center justify-between gap-2">
         <div className="max-w-44">
           <SearchBar
             search={search}
