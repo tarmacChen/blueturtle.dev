@@ -1,9 +1,9 @@
 .markdown-navigation {
-  @apply flex flex-col gap-1 pl-2 border-l-4 border-l-blue-600;
+  @apply flex flex-col gap-1 border-l-4 border-l-blue-600 pl-2;
 }
 
 .markdown-navigation .title-anchor {
-  @apply text-base mx-2;
+  @apply mx-2 text-base;
 }
 
 .markdown-navigation .title-anchor small {
@@ -39,5 +39,5 @@
 }
 
 [class*='title-level'].active {
-  @apply border-b-2 border-b-blue-500 font-medium border-solid;
+  @apply border-b-2 border-solid border-b-blue-500 font-medium;
 }

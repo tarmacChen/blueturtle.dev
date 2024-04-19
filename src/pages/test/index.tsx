@@ -9,10 +9,10 @@ export default function TestPage() {
   return (
     <BasicPage>
       <div className="flex flex-row">
-        <div className="p-2 w-1/2 border-2">
+        <div className="w-1/2 border-2 p-2">
           <TrafficSignalMachine />
         </div>
-        <div className="flex flex-col p-2 w-1/2 border-2 border-l-0">
+        <div className="flex w-1/2 flex-col border-2 border-l-0 p-2">
           <Button
             onClick={changeSignal}
             className="my-2"

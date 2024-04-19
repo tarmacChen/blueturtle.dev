@@ -48,7 +48,7 @@ export const useTrafficSignalMachine = () => {
   };
 
   const TrafficSignalMachine = () => (
-    <div className="flex flex-col w-12 h-32 bg-black gap-2 justify-center items-center">
+    <div className="flex h-32 w-12 flex-col items-center justify-center gap-2 bg-black">
       <TrafficSignal
         className={baseSignalClasses}
         activeStyle="bg-red-500"

@@ -1,11 +1,11 @@
 const FlipCard = () => {
   return (
-    <div className="w-64 h-32">
-      <div className="relative flex w-full h-full box-border border-black rounded-xl border-2 justify-center items-center">
-        <div className="absolute flex w-full h-full justify-center items-center z-10 hover:z-0 bg-white">
+    <div className="h-32 w-64">
+      <div className="relative box-border flex h-full w-full items-center justify-center rounded-xl border-2 border-black">
+        <div className="absolute z-10 flex h-full w-full items-center justify-center bg-white hover:z-0">
           <div>front</div>
         </div>
-        <div className="absolute flex w-full h-full justify-center items-center bg-white transition ease-in-out delay-100 hover:bg-gray-300 z-0 hover:z-10 duration-300">
+        <div className="absolute z-0 flex h-full w-full items-center justify-center bg-white transition delay-100 duration-300 ease-in-out hover:z-10 hover:bg-gray-300">
           <div>back</div>
         </div>
       </div>

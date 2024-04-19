@@ -17,7 +17,7 @@ const SourceButton = ({ url }: { url: string }) => (
   <Link
     href={url}
     target="_blank">
-    <Button className="flex flex-row rounded-md gap-2">
+    <Button className="flex flex-row gap-2 rounded-md">
       Source
       <ExternalLinkIcon />
     </Button>
@@ -28,7 +28,7 @@ const DemoButton = ({ url }: { url: string }) => (
   <Link
     href={url}
     target="_blank">
-    <Button className="flex flex-row rounded-md gap-2">
+    <Button className="flex flex-row gap-2 rounded-md">
       Demo
       <LayersIcon />
     </Button>
@@ -39,10 +39,10 @@ export const ProjectCard = ({ project }: { project: MarkdownFile }) => {
   const createdYear = moment(project.metadata.createdTime).year();
 
   return (
-    <Card className="w-64 border-gray-500 dark:bg-gray-800 dark:hover:border-blue-500 bg-gray-50 hover:bg-blue-50 dark:border-white">
+    <Card className="w-64 border-gray-500 bg-gray-50 hover:bg-blue-50 dark:border-white dark:bg-gray-800 dark:hover:border-blue-500">
       <CardHeader className="h-2/3">
         <div className="flex w-full justify-end text-lg">{createdYear}</div>
-        <div className="flex flex-row gap-2 justify-between">
+        <div className="flex flex-row justify-between gap-2">
           <CardTitle>{project.metadata.title}</CardTitle>
           {project.metadata.draft && <DraftBadge />}
         </div>

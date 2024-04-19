@@ -28,7 +28,7 @@ export function PostPagination({
         key={pageIndex}
         className={
           currentPageIsActive
-            ? 'flex flex-row px-4 py-2 border-2 rounded-md justify-center items-center'
+            ? 'flex flex-row items-center justify-center rounded-md border-2 px-4 py-2'
             : ''
         }>
         {currentPageIsActive ? (
@@ -85,7 +85,7 @@ export function PostPagination({
 
   return (
     <Pagination>
-      <PaginationContent className="flex flex-row gap-4 text-md">
+      <PaginationContent className="text-md flex flex-row gap-4">
         {hasPreviousPage && <PreviousItem />}
         {items}
         <PaginationItem>

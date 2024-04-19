@@ -28,14 +28,14 @@ export default function AboutPage({
       <div className="flex flex-col gap-2">
         <h1 className="text-xl font-bold">{info.title}</h1>
         <h2 className="text-lg">聯絡方式</h2>
-        <a className="underline text-blue-600">{info.email}</a>
+        <a className="text-blue-600 underline">{info.email}</a>
         <div className="flex flex-row gap-2">
           <h2 className="text-lg">MBTI</h2>
           <a
             href={info.mbtiLinkUrl}
             target="
           _blank"
-            className="underline text-blue-600">
+            className="text-blue-600 underline">
             測驗結果
           </a>
         </div>

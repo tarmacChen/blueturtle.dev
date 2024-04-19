@@ -12,7 +12,7 @@ export const SearchBar = ({
   const iconSize = '20';
 
   return (
-    <div className="flex flex-row gap-2 justify-center items-center">
+    <div className="flex flex-row items-center justify-center gap-2">
       <MagnifyingGlassIcon
         width={iconSize}
         height={iconSize}
@@ -22,7 +22,7 @@ export const SearchBar = ({
         placeholder="Search..."
         value={search}
         onChange={(event) => dispatch(event.target.value)}
-        className="border-gray-400 focus-visible:border-none focus-visible:ring-offset-0 focus-visible:ring-blue-500"
+        className="border-gray-400 focus-visible:border-none focus-visible:ring-blue-500 focus-visible:ring-offset-0"
       />
     </div>
   );

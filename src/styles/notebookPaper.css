@@ -1,19 +1,18 @@
 .notebookPaper {
-    @apply relative my-4 mx-auto pt-1 pb-1 bg-white shadow-[0_0_5px_0_#888]
+  @apply relative mx-auto my-4 bg-white pb-1 pt-1 shadow-[0_0_5px_0_#888];
 }
 
 .notebookPaper::before {
-    content: '';
-    @apply w-1 h-full absolute top-0 left-8 bg-red-600
+  content: '';
+  @apply absolute left-8 top-0 h-full w-1 bg-red-600;
 }
 
 .notebookPattern {
-    background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
-    @apply h-full
+  background-image: repeating-linear-gradient(white 0px, white 24px, teal 25px);
+  @apply h-full;
 }
 
 .notebookContent {
-    word-spacing: 5px;
-    @apply pt-2 pl-16 pr-8 leading-4 tracking-normal
+  word-spacing: 5px;
+  @apply pl-16 pr-8 pt-2 leading-4 tracking-normal;
 }
-

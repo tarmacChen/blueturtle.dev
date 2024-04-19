@@ -13,7 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { DraftBadge } from '@/components/PostCard';
 
 export const SnippetBadge = () => (
-  <Badge className="bg-orange-600 text-white h-6 hover:bg-orange-600">
+  <Badge className="h-6 bg-orange-600 text-white hover:bg-orange-600">
     Snippet
   </Badge>
 );
@@ -26,14 +26,14 @@ export const SnippetCard = ({ snippet }: { snippet: MarkdownFile }) => {
 
   return (
     <Link href={linkUrl}>
-      <Card className="bg-yellow-50 dark:bg-gray-800 border-gray-400 hover:border-orange-500 hover:border-2 hover:bg-yellow-100 hover:shadow-md">
+      <Card className="border-gray-400 bg-yellow-50 hover:border-2 hover:border-orange-500 hover:bg-yellow-100 hover:shadow-md dark:bg-gray-800">
         <CardHeader>
           <div className="flex flex-row justify-between gap-2">
             <CardTitle>{snippet.metadata.title}</CardTitle>
             {snippet.metadata.draft ? <DraftBadge /> : <SnippetBadge />}
           </div>
           <CardDescription>
-            <div className="text-foreground text-lg inline">{category}</div>
+            <div className="inline text-lg text-foreground">{category}</div>
             <div>{tags}</div>
           </CardDescription>
         </CardHeader>

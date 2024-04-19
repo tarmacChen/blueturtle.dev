@@ -46,7 +46,7 @@ export function BasicPage({
       ) : (
         <Navbar />
       )}
-      <div className="px-4 mt-4 mb-8">{children}</div>
+      <div className="mb-8 mt-4 px-4">{children}</div>
       {backButtonVisible && (
         <BackToTopButton className="fixed bottom-16 right-4 gap-1">
           <ArrowUpIcon />

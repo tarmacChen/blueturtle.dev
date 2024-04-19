@@ -44,7 +44,7 @@ export const CategorySelector = ({
         return value;
       }}
       value={selectedCategory}>
-      <SelectTrigger className="border-gray-400 focus:border-none focus:ring-offset-0 focus:ring-blue-500">
+      <SelectTrigger className="border-gray-400 focus:border-none focus:ring-blue-500 focus:ring-offset-0">
         <SelectValue placeholder="Posts filter"></SelectValue>
       </SelectTrigger>
       <SelectContent>

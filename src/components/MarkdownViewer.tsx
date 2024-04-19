@@ -12,25 +12,25 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
     h1: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
-        <h1 className="underline decoration-2 underline-offset-8 text-primary bg-background">
+        <h1 className="bg-background text-primary underline decoration-2 underline-offset-8">
           {children}
         </h1>
       );
     },
     h2: ({ children, ...props }: { children: React.ReactNode }) => {
-      return <h2 className="text-primary bg-background">{children}</h2>;
+      return <h2 className="bg-background text-primary">{children}</h2>;
     },
     h3: ({ children, ...props }: { children: React.ReactNode }) => {
-      return <h3 className="text-primary bg-background">{children}</h3>;
+      return <h3 className="bg-background text-primary">{children}</h3>;
     },
     h4: ({ children, ...props }: { children: React.ReactNode }) => {
-      return <h4 className="text-primary bg-background">{children}</h4>;
+      return <h4 className="bg-background text-primary">{children}</h4>;
     },
     h5: ({ children, ...props }: { children: React.ReactNode }) => {
-      return <h5 className="text-primary bg-background">{children}</h5>;
+      return <h5 className="bg-background text-primary">{children}</h5>;
     },
     h6: ({ children, ...props }: { children: React.ReactNode }) => {
-      return <h6 className="text-primary bg-background">{children}</h6>;
+      return <h6 className="bg-background text-primary">{children}</h6>;
     },
     a: ({
       href,
@@ -42,7 +42,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
     }) => {
       return (
         <a
-          className="text-primary bg-background"
+          className="bg-background text-primary"
           href={href}
           target="_blank">
           {children}
@@ -51,21 +51,21 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
     },
     th: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
-        <th className="text-primary font-medium not-italic bg-gray-100 border-2 dark:border-gray-400 dark:bg-gray-700 dark:border-white">
+        <th className="border-2 bg-gray-100 font-medium not-italic text-primary dark:border-gray-400 dark:border-white dark:bg-gray-700">
           {children}
         </th>
       );
     },
     td: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
-        <td className="text-primary bg-background text-center border-2 dark:border-gray-400 dark:border-white">
+        <td className="border-2 bg-background text-center text-primary dark:border-gray-400 dark:border-white">
           {children}
         </td>
       );
     },
     blockquote: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
-        <blockquote className="text-primary bg-background">
+        <blockquote className="bg-background text-primary">
           {children}
         </blockquote>
       );
@@ -124,7 +124,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
         </SyntaxHighlighter>
       ) : (
         <code
-          className="mx-1 px-2 py-1 before:content-none after:content-none bg-gray-700 text-lime-400 rounded-md font-normal"
+          className="mx-1 rounded-md bg-gray-700 px-2 py-1 font-normal text-lime-400 before:content-none after:content-none"
           {...props}></code>
       );
     },
@@ -154,7 +154,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
           width={0}
           height={0}
           sizes="100vw"
-          className="w-full h-auto"
+          className="h-auto w-full"
           alt={alt}
         />
       );
@@ -163,7 +163,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
 
   return (
     <Markdown
-      className="w-full prose lg:prose-lg text-primary"
+      className="prose w-full text-primary lg:prose-lg"
       rehypePlugins={[rehypeRaw, rehypeSlug]}
       remarkPlugins={[remarkGfm, remarkGeomoji]}
       components={MarkdownComponent}>

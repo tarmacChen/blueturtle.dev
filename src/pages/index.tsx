@@ -57,7 +57,7 @@ export default function PostCardsPage({
     <BasicPage
       search={search}
       dispatch={setSearch}>
-      <div className="mx-auto flex flex-col w-full max-md:w-full w-2/3 xl:w-1/2 justify-center gap-4">
+      <div className="mx-auto flex w-2/3 w-full flex-col justify-center gap-4 max-md:w-full xl:w-1/2">
         <PostViewer
           categories={categories}
           selectedCategory={selectedCategory}

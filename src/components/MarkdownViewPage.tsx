@@ -10,16 +10,16 @@ export default function MarkdownViewPage({
 }: InferGetStaticPropsType<typeof getMarkdownProps>) {
   return (
     <BasicPage>
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col gap-8 lg:flex-row">
         <div className="block shrink-0">
           <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}
             headingTopOffset={84}
-            className="bg-gray-100 dark:bg-gray-800 xl:sticky xl:top-20 xl:left-0"
+            className="bg-gray-100 dark:bg-gray-800 xl:sticky xl:left-0 xl:top-20"
           />
         </div>
-        <div className="flex flex-col justify-center items-center mx-auto w-full mb-32">
+        <div className="mx-auto mb-32 flex w-full flex-col items-center justify-center">
           {md && (
             <MarkdownViewer
               md={md}

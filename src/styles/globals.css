@@ -4,7 +4,6 @@
 @import 'toc.css';
 @import 'notebookPaper.css';
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
