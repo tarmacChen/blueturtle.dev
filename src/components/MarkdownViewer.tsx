@@ -65,7 +65,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
     },
     blockquote: ({ children, ...props }: { children: React.ReactNode }) => {
       return (
-        <blockquote className="bg-background text-primary">
+        <blockquote className="border-orange-400 bg-yellow-100 py-1 text-primary dark:border-green-500 dark:bg-gray-700">
           {children}
         </blockquote>
       );
