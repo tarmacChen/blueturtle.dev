@@ -59,11 +59,9 @@ export const PostCard = ({ post }: { post: MarkdownFile }) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-row justify-between gap-2">
             <div>{meta?.description}</div>
-            <div className="flex flex-row justify-end">
-              <div className="text-md">{createdTime.format('ll')}</div>
-            </div>
+            <div className="text-md">{createdTime.format('ll')}</div>
           </div>
         </CardContent>
       </Card>

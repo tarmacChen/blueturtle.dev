@@ -11,7 +11,7 @@ export default function MarkdownViewPage({
   return (
     <BasicPage>
       <div className="flex flex-col gap-8 lg:flex-row">
-        <div className="block shrink-0">
+        <div className="block max-w-128 shrink-0">
           <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}

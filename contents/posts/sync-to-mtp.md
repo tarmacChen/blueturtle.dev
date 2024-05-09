@@ -40,14 +40,14 @@ draft: false
 
 我是透過 [Scoop][scoop] (套件管理工具)安裝到電腦裡
 
-```ps
-> scoop install mtpcopy --global
+```powershell
+scoop install mtpcopy --global
 ```
 
 ### 列出所有的 MTP Storage
 
-```ps
-> mtpcopy storages
+```powershell
+mtpcopy storages
 WALKMAN:Internal shared storage:
 WALKMAN:Lyra:
 ```
@@ -56,14 +56,14 @@ WALKMAN:Lyra:
 
 ### 同步資料
 
-```ps
-> mtpcopy copy -R C:\Users\hugo\Music\Music\ WALKMAN:Lyra:\Music\
+```powershell
+mtpcopy copy -R C:\Users\hugo\Music\Music\ WALKMAN:Lyra:\Music\
 ```
 
 ### 列出路徑匹配到的所有檔案
 
-```
-PS C:\Users\hugo> mtpcopy list WALKMAN:Lyra:\Music\John*
+```powershell
+C:\Users\hugo> mtpcopy list WALKMAN:Lyra:\Music\John*
 WALKMAN:Lyra:\Music\John Mayer
 WALKMAN:Lyra:\Music\John Williams
 ```

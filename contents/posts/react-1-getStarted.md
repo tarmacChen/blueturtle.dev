@@ -37,12 +37,12 @@ createdTime: '2024-04-18T02:24:23.181Z'
 
 ### 安裝
 
-```shell
+```bash
 // 如果先前在全域環境有安裝過套件建議先將舊版本移除掉再用 'npx' 進行安裝，避免安裝到舊版本
 npm uninstall -g create-react-app
 ```
 
-```shell
+```bash
 npx create-react-app cra
 ```
 
@@ -91,7 +91,7 @@ npx create-react-app cra
 
 ### 啟動項目
 
-```shell
+```bash
 npm run start
 Compiled successfully!
 
@@ -124,13 +124,13 @@ Vite 是次世代的前端項目建置工具，作者為 Evan You (Vue.js 的作
 
 ### 安裝
 
-```shell
+```bash
 npm create vite@latest
 ```
 
 隨後會跳出 prompt 請你輸入 package 名稱及要使用的 framework，然後完成建立
 
-```shell
+```bash
 npm create vite@latest
 ✔ Project name: … vite-project
 ✔ Select a framework: › React
@@ -194,7 +194,7 @@ export default defineConfig({
 
 執行`npm run dev`後 Vite 會快速啟動一個 `dev server` 將項目部署在上面運行
 
-```shell
+```bash
 npm run dev
 $ vite
 
@@ -219,13 +219,13 @@ Next.js 提供了多樣的網頁渲染方式
 
 ### 安裝
 
-```shell
+```bash
 npx create-next-app@latest
 ```
 
 隨後會跳出一些 prompt 確認項目的偏好設定，然後完成建立
 
-```shell
+```bash
 npx create-next-app@latest
 Need to install the following packages:
 create-next-app@14.2.2
@@ -274,7 +274,7 @@ Creating a new Next.js app in /Users/tarmac/Projects/nextjsapp.
 
 ### 啟動項目
 
-```shell
+```bash
 npm run dev
 $ next dev
  ⚠ Port 3000 is in use, trying 3001 instead.

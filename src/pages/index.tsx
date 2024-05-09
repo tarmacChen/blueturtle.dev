@@ -19,7 +19,8 @@ export default function PostCardsPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const defaultCategory = 'All Posts';
+  // const defaultCategory = 'All Posts';
+  const defaultCategory = 'Show All';
 
   const getFilteredPosts = () => {
     if (selectedCategory == PostCategoryGroups['All Posts']) {
