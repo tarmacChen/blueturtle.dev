@@ -42,9 +42,11 @@ export const SnippetCard = ({ snippet }: { snippet: MarkdownFile }) => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-row justify-between gap-2">
+          <div className="flex flex-col justify-between gap-2">
             <div>{snippet.metadata?.description}</div>
-            <div className="text-md">{createdTime.format('ll')}</div>
+            <div className="flex justify-end">
+              <div className="text-md">{createdTime.format('ll')}</div>
+            </div>
           </div>
         </CardContent>
       </Card>
