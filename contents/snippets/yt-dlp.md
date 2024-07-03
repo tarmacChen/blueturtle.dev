@@ -23,12 +23,20 @@ createdTime: '2024-04-24T23:50:16.043Z'
 ### macOS
 
 #### Homebrew
+
 ```bash
 brew install yt-dlp
 ```
 
 > 透過 `Homebrew` 來安裝 `yt-dlp` 會自動安裝其他相依套件，如果是透過預先編譯完的執行檔 (executable) 來執行 `yt-dlp` 在使用時部分功能可能會無法運作，像是在下載時加入 `--merge-output-format mp4` 選項會將下載回來的視訊及音訊檔案合併成 mp4 格式，如果執行環境缺少 `ffmpeg` 套件合併會執行失敗。
-> 
+
+## 更新
+
+有時候沒辦法下載是因為`yt-dlp`的版本太舊，要更新成最新版才能使用
+
+```bash
+pip install yt-dlp --upgrade
+```
 
 ## 基本用法
 
@@ -174,6 +182,7 @@ sb0 mhtml 320x180      1    │                  mhtml │ images               
 248 webm  1920x1080   24    │   36.79MiB 1238k https │ vp09.00.40.08 1238k video only          1080p, webm_dash
 616 mp4   1920x1080   24    │ ~170.49MiB 5744k m3u8  │ vp09.00.40.08 5744k video only          Premium
 ```
+
 ### 下載後自動加上影片縮圖
 
 ```bash
@@ -205,6 +214,33 @@ yt-dlp --live-from-start --merge-output-format mp4 --embed-thumbnail "https://ww
 ```bash
 yt-dlp --live-from-start --merge-output-format mp4 --embed-thumbnail --wait-for-video 233 "https://www.youtube.com/watch?v=rntsXse2noY"
 ```
+
+## 打造自己的 Youtube 離線音樂庫
+
+如果想要把`Youtube`當作音樂播放器使用又不想要花錢訂閱`Youtube Premium`，那就只能把平台上的資源下載下來離線播放，`yt-dlp`可以在下載完成時順便幫你把檔案轉換成了想要的格式，這邊會以`iPhone`做舉例
+
+### 下載資源並轉成`m4a`檔
+
+```bash
+yt-dlp --extract-audio --audio-format m4a "https://youtu.be/iCFFl_wGSsI?si=zLPeVdoVnaFY0oDu"
+```
+
+### 將影片存進播放清單中，下載時直接與播放清單同步
+
+一個一個分別下載很麻煩，我們只要將要放入離線音樂庫的影片都存進同一個播放清單裡，下載時就可以一網打盡
+
+```bash
+cd ~/Youtube Music Library
+yt-dlp --extract-audio --audio-format m4a "https://www.youtube.com/watch?v=qHPIPdPhUP0&list=PLcZPDW3YZk05hsoPOASCsxYMBPIoXLcXI"
+```
+
+> 如果下載的資源已經存在當前目錄底下`yt-dlp`會自動跳過
+
+### 將檔案存進手機裡
+
+我這邊是用`Apple Music`作為播放器及音樂庫使用，只要把`Youtube Music Library`資料夾裡面的檔案全部匯入`Apple Music`裡再與手機同步資料，就可以直接用手機聆聽離線音樂庫了
+
+> 如果你從不同的路徑匯入相同的檔案到`Apple Music`中會被視為不同的資源因此會出現重複的歌曲，所以每一次下載都要存進同一個資料夾並從這個資料夾匯入到`Apple Music`中
 
 ## 疑難排解
 
