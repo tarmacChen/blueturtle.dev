@@ -22,7 +22,7 @@ export function DesktopNavbar() {
       navigationMenuTriggerStyle(),
       'mx-2 rounded-none',
       isActive ? 'border-b-2 border-b-blue-600' : '',
-      'hover:bg-background hover:text-lg',
+      'hover:bg-gray-100 dark:hover:bg-gray-800 hover:rounded-md',
     );
 
     return (

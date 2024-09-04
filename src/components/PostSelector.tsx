@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { MarkdownFile } from 'mdman';
 import { useDevice } from '@/hooks/useDevice';
 
-export const PostViewer = ({
+export const PostSelector = ({
   categories,
   selectedCategory,
   dispatch,
@@ -25,7 +25,7 @@ export const PostViewer = ({
   return (
     <Tabs defaultValue="card">
       <div className="flex justify-between">
-        <div className="w-1/3 max-sm:w-1/2">
+        <div className="w-1/3 max-sm:w-1/2 mb-1">
           <CategorySelector
             categories={categories}
             selectedCategory={selectedCategory}

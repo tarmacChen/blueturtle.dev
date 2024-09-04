@@ -7,7 +7,7 @@ import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { getAllCategories } from '@/lib/helper';
 import { PostCategoryGroups } from '@/type';
-import { PostViewer } from '@/components/PostViewer';
+import { PostSelector } from '@/components/PostSelector';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -58,8 +58,8 @@ export default function PostCardsPage({
     <BasicPage
       search={search}
       dispatch={setSearch}>
-      <div className="mx-auto flex w-2/3 w-full flex-col justify-center gap-4 max-md:w-full xl:w-1/2">
-        <PostViewer
+      <div className="mx-auto flex w-2/3 flex-col justify-center gap-4 max-md:w-full xl:w-1/2">
+        <PostSelector
           categories={categories}
           selectedCategory={selectedCategory}
           dispatch={setSelectedCategory}
