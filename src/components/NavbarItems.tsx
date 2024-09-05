@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { mergeClassNames } from '@/lib/helper';
 import { usePathname } from 'next/navigation';
 
-export function DesktopNavbar() {
+export function NavbarItems() {
   const pathname = usePathname().split('/')[1];
   const { isMobile } = useDevice();
 
@@ -22,7 +22,7 @@ export function DesktopNavbar() {
       navigationMenuTriggerStyle(),
       'mx-2 rounded-none',
       isActive ? 'border-b-2 border-b-blue-600' : '',
-      'hover:bg-gray-100 dark:hover:bg-gray-800 hover:rounded-md',
+      'hover:bg-gray-100 dark:hover:bg-gray-800 ',
     );
 
     return (

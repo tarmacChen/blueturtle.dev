@@ -7,7 +7,7 @@ export const SearchBar = ({
   dispatch,
 }: {
   search: string;
-  dispatch: Dispatch<SetStateAction<string>>;
+  dispatch?: Dispatch<SetStateAction<string>>;
 }) => {
   const iconSize = '20';
 
@@ -21,7 +21,7 @@ export const SearchBar = ({
         type="text"
         placeholder="Search..."
         value={search}
-        onChange={(event) => dispatch(event.target.value)}
+        // onChange={(event) => dispatch(event.target.value)}
         className="border-gray-400 focus-visible:border-none focus-visible:ring-blue-500 focus-visible:ring-offset-0"
       />
     </div>

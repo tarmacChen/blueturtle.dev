@@ -7,8 +7,8 @@ export const FooterSection = () => {
   );
 
   return (
-    <footer className={footerClasses}>
+    <div className={footerClasses}>
       <MobileNavbar />
-    </footer>
+    </div>
   );
 };

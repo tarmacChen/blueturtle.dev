@@ -37,23 +37,19 @@ export function BasicPage({
   }, [scrollY]);
 
   return (
-    <div>
-      {dispatch ? (
-        <NavbarWithSearchBar
-          search={search}
-          dispatch={dispatch}
-        />
-      ) : (
-        <Navbar />
-      )}
-      <div className="mb-8 mt-4 px-4">{children}</div>
+    <div className="mx-auto px-4 lg:w-1/2">
+      <NavbarWithSearchBar
+        search={search}
+        dispatch={dispatch}
+      />
+      <div>{children}</div>
       {backButtonVisible && (
         <BackToTopButton className="fixed bottom-16 right-4 gap-1">
           <ArrowUpIcon />
           Back to top
         </BackToTopButton>
       )}
-      {isMobile && isScrollingUp && <FooterSection />}
+      {/* {isMobile && isScrollingUp && <FooterSection />} */}
     </div>
   );
 }
