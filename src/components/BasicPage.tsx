@@ -2,7 +2,7 @@
 import { useScroll } from '@/hooks/useScroll';
 import { useDevice } from '@/hooks/useDevice';
 import { FooterSection } from '@/components/FooterSection';
-import { Navbar, NavbarWithSearchBar } from '@/components/Navbar';
+import { NavbarWithSearchBar } from '@/components/Navbar';
 import { BackToTopButton } from '@/components/BackToTopButton';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
 
