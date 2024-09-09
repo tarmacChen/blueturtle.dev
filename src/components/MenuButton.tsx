@@ -4,7 +4,7 @@ export const MenuButton = ({ clickHandler }: { clickHandler: () => void }) => {
   const iconSize = 24;
 
   return (
-    <div>
+    <div className='cursor-pointer'>
       <HamburgerMenuIcon
         width={iconSize}
         height={iconSize}

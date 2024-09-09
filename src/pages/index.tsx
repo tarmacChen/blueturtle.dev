@@ -66,7 +66,7 @@ export default function PostCardsPage({
           search={search}
           setSearch={setSearch}
         />
-
+        <div className="h-32"></div>
         {showPaginates && (
           <PostPagination
             posts={foundPosts}

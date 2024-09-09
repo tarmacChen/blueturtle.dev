@@ -11,7 +11,7 @@ const NavItems = () => {
   const pathname = usePathname().split('/')[1];
 
   return (
-    <div className="absolute z-10 flex w-full flex-col bg-background text-right">
+    <div className="flex w-full flex-col bg-background text-right">
       <LinkItem
         href="/"
         name="Posts"
@@ -27,12 +27,12 @@ const NavItems = () => {
         name="About"
         pathname={pathname}
         className={itemStyle}></LinkItem>
-      <div className="my-4"></div>
+      <div className="my-2"></div>
     </div>
   );
 };
 
-export const NavbarWithSearchBar = () => {
+export const Navbar = () => {
   const [navItemIsVisible, setNavItemsIsVisible] = useState(false);
   const menuButtonClickHandler = () => {
     setNavItemsIsVisible((visible) => !visible);
@@ -51,7 +51,9 @@ export const NavbarWithSearchBar = () => {
           <MenuButton clickHandler={menuButtonClickHandler} />
         </div>
       </div>
-      <div className="relative">{navItemIsVisible && <NavItems />}</div>
+      <div className="sticky top-16 z-10">
+        {navItemIsVisible && <NavItems />}
+      </div>
     </>
   );
 };

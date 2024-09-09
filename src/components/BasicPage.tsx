@@ -1,7 +1,6 @@
-/**/ import {  useEffect, useState } from 'react';
+/**/ import { useEffect, useState } from 'react';
 import { useScroll } from '@/hooks/useScroll';
-import { useDevice } from '@/hooks/useDevice';
-import { NavbarWithSearchBar } from '@/components/Navbar';
+import { Navbar } from '@/components/Navbar';
 import { BackToTopButton } from '@/components/BackToTopButton';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
 
@@ -27,11 +26,11 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
   }, [scrollY]);
 
   return (
-    <div className="mx-auto px-4 lg:w-1/2">
-      <NavbarWithSearchBar />
+    <div className="mx-auto px-8 lg:w-1/2">
+      <Navbar />
       <div>{children}</div>
       {backButtonVisible && (
-        <BackToTopButton className="fixed bottom-16 right-4 gap-1">
+        <BackToTopButton className="fixed bottom-8 right-12 gap-1 hover:bg-foreground hover:opacity-100">
           <ArrowUpIcon />
           Back to top
         </BackToTopButton>
