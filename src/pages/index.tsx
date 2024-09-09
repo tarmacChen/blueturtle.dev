@@ -55,9 +55,7 @@ export default function PostCardsPage({
   const showPosts = showPaginates ? paginates[pageIndex - 1] : foundPosts;
 
   return (
-    <BasicPage
-      search={search}
-      dispatch={setSearch}>
+    <BasicPage>
       <div className="mx-auto flex flex-col justify-center">
         <PostSelector
           categories={categories}
@@ -65,6 +63,8 @@ export default function PostCardsPage({
           dispatch={setSelectedCategory}
           posts={showPosts}
           defaultCategory={defaultCategory}
+          search={search}
+          setSearch={setSearch}
         />
 
         {showPaginates && (

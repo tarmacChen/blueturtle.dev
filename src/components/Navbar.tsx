@@ -1,8 +1,7 @@
 import { Logo } from '@/components/Logo';
 import { LinkItem, NavbarItems } from '@/components/NavbarItems';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { SearchBar } from '@/components/SearchBar';
+import { useState } from 'react';
 import { MenuButton } from './MenuButton';
 import { usePathname } from 'next/navigation';
 
@@ -33,13 +32,7 @@ const NavItems = () => {
   );
 };
 
-export const NavbarWithSearchBar = ({
-  search,
-  dispatch,
-}: {
-  search: string;
-  dispatch?: Dispatch<SetStateAction<string>>;
-}) => {
+export const NavbarWithSearchBar = () => {
   const [navItemIsVisible, setNavItemsIsVisible] = useState(false);
   const menuButtonClickHandler = () => {
     setNavItemsIsVisible((visible) => !visible);
@@ -47,18 +40,13 @@ export const NavbarWithSearchBar = ({
 
   return (
     <>
-      <div className="sticky top-0 z-10 mx-auto mb-4 flex h-16 flex-row items-center bg-background">
+      <div className="sticky top-0 z-10 mx-auto flex h-16 flex-row items-center bg-background">
         <Logo />
         <div className="invisible mx-auto flex-row justify-center">
           <NavbarItems />
         </div>
-        <div className="flex flex-row items-center justify-between gap-2">
-          <div className="max-w-44">
-            <SearchBar
-              search={search}
-              dispatch={dispatch}
-            />
-          </div>
+        <div className="flex flex-row items-center justify-between gap-4">
+          <div className="max-w-44"></div>
           <ToggleThemeButton />
           <MenuButton clickHandler={menuButtonClickHandler} />
         </div>
