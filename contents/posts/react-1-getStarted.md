@@ -1,6 +1,4 @@
 ---
-
-
 title: Learning React - 建立新項目 (1)
 author: tarmac
 type: post
@@ -46,7 +44,7 @@ npm uninstall -g create-react-app
 npx create-react-app cra
 ```
 
-###  package.json
+### package.json
 
 ```json
 {
@@ -69,17 +67,10 @@ npx create-react-app cra
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -269,7 +260,6 @@ Creating a new Next.js app in /Users/tarmac/Projects/nextjsapp.
     "eslint-config-next": "14.2.2"
   }
 }
-
 ```
 
 ### 啟動項目

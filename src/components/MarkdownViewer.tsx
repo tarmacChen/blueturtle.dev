@@ -11,11 +11,7 @@ import Image from 'next/image';
 export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
   const MarkdownComponent: Object = {
     h1: ({ children, ...props }: { children: React.ReactNode }) => {
-      return (
-        <h1 className="bg-background text-primary underline decoration-2 underline-offset-8">
-          {children}
-        </h1>
-      );
+      return <h1 className="bg-background text-primary">{children}</h1>;
     },
     h2: ({ children, ...props }: { children: React.ReactNode }) => {
       return <h2 className="bg-background text-primary">{children}</h2>;

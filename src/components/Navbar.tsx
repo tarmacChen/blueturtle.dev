@@ -6,8 +6,7 @@ import { MenuButton } from './MenuButton';
 import { usePathname } from 'next/navigation';
 
 const NavItems = () => {
-  const itemStyle =
-    'px-4 py-4 hover:border-2 border-black dark:border-blue-200';
+  const itemStyle = 'px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-800 ';
   const pathname = usePathname().split('/')[1];
 
   return (
@@ -39,21 +38,16 @@ export const Navbar = () => {
   };
 
   return (
-    <>
-      <div className="sticky top-0 z-10 mx-auto flex h-16 flex-row items-center bg-background">
-        <Logo />
-        <div className="invisible mx-auto flex-row justify-center">
-          <NavbarItems />
-        </div>
-        <div className="flex flex-row items-center justify-between gap-4">
-          <div className="max-w-44"></div>
-          <ToggleThemeButton />
-          <MenuButton clickHandler={menuButtonClickHandler} />
-        </div>
+    <div className="sticky top-0 z-10 mx-auto flex h-16 flex-row items-center bg-background">
+      <Logo />
+      <div className="flex w-full flex-row items-center justify-end gap-4">
+        <div className="max-w-44"></div>
+        <ToggleThemeButton />
+        <MenuButton clickHandler={menuButtonClickHandler} />
       </div>
-      <div className="sticky top-16 z-10">
+      <div className="absolute right-0 top-16 w-full">
         {navItemIsVisible && <NavItems />}
       </div>
-    </>
+    </div>
   );
 };
