@@ -12,12 +12,12 @@ export default function MarkdownViewPage({
     <BasicPage>
       <div className="flex flex-col">
         <div className="mb-8 mt-4">
-          <MarkdownNavbar
+          {/* <MarkdownNavbar
             source={md?.content || ''}
             ordered={true}
-            headingTopOffset={84}
+            lgheadingTopOffset={84}
             className="bg-gray-100 dark:bg-gray-800"
-          />
+          /> */}
         </div>
         <div className="mx-auto mb-32 flex w-full flex-col items-center justify-center">
           {md && (

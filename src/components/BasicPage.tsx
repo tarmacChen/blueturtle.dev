@@ -26,7 +26,7 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
   }, [scrollY]);
 
   return (
-    <div className="mx-auto px-4 lg:w-1/2">
+    <div className="mx-auto px-4 lg:w-2/3">
       <Navbar />
       <div>{children}</div>
       {backButtonVisible && (
