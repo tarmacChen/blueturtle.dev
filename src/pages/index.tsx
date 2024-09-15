@@ -19,9 +19,9 @@ export default function PostCardsPage({
   pageIndex = 1,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  // const defaultCategory = 'All Posts';
-  const defaultCategory = 'Show All';
+  const defaultCategory = 'All Posts';
+  const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+  // const defaultCategory = 'Show All';
 
   const getFilteredPosts = () => {
     if (selectedCategory == PostCategoryGroups['All Posts']) {
@@ -82,7 +82,7 @@ export default function PostCardsPage({
   return (
     <BasicPage>
       <MarkdownListViewer
-        mds={posts}
+        mds={foundPosts}
         pageIndex={pageIndex}
       />
     </BasicPage>
