@@ -41,7 +41,7 @@ export const Navbar = () => {
     <div className="sticky top-0 z-10 mx-auto flex h-16 flex-row items-center bg-background">
       <Logo />
       <div className="flex w-full flex-row items-center justify-end gap-4">
-        <div className="max-w-44"></div>
+        <div className=""></div>
         <ToggleThemeButton />
         <MenuButton clickHandler={menuButtonClickHandler} />
       </div>

@@ -37,11 +37,13 @@ export const MarkdownListViewer = ({
   pageIndex: number;
 }) => {
   const MarkdownPosts = () =>
-    mds.map((md) => {
+    mds.map((md, index) => {
+      const isLastItem = index == mds.length - 1;
+
       return (
         <>
           <MarkdownPostViewer md={md} />
-          <Separator />
+          {isLastItem == false && <Separator />}
         </>
       );
     });
