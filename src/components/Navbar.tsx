@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { MenuButton } from './MenuButton';
 import { usePathname } from 'next/navigation';
 
-const NavItems = () => {
+const NavMenu = () => {
   const itemStyle = 'px-4 py-4 hover:bg-blue-100 dark:hover:bg-gray-800 ';
   const pathname = usePathname().split('/')[1];
 
@@ -46,7 +46,7 @@ export const Navbar = () => {
         <MenuButton clickHandler={menuButtonClickHandler} />
       </div>
       <div className="absolute right-0 top-16 w-full">
-        {navItemIsVisible && <NavItems />}
+        {navItemIsVisible && <NavMenu />}
       </div>
     </div>
   );

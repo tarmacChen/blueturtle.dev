@@ -3,6 +3,7 @@ import { useScroll } from '@/hooks/useScroll';
 import { Navbar } from '@/components/Navbar';
 import { BackToTopButton } from '@/components/BackToTopButton';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
+import { Footer } from './Footer';
 
 export function BasicPage({ children }: { children: React.ReactNode }) {
   const [scrollY, setScrollY] = useState(0);
@@ -35,6 +36,7 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
           Back to top
         </BackToTopButton>
       )}
+      <Footer />
       {/* {isMobile && isScrollingUp && <FooterSection />} */}
     </div>
   );
