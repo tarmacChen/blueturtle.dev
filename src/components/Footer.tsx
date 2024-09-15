@@ -25,23 +25,12 @@ const ProfileButton = ({
   );
 };
 
-const buttons: React.ReactNode[] = [
-  <ProfileButton href="https://github.com/tarmacChen">
-    <FaGithub />
-    GitHub
-  </ProfileButton>,
-  <ProfileButton>
-    <MdOutlineEmail />
-    tarmac.chen@gmail.com
-  </ProfileButton>,
-];
-
 const Copyright = ({ className }: { className?: string }) => {
   return (
     <ProfileButton className={className}>
       <span>Copyright </span>
       <FaRegCopyright />
-      <span>2024 - tarmac's blog - blueturtle</span>
+      <span>2024 - tarmac&apos;s blog - blueturtle</span>
     </ProfileButton>
   );
 };
@@ -52,16 +41,15 @@ export const Footer = () => {
   return (
     <div className="mb-8 flex flex-col items-center justify-center">
       <div className="flex flex-row items-center gap-2">
-        {buttons.map((button, index) => {
-          const isLastItem = index == buttons.length - 1;
-
-          return (
-            <>
-              {button}
-              {!isLastItem && <Separator />}
-            </>
-          );
-        })}
+        <ProfileButton href="https://github.com/tarmacChen">
+          <FaGithub />
+          GitHub
+        </ProfileButton>
+        <Separator />
+        <ProfileButton>
+          <MdOutlineEmail />
+          tarmac.chen@gmail.com
+        </ProfileButton>
       </div>
       <Copyright className="text-sm" />
     </div>
