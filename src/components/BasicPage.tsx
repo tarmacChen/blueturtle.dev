@@ -26,9 +26,9 @@ export function BasicPage({ children }: { children: React.ReactNode }) {
   }, [scrollY]);
 
   return (
-    <div className="mx-auto px-4 lg:w-2/3">
+    <div className="mx-auto w-full px-4 2xl:w-1/2">
       <Navbar />
-      <div>{children}</div>
+      <main className="mb-16">{children}</main>
       {backButtonVisible && (
         <BackToTopButton className="fixed bottom-8 right-12 gap-1 hover:bg-foreground hover:opacity-100">
           <ArrowUpIcon />

@@ -1,13 +1,14 @@
 import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { BasicPage } from '@/components/BasicPage';
-import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
+import { getPostProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 import { useState } from 'react';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { getAllCategories } from '@/lib/helper';
 import { PostCategoryGroups } from '@/type';
 import { PostSelector } from '@/components/PostSelector';
+import { MarkdownListViewer } from '@/components/MarkdownListViewer';
 
 export const getStaticProps = (async (ctx) => {
   return pageIndexStaticProps(ctx);
@@ -54,27 +55,36 @@ export default function PostCardsPage({
     search == '' && selectedCategory == PostCategoryGroups['All Posts'];
   const showPosts = showPaginates ? paginates[pageIndex - 1] : foundPosts;
 
+  // return (
+  //   <BasicPage>
+  //     <div className="mx-auto flex flex-col justify-center">
+  //       <PostSelector
+  //         categories={categories}
+  //         selectedCategory={selectedCategory}
+  //         dispatch={setSelectedCategory}
+  //         posts={showPosts}
+  //         defaultCategory={defaultCategory}
+  //         search={search}
+  //         setSearch={setSearch}
+  //       />
+  //       <div className="h-32"></div>
+  //       {showPaginates && (
+  //         <PostPagination
+  //           posts={foundPosts}
+  //           baseUrl="/page"
+  //           currentIndex={pageIndex}
+  //         />
+  //       )}
+  //     </div>
+  //   </BasicPage>
+  // );
+
   return (
     <BasicPage>
-      <div className="mx-auto flex flex-col justify-center">
-        <PostSelector
-          categories={categories}
-          selectedCategory={selectedCategory}
-          dispatch={setSelectedCategory}
-          posts={showPosts}
-          defaultCategory={defaultCategory}
-          search={search}
-          setSearch={setSearch}
-        />
-        <div className="h-32"></div>
-        {showPaginates && (
-          <PostPagination
-            posts={foundPosts}
-            baseUrl="/page"
-            currentIndex={pageIndex}
-          />
-        )}
-      </div>
+      <MarkdownListViewer
+        mds={posts}
+        pageIndex={pageIndex}
+      />
     </BasicPage>
   );
 }

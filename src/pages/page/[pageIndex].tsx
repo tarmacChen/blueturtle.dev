@@ -8,6 +8,7 @@ import { getMarkdownFiles } from '@/lib/staticHelper';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import PostCardsPage from '@/pages/index';
+import { MarkdownListViewer } from '@/components/MarkdownListViewer';
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles();
@@ -26,11 +27,11 @@ export const getStaticPaths = (async () => {
   return routes;
 }) satisfies GetStaticPaths;
 
-export const getStaticProps = (async (ctx) => {
+export const getPostProps = (async (ctx) => {
   const env = process.env.NODE_ENV;
   const mdFiles = getMarkdownFiles().filter(
     (md) => md.metadata.type == 'post' || md.metadata.type == 'snippet',
-  );
+);
   const prodPosts = mdFiles.filter((md) => md.metadata.draft == false);
   const devPosts = mdFiles;
   const posts = env == 'development' ? devPosts : prodPosts;
@@ -45,11 +46,15 @@ export const getStaticProps = (async (ctx) => {
 export default function Page({
   pageIndex,
   posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetStaticPropsType<typeof getPostProps>) {
   return (
-    <PostCardsPage
+    // <PostCardsPage
+    //   pageIndex={pageIndex}
+    //   posts={posts}
+    // />
+    <MarkdownListViewer
+      mds={posts}
       pageIndex={pageIndex}
-      posts={posts}
     />
   );
 }
