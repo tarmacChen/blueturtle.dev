@@ -17,7 +17,7 @@ const MarkdownPostViewer = ({ md }: { md: MarkdownFile }) => {
       </div>
       <div className="mt-4 flex items-center justify-between">
         <p className="text-md text-gray-500">
-          {createdTime.format('YYYY-MM-D')}
+          {createdTime.format('YYYY-MM-DD')}
         </p>
         <Link
           href={url}
