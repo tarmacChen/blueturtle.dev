@@ -1,13 +1,11 @@
-import { PostPagination } from '@/components/PostPagination';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { BasicPage } from '@/components/BasicPage';
-import { getPostProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
+import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 import { useState } from 'react';
 import { paginateElements } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import { getAllCategories } from '@/lib/helper';
 import { PostCategoryGroups } from '@/type';
-import { PostSelector } from '@/components/PostSelector';
 import { MarkdownListViewer } from '@/components/MarkdownListViewer';
 
 export const getStaticProps = (async (ctx) => {
