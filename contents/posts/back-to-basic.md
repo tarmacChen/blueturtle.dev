@@ -18,11 +18,11 @@ createdTime: '2024-09-23T21:20:59.330Z'
 
 ### Markdown 驅動文章頁面
 
-最近在寫文章時對於添加圖片這件事很困擾，自從 `blueturtle.dev` 採取`由 Markdown 檔案去產生文章頁面`的解決方案，對於頁面的渲染結果我一直都不是很滿意，這套工作流整體運作起來很流暢，只需要專注在撰寫內容本身然後管理好每個文章對應的 md 檔，其他跟文章有關的資料（主旨、文章類別、標籤...）放到 Metadata 裡面，剩下的都不用手動操作，Next.js 會幫我遍歷 md 檔案建立好靜態路由、渲染頁面、產生超連結到文章列表裡，從結果來看確實達成了當初想要的效果
+最近在寫文章時對於添加圖片這件事很困擾，自從 `blueturtle.dev` 採取`由 Markdown 檔案去產生文章頁面`的解決方案，對於文章頁面的渲染結果我一直都不是很滿意，這套工作流運作起來很流暢，只需要專注在撰寫內容本身然後管理好每個文章對應的 md 檔，其他跟文章有關的資料（主旨、文章類別、標籤...）放到 Metadata 裡面，剩下的都不用手動介入，Next.js 會幫我遍歷 md 檔案建立好靜態路由、渲染頁面、產生超連結到文章列表裡，從結果來看確實達成了當初想要的效果
 
 ### 新增圖片是一場災難
 
-如果只是撰寫純文字的文章內容沒有太大的問題，但只要想圖片就是一場災難，在 Markdown 裡面新增圖片的語法像是這樣
+如果只是撰寫純文字的文章內容沒有太大的問題，但只要想新增圖片就是一場災難，在 Markdown 裡面新增圖片的語法像是這樣
 
 ```Markdown
 ![Title](/public/picture.png)
@@ -92,7 +92,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
 ```typescript
 import { Article, Picture, TextWrap } from '@/components/article'
 
-default function Page() {
+export default function Page() {
   const title = '彰化秘境私藏旅行'
   const address = "彰化縣田尾鄉"
   const caption = '毛茸茸的田尾波波草'
