@@ -149,7 +149,7 @@ export const MarkdownViewer = ({ md, codeStyle }: MarkdownTypes) => {
           src={imageSource}
           width={0}
           height={0}
-          sizes="100vw"
+          // sizes="100vw"
           className="h-auto w-full"
           alt={alt}
         />
