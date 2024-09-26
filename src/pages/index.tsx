@@ -1,5 +1,5 @@
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { BasicPage } from '@/components/BasicPage';
+import { RootLayout } from '@/components/RootLayout';
 import { getStaticProps as pageIndexStaticProps } from '@/pages/page/[pageIndex]';
 import { useState } from 'react';
 import { paginateElements } from '@/lib/helper';
@@ -78,11 +78,11 @@ export default function PostCardsPage({
   // );
 
   return (
-    <BasicPage>
+    <RootLayout>
       <MarkdownListViewer
         mds={foundPosts}
         pageIndex={pageIndex}
       />
-    </BasicPage>
+    </RootLayout>
   );
 }

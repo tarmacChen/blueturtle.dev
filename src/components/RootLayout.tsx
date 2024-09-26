@@ -5,7 +5,7 @@ import { BackToTopButton } from '@/components/BackToTopButton';
 import { ArrowUpIcon } from '@radix-ui/react-icons';
 import { Footer } from './Footer';
 
-export function BasicPage({ children }: { children: React.ReactNode }) {
+export function RootLayout({ children }: { children: React.ReactNode }) {
   const [scrollY, setScrollY] = useState(0);
   const { isScrollingUp, updatePosition } = useScroll();
   const backButtonVisible = isScrollingUp && scrollY > window.outerHeight;

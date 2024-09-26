@@ -1,4 +1,4 @@
-import { BasicPage } from '@/components/BasicPage';
+import { RootLayout } from '@/components/RootLayout';
 import { getMarkdownFiles } from '@/lib/staticHelper';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ProjectCard } from '@/components/ProjectCard';
@@ -21,7 +21,7 @@ export default function ProjectsPage({
   projects,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <BasicPage>
+    <RootLayout>
       <div className="flex w-full flex-row flex-wrap justify-center gap-4">
         {projects.map((project) => {
           return (
@@ -32,6 +32,6 @@ export default function ProjectsPage({
           );
         })}
       </div>
-    </BasicPage>
+    </RootLayout>
   );
 }
