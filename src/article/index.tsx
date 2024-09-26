@@ -76,14 +76,21 @@ export const Header = ({ title, description, timeText }: HeaderProps) => {
   );
 };
 
-export const Blockquote = ({}: {}) => {
-  return <div></div>;
-};
-
 export const Paragraph = ({ className, children }: ReactNodeProps) => {
   return (
-    <p className={clsx("my-8 leading-relaxed tracking-wide", className)}>
-      {children}
-    </p>
+    <p className={clsx("my-8 text-lg leading-loose", className)}>{children}</p>
+  );
+};
+
+export const Blockquote = ({ className, children }: ReactNodeProps) => {
+  return (
+    <div className="my-8 flex bg-slate-200 dark:bg-gray-700 dark:text-white">
+      <div className="w-2 bg-black text-black dark:bg-green-400 dark:text-green-400">
+        *
+      </div>
+      <blockquote className={clsx("mx-4 py-4", className)}>
+        {children}
+      </blockquote>
+    </div>
   );
 };

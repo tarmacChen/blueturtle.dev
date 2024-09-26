@@ -1,5 +1,6 @@
 import {
   Article,
+  Blockquote,
   Header,
   Heading1,
   Heading2,
@@ -25,10 +26,9 @@ export default function Page() {
           description={description}
           timeText={createdDate}
         />
-        <Heading2>前言</Heading2>
-        <Paragraph>
+        <Blockquote>
           我經常會在處理一件事的時候用力過頭，一口氣把全部的精力投入進去，過度思考問題把事情複雜化，最後被衍生出來的更多事情淹沒然後自我放棄，這個習慣不但對我的生產力有害且挫敗的經驗長久下來會傷害我的身心健康，我想要先用`限制資源`這個方法試著不要讓我在處理事情的時候失去控制
-        </Paragraph>
+        </Blockquote>
         <Heading2>限制資源</Heading2>
         <Paragraph>
           要不試著在每次處理事情的時候限制自己只能花30分鐘的時間處理，每個單位(30分鐘)我把它稱為一個子工作，如果這次執行子工作在資源結束時沒有處理完是正常的，如果需要很多個子工作才能完成是正常的，這就是一件事情在處理時必然會發生的過程
