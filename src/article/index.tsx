@@ -94,3 +94,20 @@ export const Blockquote = ({ className, children }: ReactNodeProps) => {
     </div>
   );
 };
+
+export const Hyperlink = ({
+  className,
+  children,
+  src,
+}: ReactNodeProps & { src: string }) => {
+  return (
+    <a
+      className={clsx(
+        "mx-2 text-blue-700 underline underline-offset-4 dark:text-blue-400",
+        className,
+      )}
+      href={src}>
+      {children}
+    </a>
+  );
+};
