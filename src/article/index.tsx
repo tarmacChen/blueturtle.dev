@@ -1,6 +1,11 @@
 import clsx from "clsx";
-import moment from "moment";
-import React from "react";
+import moment, { lang } from "moment";
+import React, { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import SyntaxHighlighter, {
+  SyntaxHighlighterProps,
+} from "react-syntax-highlighter";
+import { CheckIcon, ClipboardIcon } from "@radix-ui/react-icons";
 
 type ReactNodeProps = {
   children: React.ReactNode;
@@ -109,5 +114,53 @@ export const Hyperlink = ({
       href={src}>
       {children}
     </a>
+  );
+};
+
+export const CodeBlock = ({
+  language,
+  props,
+  children,
+}: SyntaxHighlighterProps) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const iconSize = 18;
+  const code = "\n" + children.toString();
+  const lang = language || "";
+  const codeLanguage =
+    lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
+
+  return (
+    <CopyToClipboard
+      text={children.toString()}
+      onCopy={() => {
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 2000);
+      }}>
+      <div className="relative w-full">
+        <SyntaxHighlighter
+          language={language}
+          {...props}>
+          {code}
+        </SyntaxHighlighter>
+        <span className="absolute left-2 top-2 text-sm text-primary/80">
+          {codeLanguage}
+        </span>
+        <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1">
+          {isCopied ? (
+            <CheckIcon
+              height={iconSize}
+              width={iconSize}
+            />
+          ) : (
+            <ClipboardIcon
+              height={iconSize}
+              width={iconSize}
+            />
+          )}
+        </button>
+      </div>
+    </CopyToClipboard>
   );
 };
