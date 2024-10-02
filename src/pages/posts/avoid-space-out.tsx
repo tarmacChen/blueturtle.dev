@@ -16,7 +16,7 @@ import { RootLayout } from "@/components/RootLayout";
 export default function Page() {
   const title = "避免注意力分散 Avoid space out";
   const description = "用限制資源這個方法來約束自己處理事情時的擁有的條件";
-  const createdDate = "2023-2-23";
+  const createdDate = "2023-02-23";
 
   return (
     <RootLayout>

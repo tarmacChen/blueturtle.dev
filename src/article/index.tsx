@@ -1,13 +1,13 @@
 import clsx from "clsx";
-import moment, { lang } from "moment";
-import React, { useState } from "react";
+import moment from "moment";
+import React, { AnchorHTMLAttributes, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import SyntaxHighlighter, {
   SyntaxHighlighterProps,
 } from "react-syntax-highlighter";
 import { CheckIcon, ClipboardIcon } from "@radix-ui/react-icons";
 
-type ReactNodeProps = {
+type ClassNodeProps = {
   children: React.ReactNode;
   className?: string;
 };
@@ -19,33 +19,33 @@ type HeaderProps = {
   className?: string;
 };
 
-export const Article = ({ children }: ReactNodeProps) => {
+export const Article = ({ children }: ClassNodeProps) => {
   return <article className={clsx("my-4 p-4")}>{children}</article>;
 };
 
-export const Heading1 = ({ className, children }: ReactNodeProps) => {
+export const Heading1 = ({ className, children }: ClassNodeProps) => {
   return <h1 className={clsx("text-3xl font-bold", className)}>{children}</h1>;
 };
 
-export const Heading2 = ({ className, children }: ReactNodeProps) => {
+export const Heading2 = ({ className, children }: ClassNodeProps) => {
   return (
     <h2 className={clsx("text-2xl font-semibold", className)}>{children}</h2>
   );
 };
 
-export const Heading3 = ({ className, children }: ReactNodeProps) => {
+export const Heading3 = ({ className, children }: ClassNodeProps) => {
   return <h3 className={clsx("text-xl", className)}>{children}</h3>;
 };
 
-export const Heading4 = ({ className, children }: ReactNodeProps) => {
+export const Heading4 = ({ className, children }: ClassNodeProps) => {
   return <h4 className={clsx("text-lg", className)}>{children}</h4>;
 };
 
-export const Heading5 = ({ className, children }: ReactNodeProps) => {
+export const Heading5 = ({ className, children }: ClassNodeProps) => {
   return <h5 className={clsx("", className)}>{children}</h5>;
 };
 
-export const Heading6 = ({ className, children }: ReactNodeProps) => {
+export const Heading6 = ({ className, children }: ClassNodeProps) => {
   return <h6 className={clsx("", className)}>{children}</h6>;
 };
 
@@ -67,7 +67,7 @@ export const PostTime = ({
   );
 };
 
-export const SubTitle = ({ className, children }: ReactNodeProps) => {
+export const SubTitle = ({ className, children }: ClassNodeProps) => {
   return <span className={clsx("text-primary/80", className)}>{children}</span>;
 };
 
@@ -81,13 +81,13 @@ export const Header = ({ title, description, timeText }: HeaderProps) => {
   );
 };
 
-export const Paragraph = ({ className, children }: ReactNodeProps) => {
+export const Paragraph = ({ className, children }: ClassNodeProps) => {
   return (
     <p className={clsx("my-8 text-lg leading-loose", className)}>{children}</p>
   );
 };
 
-export const Blockquote = ({ className, children }: ReactNodeProps) => {
+export const Blockquote = ({ className, children }: ClassNodeProps) => {
   return (
     <div className="my-8 flex bg-slate-200 dark:bg-gray-700 dark:text-white">
       <div className="w-2 bg-black text-black dark:bg-green-400 dark:text-green-400">
@@ -103,31 +103,34 @@ export const Blockquote = ({ className, children }: ReactNodeProps) => {
 export const Hyperlink = ({
   className,
   children,
-  src,
-}: ReactNodeProps & { src: string }) => {
+  href,
+  target,
+  ...props
+}: ClassNodeProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
   return (
     <a
       className={clsx(
         "mx-2 text-blue-700 underline underline-offset-4 dark:text-blue-400",
         className,
       )}
-      href={src}>
+      href={href}
+      target={target}
+      {...props}>
       {children}
     </a>
   );
 };
 
 export const CodeBlock = ({
-  language,
   props,
+  language,
   children,
 }: SyntaxHighlighterProps) => {
   const [isCopied, setIsCopied] = useState(false);
   const iconSize = 18;
   const code = "\n" + children.toString();
   const lang = language || "";
-  const codeLanguage =
-    lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
+  const name = lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
 
   return (
     <CopyToClipboard
@@ -144,8 +147,8 @@ export const CodeBlock = ({
           {...props}>
           {code}
         </SyntaxHighlighter>
-        <span className="absolute left-2 top-2 text-sm text-primary/80">
-          {codeLanguage}
+        <span className="absolute left-2 top-2 text-sm text-black/50">
+          {name}
         </span>
         <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1">
           {isCopied ? (
