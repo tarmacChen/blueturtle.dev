@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import moment from "moment";
-import React, { AnchorHTMLAttributes, HTMLAttributes, useState } from "react";
+import React, { AnchorHTMLAttributes, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import SyntaxHighlighter, {
   SyntaxHighlighterProps,
@@ -135,10 +135,10 @@ export const CodeBlock = (props: SyntaxHighlighterProps) => {
       }}>
       <div className="relative w-full">
         <SyntaxHighlighter {...props}>{code}</SyntaxHighlighter>
-        <span className="absolute left-2 top-2 text-sm text-black/50">
+        <span className="absolute left-2 top-2 text-sm text-primary/50">
           {name}
         </span>
-        <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1">
+        <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1 text-black ">
           {isCopied ? (
             <CheckIcon
               height={iconSize}

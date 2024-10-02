@@ -14,6 +14,8 @@ import {
   SubTitle,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
+import { useDevice } from "@/hooks/useDevice";
+import { useTheme } from "next-themes";
 import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 export default function Page() {
@@ -21,6 +23,10 @@ export default function Page() {
   const description = "不能用 SDKMAN 該怎麼辦";
   const createdDate = "2023-03-16";
   const code = `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser\nInvoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression`;
+  const { theme } = useTheme();
+  const lightStyle = docco;
+  const darkStyle = a11yDark;
+  const style = theme === "dark" ? darkStyle : lightStyle;
 
   return (
     <RootLayout>
@@ -55,7 +61,7 @@ export default function Page() {
         </Paragraph>
         <CodeBlock
           language="PowerShell"
-          style={docco}>
+          style={style}>
           {code}
         </CodeBlock>
       </Article>
