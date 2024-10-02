@@ -55,7 +55,6 @@ export default function Page() {
         </Paragraph>
         <CodeBlock
           language="PowerShell"
-          showLineNumbers={true}
           style={docco}>
           {code}
         </CodeBlock>

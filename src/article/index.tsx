@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import moment from "moment";
-import React, { AnchorHTMLAttributes, useState } from "react";
+import React, { AnchorHTMLAttributes, HTMLAttributes, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import SyntaxHighlighter, {
   SyntaxHighlighterProps,
@@ -101,40 +101,32 @@ export const Blockquote = ({ className, children }: ClassNodeProps) => {
 };
 
 export const Hyperlink = ({
-  className,
   children,
-  href,
-  target,
+  className,
   ...props
-}: ClassNodeProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
+}: AnchorHTMLAttributes<HTMLAnchorElement> & ClassNodeProps) => {
   return (
     <a
       className={clsx(
         "mx-2 text-blue-700 underline underline-offset-4 dark:text-blue-400",
         className,
       )}
-      href={href}
-      target={target}
       {...props}>
       {children}
     </a>
   );
 };
 
-export const CodeBlock = ({
-  props,
-  language,
-  children,
-}: SyntaxHighlighterProps) => {
+export const CodeBlock = (props: SyntaxHighlighterProps) => {
   const [isCopied, setIsCopied] = useState(false);
   const iconSize = 18;
-  const code = "\n" + children.toString();
-  const lang = language || "";
+  const code = "\n" + props.children.toString();
+  const lang = props.language || "";
   const name = lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
 
   return (
     <CopyToClipboard
-      text={children.toString()}
+      text={props.children.toString()}
       onCopy={() => {
         setIsCopied(true);
         setTimeout(() => {
@@ -142,11 +134,7 @@ export const CodeBlock = ({
         }, 2000);
       }}>
       <div className="relative w-full">
-        <SyntaxHighlighter
-          language={language}
-          {...props}>
-          {code}
-        </SyntaxHighlighter>
+        <SyntaxHighlighter {...props}>{code}</SyntaxHighlighter>
         <span className="absolute left-2 top-2 text-sm text-black/50">
           {name}
         </span>
