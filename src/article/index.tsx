@@ -176,3 +176,18 @@ export const Emphasis = ({ className, children }: ClassNodeProps) => {
     </span>
   );
 };
+
+export const ListItems = ({
+  children,
+  className,
+  title,
+}: ClassNodeProps & { title?: string }) => {
+  return (
+    <div className="my-4 flex flex-col">
+      <p>{title}：</p>
+      <ul className={clsx("list-inside list-decimal", className)}>
+        {children}
+      </ul>
+    </div>
+  );
+};
