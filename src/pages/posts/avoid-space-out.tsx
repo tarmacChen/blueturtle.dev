@@ -3,16 +3,11 @@ import {
   Blockquote,
   Emphasis,
   Header,
-  Heading1,
   Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
   Paragraph,
-  PostTime,
-  SubTitle,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
+import Head from "next/head";
 
 export default function Page() {
   const title = "避免注意力分散 Avoid space out";
@@ -21,6 +16,9 @@ export default function Page() {
 
   return (
     <RootLayout>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <Article>
         <Header
           title={title}

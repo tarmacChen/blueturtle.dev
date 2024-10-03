@@ -4,19 +4,20 @@ import {
   CodeBlock,
   Emphasis,
   Header,
-  Heading1,
   Heading2,
   Heading3,
-  Heading4,
-  Heading5,
   Hyperlink,
   Paragraph,
-  PostTime,
-  SubTitle,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
 import { useTheme } from "next-themes";
 import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import type { Metadata } from "next";
+import Head from "next/head";
+
+export const metadata: Metadata = {
+  title: "yo",
+};
 
 export default function Page() {
   const title = "在單純的 Windows 環境下使用 JDK 管理工具 - jabba";
@@ -183,6 +184,9 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
 
   return (
     <RootLayout>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <Article>
         <Header
           title={title}
