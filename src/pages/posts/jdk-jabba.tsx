@@ -14,7 +14,6 @@ import {
   SubTitle,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
-import { useDevice } from "@/hooks/useDevice";
 import { useTheme } from "next-themes";
 import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
@@ -22,7 +21,10 @@ export default function Page() {
   const title = "在單純的 Windows 環境下使用 JDK 管理工具 - jabba";
   const description = "不能用 SDKMAN 該怎麼辦";
   const createdDate = "2023-03-16";
-  const code = `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser\nInvoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression`;
+  const code = `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Invoke-Expression (
+  Invoke-WebRequest "https://github.com/shyiko/jabba/raw/master/install.ps1" -UseBasicParsing
+).Content`;
   const { theme } = useTheme();
   const lightStyle = docco;
   const darkStyle = a11yDark;
@@ -61,8 +63,29 @@ export default function Page() {
         </Paragraph>
         <CodeBlock
           language="PowerShell"
-          style={style}>
+          style={style}
+          showLanguageName>
           {code}
+        </CodeBlock>
+        <Paragraph>
+          <Hyperlink
+            href="https://github.com/shyiko/jabba/issues/707"
+            className="mx-0 block"
+            target="_blank">
+            jabba use not working on Windows (installed with scoop) #707
+          </Hyperlink>
+          <Hyperlink
+            href="https://hackmd.io/@jonz94/BJbp3lsnu"
+            className="mx-0 block">
+            The prefered way to install jabba is via the installation script
+          </Hyperlink>
+        </Paragraph>
+        <Heading2>基本用法</Heading2>
+        <Heading3>列出可用的 JDK 版本</Heading3>
+        <CodeBlock
+          language="bash"
+          style={style}>
+          {`jabba ls-remote\n...\nzulu@1.6.53\nzulu@1.6.4\nzulu@1.6.47`}
         </CodeBlock>
       </Article>
     </RootLayout>
