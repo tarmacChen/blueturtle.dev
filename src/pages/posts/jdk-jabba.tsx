@@ -21,7 +21,7 @@ export default function Page() {
   const title = "在單純的 Windows 環境下使用 JDK 管理工具 - jabba";
   const description = "不能用 SDKMAN 該怎麼辦";
   const createdDate = "2023-03-16";
-  const code = `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+  const installation = `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-Expression (
   Invoke-WebRequest "https://github.com/shyiko/jabba/raw/master/install.ps1" -UseBasicParsing
 ).Content`;
@@ -29,6 +29,147 @@ Invoke-Expression (
   const lightStyle = docco;
   const darkStyle = a11yDark;
   const style = theme === "dark" ? darkStyle : lightStyle;
+
+  const lsRemote = `jabba ls-remote
+1.16.0
+1.16.0-1
+adopt@1.16.0-1
+adopt@1.16.0-0
+adopt-openj9@1.16.0-1
+adopt-openj9@1.16.0-0
+amazon-corretto@1.17.0-0.35.1
+amazon-corretto@1.11.0-11.9.1
+graalvm@21.1.0
+graalvm@21.0.0
+openjdk@1.17.0
+openjdk@1.16.0
+zulu@1.17.0-0
+zulu@1.16.0
+`;
+
+  const zuluAllVersion = `jabba ls-remote "zulu@*"
+zulu@1.16.0
+zulu@1.15.0
+zulu@1.14.0
+zulu@1.13.0
+zulu@1.12.0
+zulu@1.11.0
+zulu@1.10.0
+zulu@1.9.0
+zulu@1.8.282
+zulu@1.8.275
+zulu@1.8.272
+zulu@1.8.265
+zulu@1.8.262
+zulu@1.8.252
+zulu@1.8.242
+zulu@1.8.232
+  `;
+
+  const zuluJava8 = `jabba ls-remote "zulu@1.8"
+zulu@1.8.282
+zulu@1.8.275
+zulu@1.8.272
+zulu@1.8.265
+zulu@1.8.262
+zulu@1.8.252
+zulu@1.8.242
+zulu@1.8.232
+zulu@1.8.222
+zulu@1.8.212
+zulu@1.8.202
+zulu@1.8.201
+zulu@1.8.192
+zulu@1.8.181
+zulu@1.8.172
+zulu@1.8.163
+zulu@1.8.162
+zulu@1.8.152
+zulu@1.8.144
+zulu@1.8.131
+zulu@1.8.121
+zulu@1.8.112
+zulu@1.8.102
+zulu@1.8.101
+zulu@1.8.92
+zulu@1.8.91
+zulu@1.8.72
+zulu@1.8.71
+zulu@1.8.66
+zulu@1.8.65
+zulu@1.8.60
+zulu@1.8.51
+zulu@1.8.45
+zulu@1.8.40
+zulu@1.8.31
+zulu@1.8.25
+zulu@1.8.20
+zulu@1.8.11
+zulu@1.8.5
+zulu@1.8.0`;
+
+  const javaGt17 = `jabba ls-remote "*@>=1.17"
+graalvm@21.1.0
+graalvm@21.0.0
+graalvm@20.3.2
+graalvm@20.3.1
+graalvm@20.3.0
+graalvm@20.2.0
+graalvm@20.1.0
+graalvm@20.0.0
+graalvm@19.3.6
+graalvm@19.3.5
+graalvm@19.3.4
+graalvm@19.3.3
+graalvm@19.3.2
+graalvm@19.3.1
+graalvm@19.3.0
+graalvm@19.2.1
+graalvm@19.2.0
+graalvm@19.1.1
+graalvm@19.1.0
+graalvm@19.0.2
+graalvm@19.0.0
+graalvm-ce-java11@21.1.0
+graalvm-ce-java11@21.0.0
+graalvm-ce-java11@20.3.2
+graalvm-ce-java11@20.3.1
+graalvm-ce-java11@20.3.0
+graalvm-ce-java11@20.2.0
+graalvm-ce-java11@20.1.0
+graalvm-ce-java11@20.0.0
+graalvm-ce-java11@19.3.6
+graalvm-ce-java11@19.3.5
+graalvm-ce-java11@19.3.4
+graalvm-ce-java11@19.3.3
+graalvm-ce-java11@19.3.2
+graalvm-ce-java11@19.3.1
+graalvm-ce-java11@19.3.0
+graalvm-ce-java16@21.1`;
+
+  const installZuluJava8 = `jabba install zulu@1.8
+Downloading zulu@1.8.282 (https://cdn.azul.com/zulu/bin/zulu8.52.0.23-ca-jdk8.0.282-win_x64.zip)
+109319135/109319135
+Extracting C:\\Users\\tarmac\\AppData\\Local\\Temp\\jabba-d-355854135 to C:\\Users\\tarmac\\.jabba\\jdk\\zulu@1.8.282
+zulu@1.8 -> C:\\Users\\tarmac\\.jabba\\jdk\\zulu@1.8.282`;
+
+  const listInstalledJDK = `jabba ls
+zulu@1.17.0-0
+zulu@1.8.282`;
+
+  const listCurrentJDK = `jabba current
+zulu@1.8.282`;
+
+  const switchJDK = `jabba use "zulu@1.17.0-0"
+
+jabba current
+zulu@1.17.0-0`;
+
+  const defaultJDK = `jabba alias default "zulu@1.8.282"
+default -> C:\\Users\\tarmac\\.jabba\\jdk\\zulu@1.8.282
+
+jabba alias default
+zulu@1.8.282`;
 
   return (
     <RootLayout>
@@ -65,7 +206,7 @@ Invoke-Expression (
           language="PowerShell"
           style={style}
           showLanguageName>
-          {code}
+          {installation}
         </CodeBlock>
         <Paragraph>
           <Hyperlink
@@ -81,12 +222,70 @@ Invoke-Expression (
           </Hyperlink>
         </Paragraph>
         <Heading2>基本用法</Heading2>
-        <Heading3>列出可用的 JDK 版本</Heading3>
+        <Heading3>列出所有可用的 JDK</Heading3>
         <CodeBlock
-          language="bash"
+          language="shell"
           style={style}>
-          {`jabba ls-remote\n...\nzulu@1.6.53\nzulu@1.6.4\nzulu@1.6.47`}
+          {lsRemote}
         </CodeBlock>
+        <Heading3>列出所有 Zulu JDK</Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {zuluAllVersion}
+        </CodeBlock>
+        <Heading3>列出 Java 8 的所有 Zulu JDK</Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {zuluJava8}
+        </CodeBlock>
+        <Heading3>列出 Java 版本大於 17 的所有 JDK</Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {javaGt17}
+        </CodeBlock>
+        <Heading3>安裝 Java 8 的最新 Zulu JDK </Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {installZuluJava8}
+        </CodeBlock>
+        <Heading3>列出已下載的 JDK</Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {listInstalledJDK}
+        </CodeBlock>
+        <Heading3>列出目前使用的 JDK</Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {listCurrentJDK}
+        </CodeBlock>
+        <Heading3>切換目前使用的 JDK</Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {switchJDK}
+        </CodeBlock>
+        <Heading3>
+          將指定的 JDK 版本存進名稱為 default 的 alias 裡面方便後續快速切換
+        </Heading3>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {defaultJDK}
+        </CodeBlock>
+        <Blockquote>
+          這邊的 default 只是普通的 alias 跟其他的 alias
+          沒有任何差異，每次啟動新的 PowerShell Session 的時候 jabba
+          並不會自動切換該 JDK 做為使用的版本，因此在新的 Session 裡面執行
+          "jabba current" 會得到 "" 而不是剛剛設定的
+          "zulu@1.8.282"，可以選擇每次啟動 Session 的時候手動執行 "jabba use
+          default" 或是把這個指令寫進啟動腳本裡實現想要的效果
+        </Blockquote>
       </Article>
     </RootLayout>
   );

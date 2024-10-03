@@ -38,11 +38,11 @@ export const Heading2 = ({ className, children }: ClassNodeProps) => {
 };
 
 export const Heading3 = ({ className, children }: ClassNodeProps) => {
-  return <h3 className={clsx("my-4 text-xl", className)}>{children}</h3>;
+  return <h3 className={clsx("my-4 text-lg", className)}>{children}</h3>;
 };
 
 export const Heading4 = ({ className, children }: ClassNodeProps) => {
-  return <h4 className={clsx("my-2 text-lg", className)}>{children}</h4>;
+  return <h4 className={clsx("text-md my-2", className)}>{children}</h4>;
 };
 
 export const Heading5 = ({ className, children }: ClassNodeProps) => {
@@ -87,7 +87,7 @@ export const Header = ({ title, description, timeText }: HeaderProps) => {
 
 export const Paragraph = ({ className, children }: ClassNodeProps) => {
   return (
-    <p className={clsx("my-4 text-lg leading-loose", className)}>{children}</p>
+    <p className={clsx("text-md my-4 text-wrap", className)}>{children}</p>
   );
 };
 
@@ -140,7 +140,7 @@ export const CodeBlock = ({
           setIsCopied(false);
         }, 2000);
       }}>
-      <div className="relative w-full text-sm">
+      <div className="relative my-4 w-full text-sm">
         <SyntaxHighlighter {...props}>{code}</SyntaxHighlighter>
         <span className="absolute left-2 top-2 text-sm text-primary/50">
           {showLanguage ? name : ""}
