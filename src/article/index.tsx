@@ -87,13 +87,15 @@ export const Header = ({ title, description, timeText }: HeaderProps) => {
 
 export const Paragraph = ({ className, children }: ClassNodeProps) => {
   return (
-    <p className={clsx("text-md my-4 text-wrap", className)}>{children}</p>
+    <p className={clsx("text-md my-4 text-wrap leading-loose", className)}>
+      {children}
+    </p>
   );
 };
 
 export const Blockquote = ({ className, children }: ClassNodeProps) => {
   return (
-    <div className="my-4 flex bg-slate-200 leading-relaxed dark:bg-gray-700 dark:text-white">
+    <div className="my-4 flex bg-slate-200 leading-loose dark:bg-gray-700 dark:text-white">
       <div className="w-2 bg-black text-black dark:bg-green-400 dark:text-green-400">
         *
       </div>
@@ -167,7 +169,7 @@ export const Emphasis = ({ className, children }: ClassNodeProps) => {
   return (
     <span
       className={clsx(
-        "mx-2 rounded-md bg-gray-700 px-2 py-1 text-white dark:bg-gray-800 dark:text-green-400",
+        "mx-2 rounded-md bg-gray-700 px-1 py-1 text-white dark:bg-gray-800 dark:text-green-400",
         className,
       )}>
       {children}

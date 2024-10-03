@@ -165,18 +165,21 @@ zulu@1.8.282`;
 
 > jabba current
 zulu@1.17.0-0`;
-
   const defaultJDK = `> jabba alias default "zulu@1.8.282"
 default -> C:\\Users\\tarmac\\.jabba\\jdk\\zulu@1.8.282
-
 > jabba alias default
 zulu@1.8.282
 > jabba use default
 > jabba current
 zulu@1.8.282`;
-
   const findProfile = `> $profile
 \\Mac\\Home\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1`;
+
+  const profileScriptEdited = `# 下面這行是安裝 jabba 時自動添加的，如果移除會造成 jabba 無法正常執行
+if (Test-Path "C:\\Users\\tarmac\\.jabba\\jabba.ps1") { . "C:\\Users\\tarmac\\.jabba\\jabba.ps1" }
+
+# 加上下面這行來自動執行 "jabba use default"
+if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
 
   return (
     <RootLayout>
@@ -210,7 +213,7 @@ zulu@1.8.282`;
           腳本進行安裝
         </Paragraph>
         <CodeBlock
-          language="PowerShell"
+          language="ps"
           style={style}
           showLanguageName>
           {installation}
@@ -299,13 +302,31 @@ zulu@1.8.282`;
           修改 PowerShell Profile 來讓每次啟動 shell session 的時候自動切換成
           alias default 指向的 JDK
         </Heading3>
-        <Heading4>先找到 profile 的所在位置</Heading4>
+        先找到 profile 的所在位置
         <CodeBlock
           language="powerShell"
           style={style}
           showLanguageName>
           {findProfile}
         </CodeBlock>
+        <Paragraph>
+          我們可以直接把 profile 改成這樣，當 jabba 有設定 alias default
+          的時候會自動在<Emphasis>.jabba</Emphasis>資料夾底下建立
+          <Emphasis>default.alias </Emphasis>檔案，啟動 session
+          時透過檢查這個檔案存不存在來判斷要不要執行
+          <Emphasis>jabba use default</Emphasis>
+        </Paragraph>
+        <CodeBlock
+          language="shell"
+          style={style}>
+          {profileScriptEdited}
+        </CodeBlock>
+        還有另一種做法是把預設的 JDK 加到<Emphasis>.jabbarc</Emphasis>
+        裡面，有興趣的可以
+        <Hyperlink href="https://github.com/shyiko/jabba?tab=readme-ov-file#usage">
+          參考
+        </Hyperlink>
+        研究看看
       </Article>
     </RootLayout>
   );
