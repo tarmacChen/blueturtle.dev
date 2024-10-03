@@ -93,7 +93,7 @@ export const Paragraph = ({ className, children }: ClassNodeProps) => {
 
 export const Blockquote = ({ className, children }: ClassNodeProps) => {
   return (
-    <div className="my-4 flex bg-slate-200 dark:bg-gray-700 dark:text-white">
+    <div className="my-4 flex bg-slate-200 leading-relaxed dark:bg-gray-700 dark:text-white">
       <div className="w-2 bg-black text-black dark:bg-green-400 dark:text-green-400">
         *
       </div>
@@ -160,5 +160,17 @@ export const CodeBlock = ({
         </button>
       </div>
     </CopyToClipboard>
+  );
+};
+
+export const Emphasis = ({ className, children }: ClassNodeProps) => {
+  return (
+    <span
+      className={clsx(
+        "mx-2 rounded-md bg-gray-700 px-2 py-1 text-white dark:bg-gray-800 dark:text-green-400",
+        className,
+      )}>
+      {children}
+    </span>
   );
 };
