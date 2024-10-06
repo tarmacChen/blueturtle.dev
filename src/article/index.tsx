@@ -25,20 +25,24 @@ export const Article = ({ children }: ClassNodeProps) => {
 
 export const Heading1 = ({ className, children }: ClassNodeProps) => {
   return (
-    <h1 className={clsx("my-2 text-3xl font-bold", className)}>{children}</h1>
+    <h1 className={clsx("my-2 text-2xl font-bold", className)}>{children}</h1>
   );
 };
 
 export const Heading2 = ({ className, children }: ClassNodeProps) => {
   return (
-    <h2 className={clsx("my-4 text-2xl font-semibold", className)}>
+    <h2 className={clsx("my-4 text-xl font-semibold", className)}>
       {children}
     </h2>
   );
 };
 
 export const Heading3 = ({ className, children }: ClassNodeProps) => {
-  return <h3 className={clsx("my-4 text-lg", className)}>{children}</h3>;
+  return (
+    <h3 className={clsx("my-4 text-lg font-semibold", className)}>
+      {children}
+    </h3>
+  );
 };
 
 export const Heading4 = ({ className, children }: ClassNodeProps) => {
@@ -87,7 +91,7 @@ export const Header = ({ title, description, timeText }: HeaderProps) => {
 
 export const Paragraph = ({ className, children }: ClassNodeProps) => {
   return (
-    <p className={clsx("text-md my-4 text-wrap leading-loose", className)}>
+    <p className={clsx("text-md my-2 text-wrap leading-8", className)}>
       {children}
     </p>
   );
@@ -142,7 +146,7 @@ export const CodeBlock = ({
           setIsCopied(false);
         }, 2000);
       }}>
-      <div className="relative my-4 w-full text-sm">
+      <div className="relative mb-6 mt-2 w-full text-sm">
         <SyntaxHighlighter {...props}>{code}</SyntaxHighlighter>
         <span className="absolute left-2 top-2 text-sm text-primary/50">
           {showLanguage ? name : ""}
@@ -169,7 +173,7 @@ export const Emphasis = ({ className, children }: ClassNodeProps) => {
   return (
     <span
       className={clsx(
-        "mx-2 rounded-md bg-gray-700 px-1 py-1 text-white dark:bg-gray-800 dark:text-green-400",
+        "mx-1 rounded-md bg-gray-700 px-1 py-1 text-white dark:bg-gray-800 dark:text-green-400",
         className,
       )}>
       {children}
@@ -183,9 +187,9 @@ export const ListItems = ({
   title,
 }: ClassNodeProps & { title?: string }) => {
   return (
-    <div className="my-4 flex flex-col">
-      <p>{title}：</p>
-      <ul className={clsx("list-inside list-decimal", className)}>
+    <div className="my-4">
+      <p className="my-2">{title}：</p>
+      <ul className={clsx("list-inside list-decimal pl-4", className)}>
         {children}
       </ul>
     </div>

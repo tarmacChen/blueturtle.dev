@@ -222,19 +222,19 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
           showLanguageName>
           {installation}
         </CodeBlock>
-        <Paragraph>
+        <div className="space-y-2">
           <Hyperlink
             href="https://github.com/shyiko/jabba/issues/707"
-            className="mx-0 block"
+            className="mx-0 block text-sm"
             target="_blank">
             jabba use not working on Windows (installed with scoop) #707
           </Hyperlink>
           <Hyperlink
             href="https://hackmd.io/@jonz94/BJbp3lsnu"
-            className="mx-0 block">
+            className="mx-0 block text-sm">
             The prefered way to install jabba is via the installation script
           </Hyperlink>
-        </Paragraph>
+        </div>
         <Heading2>基本用法</Heading2>
         <Heading3>列出所有可用的 JDK</Heading3>
         <CodeBlock
@@ -293,12 +293,17 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
           {defaultJDK}
         </CodeBlock>
         <Blockquote>
-          這邊的<Emphasis>default</Emphasis>只是普通的 alias 跟其他的 alias
-          沒有什麼差別，每次啟動新的 shell session 的時候 jabba 並不會使用
-          default 作為預設版本，因此在新的 session 裡執行 "jabba current" 會得到
-          "" 而不是剛剛設定的 "zulu@1.8.282"，你必須在啟動新的 session
-          的時候手動執行
-          <Emphasis>jabba use default</Emphasis>
+          這邊的
+          <span className="mx-1 font-bold underline underline-offset-2">
+            default
+          </span>
+          只是普通的 alias 跟其他的 alias 沒有什麼差別，每次啟動新的 shell
+          session 的時候 jabba 並不會使用 default 作為預設版本，因此在新的
+          session 裡執行 "jabba current" 會得到 "" 而不是剛剛設定的
+          "zulu@1.8.282"，你必須在啟動新的 session 的時候手動執行
+          <span className="mx-1 font-bold underline underline-offset-2">
+            jabba use default
+          </span>
           或是透過啟動腳本執行該指令裡實現你要的效果
         </Blockquote>
         <Heading2>進階用法</Heading2>
@@ -315,22 +320,25 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
         </CodeBlock>
         <Paragraph>
           我們可以直接把 profile 改成這樣，當 jabba 有設定 alias default
-          的時候會自動在<Emphasis>.jabba</Emphasis>資料夾底下建立
-          <Emphasis>default.alias </Emphasis>檔案，啟動 session
-          時透過檢查這個檔案存不存在來判斷要不要執行
-          <Emphasis>jabba use default</Emphasis>
+          的時候會自動在 <span className="mx-1 font-semibold ">.jabba </span>
+          資料夾底下建立
+          <span className="mx-1 font-semibold">default.alias</span>
+          檔案，啟動 session 時透過檢查這個檔案存不存在來判斷要不要執行
+          <span className="mx-1 font-semibold underline underline-offset-2">
+            jabba use default
+          </span>
         </Paragraph>
         <CodeBlock
           language="shell"
           style={style}>
           {profileScriptEdited}
         </CodeBlock>
-        還有另一種做法是把預設的 JDK 加到<Emphasis>.jabbarc</Emphasis>
-        裡面，有興趣的可以
+        還有另一種做法是把預設要用的 JDK 加到
+        <span className="mx-1 font-bold">.jabbarc</span>
+        裡面，有興趣可以
         <Hyperlink href="https://github.com/shyiko/jabba?tab=readme-ov-file#usage">
-          參考
+          參考這裡
         </Hyperlink>
-        研究看看
       </Article>
     </RootLayout>
   );
