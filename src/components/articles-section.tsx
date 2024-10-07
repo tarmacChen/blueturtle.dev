@@ -9,7 +9,7 @@ const Article = ({ title, description, href, posted }: ArticleProps) => {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-xl font-semibold">
+      <h1 className="text-2xl font-semibold">
         <Link href={href}>{title}</Link>
       </h1>
       <p className="mb-2 mt-1 text-sm text-black/60 dark:text-gray-400">

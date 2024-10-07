@@ -17,7 +17,7 @@ import Head from "next/head";
 import { ArticleProps, articles } from "../../components/articles";
 
 export const getStaticProps = (async (ctx) => {
-  const filename = "avoid-space-out";
+  const filename = "jdk-jabba";
 
   const article = articles.find(
     (article) => article.href === `/posts/${filename}`,
