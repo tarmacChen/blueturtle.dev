@@ -1,28 +1,34 @@
-import { MoonIcon, SunIcon, GearIcon } from '@radix-ui/react-icons';
-import { useTheme } from 'next-themes';
-import { createActor, createMachine } from 'xstate';
+import { MoonIcon, SunIcon, GearIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
+import { useEffect } from "react";
+import { createActor, createMachine } from "xstate";
 
 export const ToggleThemeButton = () => {
   const { theme, setTheme } = useTheme();
-  const themeName = theme || 'system';
+  const themeName = theme || "system";
 
   const themeControllerMachine = createMachine({
-    id: 'change',
+    id: "change",
     initial: themeName,
     states: {
-      system: { on: { change: 'light' } },
-      light: { on: { change: 'dark' } },
-      dark: { on: { change: 'system' } },
+      system: { on: { change: "light" } },
+      light: { on: { change: "dark" } },
+      dark: { on: { change: "system" } },
     },
   });
 
   const themeControllerActor = createActor(themeControllerMachine);
-  themeControllerActor.subscribe((snapshot) => {
-    setTheme(snapshot.value.toString());
+
+  useEffect(() => {
+    themeControllerActor.subscribe((snapshot) => {
+      const updatedTheme = snapshot.value.toString();
+      setTheme(updatedTheme);
+    });
   });
+
   themeControllerActor.start();
 
-  const ThemeIcon = ({ iconSize = '24' }: { iconSize?: string }) => {
+  const ThemeIcon = ({ iconSize = "24" }: { iconSize?: string }) => {
     const DarkIcon = () => (
       <MoonIcon
         width={iconSize}
@@ -44,9 +50,9 @@ export const ToggleThemeButton = () => {
       />
     );
 
-    return theme == 'dark' ? (
+    return theme == "dark" ? (
       <DarkIcon />
-    ) : theme == 'light' ? (
+    ) : theme == "light" ? (
       <LightIcon />
     ) : (
       <SystemIcon />
@@ -55,7 +61,7 @@ export const ToggleThemeButton = () => {
 
   return (
     <div
-      onClick={() => themeControllerActor.send({ type: 'change' })}
+      onClick={() => themeControllerActor.send({ type: "change" })}
       className="hover:cursor-pointer">
       <div className="text-foreground dark:text-yellow-300">
         <ThemeIcon />

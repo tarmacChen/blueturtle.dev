@@ -20,7 +20,6 @@ export default function PostCardsPage({
   const [search, setSearch] = useState("");
   const defaultCategory = "All Posts";
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
-  // const defaultCategory = 'Show All';
 
   const getFilteredPosts = () => {
     if (selectedCategory == PostCategoryGroups["All Posts"]) {
@@ -48,20 +47,6 @@ export default function PostCardsPage({
       tagsText.match(searchPattern)
     );
   });
-  const paginates = paginateElements<MarkdownFile>(foundPosts, 5);
-  const categories = getAllCategories(posts);
-  const showPaginates =
-    search == "" && selectedCategory == PostCategoryGroups["All Posts"];
-  const showPosts = showPaginates ? paginates[pageIndex - 1] : foundPosts;
-
-  // return (
-  //   <RootLayout>
-  //     <MarkdownListViewer
-  //       mds={foundPosts}
-  //       pageIndex={pageIndex}
-  //     />
-  //   </RootLayout>
-  // );
 
   return (
     <RootLayout>

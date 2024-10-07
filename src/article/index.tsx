@@ -135,7 +135,7 @@ export const CodeBlock = ({
   const iconSize = 18;
   const code = (showLanguage ? "\n" : "") + props.children.toString();
   const lang = props.language || "";
-  const name = lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
+  const languageName = lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
 
   return (
     <CopyToClipboard
@@ -149,7 +149,7 @@ export const CodeBlock = ({
       <div className="relative mb-6 mt-2 w-full text-sm">
         <SyntaxHighlighter {...props}>{code}</SyntaxHighlighter>
         <span className="absolute left-2 top-2 text-sm text-primary/50">
-          {showLanguage ? name : ""}
+          {showLanguage ? languageName : ""}
         </span>
         <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1 text-black ">
           {isCopied ? (

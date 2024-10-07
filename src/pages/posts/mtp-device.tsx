@@ -32,7 +32,7 @@ export const getStaticProps = (async (ctx) => {
 export default function Page({
   article,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   if (article === undefined) return <></>;
 
   const title = article.title;
@@ -40,7 +40,7 @@ export default function Page({
   const createdDate = article.posted;
   const lightStyle = docco;
   const darkStyle = a11yDark;
-  const style = theme === "dark" ? darkStyle : lightStyle;
+  const style = resolvedTheme === "dark" ? darkStyle : lightStyle;
 
   return (
     <RootLayout>

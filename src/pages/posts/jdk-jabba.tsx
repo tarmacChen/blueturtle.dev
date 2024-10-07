@@ -31,7 +31,7 @@ export const getStaticProps = (async (ctx) => {
 export default function Page({
   article,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   if (article === undefined) return <></>;
 
   const title = article.title;
@@ -43,7 +43,7 @@ Invoke-Expression (
 ).Content`;
   const lightStyle = docco;
   const darkStyle = a11yDark;
-  const style = theme === "dark" ? darkStyle : lightStyle;
+  const style = resolvedTheme === "dark" ? darkStyle : lightStyle;
 
   const lsRemote = `> jabba ls-remote
 1.16.0
