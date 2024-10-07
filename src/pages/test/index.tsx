@@ -1,4 +1,4 @@
-import { BasicPage } from '@/components/BasicPage';
+import { RootLayout } from '@/components/RootLayout';
 import { useTrafficSignalMachine } from '@/hooks/useTrafficSignalMachine';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -7,7 +7,7 @@ export default function TestPage() {
   const { TrafficSignalMachine, changeSignal } = useTrafficSignalMachine();
 
   return (
-    <BasicPage>
+    <RootLayout>
       <div className="flex flex-row">
         <div className="w-1/2 border-2 p-2">
           <TrafficSignalMachine />
@@ -21,6 +21,6 @@ export default function TestPage() {
           </Button>
         </div>
       </div>
-    </BasicPage>
+    </RootLayout>
   );
 }

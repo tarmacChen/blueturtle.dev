@@ -1,4 +1,4 @@
-import { BasicPage } from '@/components/BasicPage';
+import { RootLayout } from '@/components/RootLayout';
 import MarkdownNavbar from 'markdown-navbar';
 import { MarkdownViewer } from '@/components/MarkdownViewer';
 import { a11yDark as darkStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
@@ -9,7 +9,7 @@ export default function MarkdownViewPage({
   md,
 }: InferGetStaticPropsType<typeof getMarkdownProps>) {
   return (
-    <BasicPage>
+    <RootLayout>
       <div className="flex flex-col">
         <div className="mb-8 mt-4">
           {/* <MarkdownNavbar
@@ -28,6 +28,6 @@ export default function MarkdownViewPage({
           )}
         </div>
       </div>
-    </BasicPage>
+    </RootLayout>
   );
 }
