@@ -23,6 +23,7 @@
     "@types/markdown-navbar": "^1.4.4",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@xstate/react": "^4.1.0",
+    "caniuse-lite": "^1.0.30001667",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
