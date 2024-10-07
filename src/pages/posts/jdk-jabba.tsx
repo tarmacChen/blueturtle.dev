@@ -10,9 +10,7 @@ import {
   Paragraph,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
-import { useTheme } from "next-themes";
-import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import type { GetStaticProps, InferGetStaticPropsType, Metadata } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { ArticleProps, articles } from "../../components/articles";
 
@@ -31,7 +29,6 @@ export const getStaticProps = (async (ctx) => {
 export default function Page({
   article,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { resolvedTheme } = useTheme();
   if (article === undefined) return <></>;
 
   const title = article.title;
@@ -41,9 +38,6 @@ export default function Page({
 Invoke-Expression (
   Invoke-WebRequest "https://github.com/shyiko/jabba/raw/master/install.ps1" -UseBasicParsing
 ).Content`;
-  const lightStyle = docco;
-  const darkStyle = a11yDark;
-  const style = resolvedTheme === "dark" ? darkStyle : lightStyle;
 
   const lsRemote = `> jabba ls-remote
 1.16.0
@@ -201,11 +195,7 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
         <title>{title}</title>
       </Head>
       <Article>
-        <Header
-          title={title}
-          description={description}
-          posted={createdDate}
-        />
+        <Header {...article}></Header>
         <Blockquote>
           先前在找 JDK 管理工具的時候，發現 SDKMAN 只能在有 bash
           的執行環境下使用，因為我的 Windows 開發環境沒有辦法安裝 WSL，
@@ -231,7 +221,6 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
         </Paragraph>
         <CodeBlock
           language="ps"
-          style={style}
           showLanguageName>
           {installation}
         </CodeBlock>
@@ -250,61 +239,25 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
         </div>
         <Heading2>基本用法</Heading2>
         <Heading3>列出所有可用的 JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {lsRemote}
-        </CodeBlock>
+        <CodeBlock language="shell">{lsRemote}</CodeBlock>
         <Heading3>列出所有 Zulu JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {zuluAllVersion}
-        </CodeBlock>
+        <CodeBlock language="shell">{zuluAllVersion}</CodeBlock>
         <Heading3>列出 Java 8 的所有 Zulu JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {zuluJava8}
-        </CodeBlock>
+        <CodeBlock language="shell">{zuluJava8}</CodeBlock>
         <Heading3>列出 Java 版本大於 17 的所有 JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {javaGt17}
-        </CodeBlock>
+        <CodeBlock language="shell">{javaGt17}</CodeBlock>
         <Heading3>安裝 Java 版本 8 的最新 Zulu JDK </Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {installZuluJava8}
-        </CodeBlock>
+        <CodeBlock language="shell">{installZuluJava8}</CodeBlock>
         <Heading3>列出已下載的 JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {listInstalledJDK}
-        </CodeBlock>
+        <CodeBlock language="shell">{listInstalledJDK}</CodeBlock>
         <Heading3>列出目前使用的 JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {listCurrentJDK}
-        </CodeBlock>
+        <CodeBlock language="shell">{listCurrentJDK}</CodeBlock>
         <Heading3>切換目前使用的 JDK</Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {switchJDK}
-        </CodeBlock>
+        <CodeBlock language="shell">{switchJDK}</CodeBlock>
         <Heading3>
           將指定的 JDK 版本保存到名稱為 default 的 alias 方便快速切換
         </Heading3>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {defaultJDK}
-        </CodeBlock>
+        <CodeBlock language="shell">{defaultJDK}</CodeBlock>
         <Blockquote>
           這邊的
           <span className="mx-1 font-bold underline underline-offset-2">
@@ -327,7 +280,6 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
         先找到 profile 的所在位置
         <CodeBlock
           language="powerShell"
-          style={style}
           showLanguageName>
           {findProfile}
         </CodeBlock>
@@ -341,11 +293,7 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
             jabba use default
           </span>
         </Paragraph>
-        <CodeBlock
-          language="shell"
-          style={style}>
-          {profileScriptEdited}
-        </CodeBlock>
+        <CodeBlock language="shell">{profileScriptEdited}</CodeBlock>
         還有另一種做法是把預設要用的 JDK 加到
         <span className="mx-1 font-bold">.jabbarc</span>
         裡面，有興趣可以

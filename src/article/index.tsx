@@ -7,6 +7,8 @@ import SyntaxHighlighter, {
 } from "react-syntax-highlighter";
 import { CheckIcon, ClipboardIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { useTheme } from "next-themes";
 
 type ClassNodeProps = {
   children: React.ReactNode;
@@ -134,13 +136,19 @@ export const Hyperlink = ({
 export const CodeBlock = ({
   showLanguageName: showLanguage,
   ...props
-}: SyntaxHighlighterProps & { showLanguageName?: boolean }) => {
+}: SyntaxHighlighterProps & {
+  showLanguageName?: boolean;
+}) => {
+  const { resolvedTheme } = useTheme();
   const [isCopied, setIsCopied] = useState(false);
   const iconSize = 18;
   const code = (showLanguage ? "\n" : "") + props.children.toString();
   const lang = props.language || "";
   const languageName =
     lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
+  const lightStyle = docco;
+  const darkStyle = a11yDark;
+  const style = resolvedTheme === "dark" ? darkStyle : lightStyle;
 
   return (
     <CopyToClipboard
@@ -152,7 +160,7 @@ export const CodeBlock = ({
         }, 2000);
       }}>
       <div className="relative mb-6 mt-2 w-full text-sm">
-        <SyntaxHighlighter {...props}>{code}</SyntaxHighlighter>
+        <SyntaxHighlighter style={style} {...props}>{code}</SyntaxHighlighter>
         <span className="absolute left-2 top-2 text-sm text-primary/50">
           {showLanguage ? languageName : ""}
         </span>

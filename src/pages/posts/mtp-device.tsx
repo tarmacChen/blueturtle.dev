@@ -11,9 +11,7 @@ import {
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { useTheme } from "next-themes";
 import Head from "next/head";
-import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { ArticleProps } from "../../components/articles";
 import { articles } from "@/components/articles";
 
@@ -32,15 +30,11 @@ export const getStaticProps = (async (ctx) => {
 export default function Page({
   article,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { resolvedTheme } = useTheme();
   if (article === undefined) return <></>;
 
   const title = article.title;
   const description = article.description;
   const createdDate = article.posted;
-  const lightStyle = docco;
-  const darkStyle = a11yDark;
-  const style = resolvedTheme === "dark" ? darkStyle : lightStyle;
 
   return (
     <RootLayout>
@@ -48,10 +42,7 @@ export default function Page({
         <title>{title}</title>
       </Head>
       <Article>
-        <Header
-          title={title}
-          description={description}
-          posted={createdDate}></Header>
+        <Header {...article}></Header>
         <Blockquote>
           一個裝置透過 USB 連接到電腦，它的連接協定不是用
           <span className="mx-1 font-bold underline underline-offset-2">
@@ -94,8 +85,7 @@ export default function Page({
         </Paragraph>
         <CodeBlock
           language="bash"
-          showLanguageName
-          style={style}>
+          showLanguageName>
           cp &quot;/Media Library/Music/*.*&quot; &quot;/Device/Music/&quot;
         </CodeBlock>
         <Paragraph>
