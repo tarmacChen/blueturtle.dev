@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import { FaGithub, FaRegCopyright } from 'react-icons/fa';
-import { MdOutlineEmail } from 'react-icons/md';
+import clsx from "clsx";
+import { FaGithub, FaRegCopyright } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
 
 const ProfileButton = ({
   className,
@@ -14,9 +14,12 @@ const ProfileButton = ({
   const hrefIsNotEmpty = href != undefined;
 
   return (
-    <div className={clsx(hrefIsNotEmpty && 'cursor-pointer hover:bg-gray-100')}>
+    <div
+      className={clsx(
+        hrefIsNotEmpty && "cursor-pointer hover:bg-blue-100 hover:underline",
+      )}>
       <a
-        className={clsx(className, 'flex flex-row items-center gap-1 text-sm')}
+        className={clsx(className, "flex flex-row items-center gap-1 text-sm")}
         href={href}
         target="_blank">
         {children}

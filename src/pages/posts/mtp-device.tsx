@@ -51,7 +51,7 @@ export default function Page({
         <Header
           title={title}
           description={description}
-          timeText={createdDate}></Header>
+          posted={createdDate}></Header>
         <Blockquote>
           一個裝置透過 USB 連接到電腦，它的連接協定不是用
           <span className="mx-1 font-bold underline underline-offset-2">

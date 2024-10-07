@@ -204,7 +204,7 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
         <Header
           title={title}
           description={description}
-          timeText={createdDate}
+          posted={createdDate}
         />
         <Blockquote>
           先前在找 JDK 管理工具的時候，發現 SDKMAN 只能在有 bash

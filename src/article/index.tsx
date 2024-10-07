@@ -6,6 +6,7 @@ import SyntaxHighlighter, {
   SyntaxHighlighterProps,
 } from "react-syntax-highlighter";
 import { CheckIcon, ClipboardIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 type ClassNodeProps = {
   children: React.ReactNode;
@@ -14,8 +15,9 @@ type ClassNodeProps = {
 
 type HeaderProps = {
   title: string;
+  href?: string;
   description: string;
-  timeText: string;
+  posted: string;
   className?: string;
 };
 
@@ -25,7 +27,9 @@ export const Article = ({ children }: ClassNodeProps) => {
 
 export const Heading1 = ({ className, children }: ClassNodeProps) => {
   return (
-    <h1 className={clsx("my-2 text-2xl font-bold", className)}>{children}</h1>
+    <h1 className={clsx("my-2 text-2xl font-semibold", className)}>
+      {children}
+    </h1>
   );
 };
 
@@ -75,16 +79,16 @@ export const PostTime = ({
   );
 };
 
-export const SubTitle = ({ className, children }: ClassNodeProps) => {
+export const Subheading = ({ className, children }: ClassNodeProps) => {
   return <span className={clsx("text-primary/80", className)}>{children}</span>;
 };
 
-export const Header = ({ title, description, timeText }: HeaderProps) => {
+export const Header = ({ title, description, posted, href }: HeaderProps) => {
   return (
     <section>
-      <Heading1>{title}</Heading1>
-      <SubTitle>{description}</SubTitle>
-      <PostTime timeText={timeText} />
+      <Heading1>{href ? <Link href={href}>{title}</Link> : title}</Heading1>
+      <Subheading>{description}</Subheading>
+      <PostTime timeText={posted} />
     </section>
   );
 };
@@ -118,7 +122,7 @@ export const Hyperlink = ({
   return (
     <a
       className={clsx(
-        "mx-1 text-blue-700 underline underline-offset-4 dark:text-blue-400",
+        "mx-1 text-blue-700 underline underline-offset-4 hover:bg-blue-100 dark:text-blue-400",
         className,
       )}
       {...props}>
@@ -135,7 +139,8 @@ export const CodeBlock = ({
   const iconSize = 18;
   const code = (showLanguage ? "\n" : "") + props.children.toString();
   const lang = props.language || "";
-  const languageName = lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
+  const languageName =
+    lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
 
   return (
     <CopyToClipboard
@@ -151,7 +156,7 @@ export const CodeBlock = ({
         <span className="absolute left-2 top-2 text-sm text-primary/50">
           {showLanguage ? languageName : ""}
         </span>
-        <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1 text-black ">
+        <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1 text-black hover:bg-gray-300">
           {isCopied ? (
             <CheckIcon
               height={iconSize}
@@ -161,6 +166,7 @@ export const CodeBlock = ({
             <ClipboardIcon
               height={iconSize}
               width={iconSize}
+              className=""
             />
           )}
         </button>

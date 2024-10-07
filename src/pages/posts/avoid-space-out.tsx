@@ -41,7 +41,7 @@ export default function Page({
         <Header
           title={title}
           description={description}
-          timeText={createdDate}
+          posted={createdDate}
         />
         <Blockquote>
           我經常會在處理一件事的時候用力過頭一口氣把全部的精力投入進去，過度思考問題把事情複雜化，最後衍生出來的更多事情淹沒自己然後想要放棄，這個習慣不但對我的生產力有害且每一次挫敗的經驗長久下來會傷害我的身心健康，我想要先用
