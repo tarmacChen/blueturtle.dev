@@ -10,15 +10,34 @@ import {
   CodeBlock,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useTheme } from "next-themes";
 import Head from "next/head";
 import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { ArticleProps } from "../../components/articles";
+import { articles } from "@/components/articles";
 
-export default function Page() {
-  const title = "在 MTP 協定裡透過命令列同步資料";
-  const description = "使用 mtpcopy";
-  const createdDate = "2023-4-26";
+export const getStaticProps = (async (ctx) => {
+  const filename = "mtp-device";
+
+  const article = articles.find(
+    (article) => article.href === `/posts/${filename}`,
+  );
+
+  return { props: { article: article } };
+}) satisfies GetStaticProps<{
+  article: ArticleProps | undefined;
+}>;
+
+export default function Page({
+  article,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const { theme } = useTheme();
+  if (article === undefined) return <></>;
+
+  const title = article.title;
+  const description = article.description;
+  const createdDate = article.posted;
   const lightStyle = docco;
   const darkStyle = a11yDark;
   const style = theme === "dark" ? darkStyle : lightStyle;
@@ -77,7 +96,7 @@ export default function Page() {
           language="bash"
           showLanguageName
           style={style}>
-          cp "/Media Library/Music/*.*" "/Device/Music/"
+          cp &quot;/Media Library/Music/*.*&quot; &quot;/Device/Music/&quot;
         </CodeBlock>
         <Paragraph>
           你也可以找到其他方法來把 MTP 裝置掛載到檔案系統中，或是使用

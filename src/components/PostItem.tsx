@@ -2,7 +2,7 @@ import { mergeClassNames, withListItemDecorator } from '@/lib/helper';
 import { MarkdownFile } from 'mdman';
 import moment from 'moment';
 import Link from 'next/link';
-import { RootLayout } from '@/components/BasicPage';
+import { RootLayout } from '@/components/RootLayout';
 
 export const PostItem = ({
   href,

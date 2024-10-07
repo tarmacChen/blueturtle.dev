@@ -7,12 +7,30 @@ import {
   Paragraph,
 } from "@/article";
 import { RootLayout } from "@/components/RootLayout";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
+import { ArticleProps, articles } from "../../components/articles";
 
-export default function Page() {
-  const title = "避免注意力分散 Avoid space out";
-  const description = "用限制資源這個方法來約束自己處理事情時的擁有的條件";
-  const createdDate = "2023-02-23";
+export const getStaticProps = (async (ctx) => {
+  const filename = "avoid-space-out";
+
+  const article = articles.find(
+    (article) => article.href === `/posts/${filename}`,
+  );
+
+  return { props: { article: article } };
+}) satisfies GetStaticProps<{
+  article: ArticleProps | undefined;
+}>;
+
+export default function Page({
+  article,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (article === undefined) return <></>;
+
+  const title = article.title;
+  const description = article.description;
+  const createdDate = article.posted;
 
   return (
     <RootLayout>

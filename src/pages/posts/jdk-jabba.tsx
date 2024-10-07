@@ -12,22 +12,35 @@ import {
 import { RootLayout } from "@/components/RootLayout";
 import { useTheme } from "next-themes";
 import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import type { Metadata } from "next";
+import type { GetStaticProps, InferGetStaticPropsType, Metadata } from "next";
 import Head from "next/head";
+import { ArticleProps, articles } from "../../components/articles";
 
-export const metadata: Metadata = {
-  title: "yo",
-};
+export const getStaticProps = (async (ctx) => {
+  const filename = "avoid-space-out";
 
-export default function Page() {
-  const title = "在單純的 Windows 環境下使用 JDK 管理工具 - jabba";
-  const description = "不能用 SDKMAN 該怎麼辦";
-  const createdDate = "2023-03-16";
+  const article = articles.find(
+    (article) => article.href === `/posts/${filename}`,
+  );
+
+  return { props: { article: article } };
+}) satisfies GetStaticProps<{
+  article: ArticleProps | undefined;
+}>;
+
+export default function Page({
+  article,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { theme } = useTheme();
+  if (article === undefined) return <></>;
+
+  const title = article.title;
+  const description = article.description;
+  const createdDate = article.posted;
   const installation = `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-Expression (
   Invoke-WebRequest "https://github.com/shyiko/jabba/raw/master/install.ps1" -UseBasicParsing
 ).Content`;
-  const { theme } = useTheme();
   const lightStyle = docco;
   const darkStyle = a11yDark;
   const style = theme === "dark" ? darkStyle : lightStyle;
@@ -299,8 +312,8 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
           </span>
           只是普通的 alias 跟其他的 alias 沒有什麼差別，每次啟動新的 shell
           session 的時候 jabba 並不會使用 default 作為預設版本，因此在新的
-          session 裡執行 "jabba current" 會得到 "" 而不是剛剛設定的
-          "zulu@1.8.282"，你必須在啟動新的 session 的時候手動執行
+          session 裡執行 jabba current 會得到空白而不是剛剛設定的
+          zulu@1.8.282，你必須在啟動新的 session 的時候手動執行
           <span className="mx-1 font-bold underline underline-offset-2">
             jabba use default
           </span>

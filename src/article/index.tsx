@@ -20,7 +20,7 @@ type HeaderProps = {
 };
 
 export const Article = ({ children }: ClassNodeProps) => {
-  return <article className={clsx("my-2 p-2")}>{children}</article>;
+  return <article className={clsx("my-2 px-2")}>{children}</article>;
 };
 
 export const Heading1 = ({ className, children }: ClassNodeProps) => {

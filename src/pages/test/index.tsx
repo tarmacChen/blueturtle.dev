@@ -1,4 +1,4 @@
-import { RootLayout } from '@/components/BasicPage';
+import { RootLayout } from '@/components/RootLayout';
 import { useTrafficSignalMachine } from '@/hooks/useTrafficSignalMachine';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
