@@ -28,14 +28,10 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (article === undefined) return <></>;
 
-  const title = article.title;
-  const description = article.description;
-  const createdDate = article.posted;
-
   return (
     <RootLayout>
       <Head>
-        <title>{title}</title>
+        <title>{article.title}</title>
       </Head>
       <Article>
         <Header {...article}></Header>

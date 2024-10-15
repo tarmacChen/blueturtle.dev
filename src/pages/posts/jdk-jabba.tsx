@@ -31,9 +31,6 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (article === undefined) return <></>;
 
-  const title = article.title;
-  const description = article.description;
-  const createdDate = article.posted;
   const installation = `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-Expression (
   Invoke-WebRequest "https://github.com/shyiko/jabba/raw/master/install.ps1" -UseBasicParsing
@@ -192,7 +189,7 @@ if (Test-Path "$env:USERPROFILE\.jabba\default.alias") { jabba use default }`;
   return (
     <RootLayout>
       <Head>
-        <title>{title}</title>
+        <title>{article.title}</title>
       </Head>
       <Article>
         <Header {...article}></Header>

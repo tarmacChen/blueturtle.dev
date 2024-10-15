@@ -1,6 +1,6 @@
 import { articles } from "./articles";
 import clsx from "clsx";
-import { Header } from "@/article";
+import { HeaderWithLink } from "@/article";
 
 const Separator = ({ className }: { className?: string }) => {
   return (
@@ -18,7 +18,7 @@ const ArticlesSection = () => {
       {articles.map((article, index) => {
         return (
           <div key={article.href}>
-            <Header {...article} />
+            <HeaderWithLink {...article} />
             {index !== articles.length - 1 ? <Separator /> : <></>}
           </div>
         );
