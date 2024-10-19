@@ -6,6 +6,7 @@ import {
   Header,
   Heading2,
   Heading3,
+  Heading4,
   Hyperlink,
   ListItems,
   Paragraph,
@@ -73,15 +74,14 @@ ${hash}`;
           另一個名詞 Authorization 是用來確認使用者是否擁有存取各功能的權限
         </Paragraph>
         <Table className="my-2 border-[1px]">
-          <TableCaption></TableCaption>
-          <TableHeader className="bg-gray-100">
-            <TableRow>
-              <TableHead>Authentication</TableHead>
-              <TableHead>Authorization</TableHead>
+          <TableHeader className="bg-gray-200 dark:bg-gray-700">
+            <TableRow className="">
+              <TableHead className="text-foreground">Authentication</TableHead>
+              <TableHead className="text-foreground">Authorization</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
+            <TableRow className="dark:bg-slate-200 dark:text-black">
               <TableCell>你是誰？</TableCell>
               <TableCell>你可以做什麼？</TableCell>
             </TableRow>
@@ -112,23 +112,19 @@ ${hash}`;
           </ListItems>
         </Paragraph>
         <Paragraph>
-          前面的 <span className="mx-1 font-semibold">MTIz</span>
-          可以透過 base64 解碼得到答案(123)，後面的
+          如果只是用某種方式將密碼用編碼的方式處理對於安全性是沒有幫助的，前面的
+          <span className="mx-1 font-semibold">MTIz</span>
+          可以透過 base64 解碼得到答案為 123，後面的
           <span className="mx-1 font-semibold">30c20a......</span>
-          多做了一些處理必須要有 salt (public key) 及 password (private key)
-          才能知道答案
+          多了非對稱密碼學的處理必須要有 salt (public key) 及 password (private
+          key) 才能知道答案
         </Paragraph>
-        <Heading3 id="add-salt">在密碼上灑點鹽 (salt)</Heading3>
+        <Heading3 id="add-salt">在密碼上灑點鹽</Heading3>
         <Paragraph>
           我們可以在使用者註冊帳號時產生一組 public key
-          並將它保存起來，這組專門用來驗證密碼的 public key 我們稱它為
-          salt，它是一組在使用者註冊時隨機產生的文字，這邊用 JavaScript 呼叫
-          <Hyperlink
-            href="https://node.readthedocs.io/en/latest/api/crypto/"
-            target="_blank">
-            crypto
-          </Hyperlink>
-          函式庫來做範例
+          並將它保存在服務器內，這組專門用來驗證密碼的 public key 我們稱它為
+          <span className="mx-1 font-semibold underline">salt</span>
+          ，它是一組在使用者註冊時隨機產生的文字，這邊用 JavaScript 處理做舉例
         </Paragraph>
         <CodeBlock
           language="javaScript"
@@ -137,7 +133,8 @@ ${hash}`;
         </CodeBlock>
         <CodeBlock language="bash">{execSalt}</CodeBlock>
         <Paragraph>
-          再將 salt 與使用者註冊設定的密碼做計算得到一組雜湊值 (hash)
+          再將 salt 與註冊帳號設定的密碼做計算得到一組雜湊值 (hash)，與 salt
+          一樣要保存在服務器內
         </Paragraph>
         <CodeBlock
           language="javaScript"
@@ -146,8 +143,8 @@ ${hash}`;
         </CodeBlock>
         <CodeBlock language="bash">{execHash}</CodeBlock>
         <Paragraph>
-          之後每次登入我們會拿輸入的密碼與該使用者擁有的 salt 做計算看結果
-          (hash) 跟註冊時得到的 hash
+          之後每次登入我們會拿輸入的密碼與該使用者擁有的 salt
+          做計算看結果跟註冊帳號時保存的 hash
           有沒有吻合，如果不一樣就是密碼輸入錯誤，除了使用者本人以外沒有人知道密碼
           (private key) 是什麼
         </Paragraph>
@@ -168,18 +165,30 @@ ${hash}`;
         <Heading3>鹽巴記得換新</Heading3>
         <Paragraph>
           在使用者註冊帳號或是更換密碼成功時 (牽涉到 private key
-          變更)，我們應該替使用者更換一組新的 salt
+          的變更)，我們應該幫使用者更換一組新的 salt
         </Paragraph>
-        <Heading2>記住使用者的登入狀態</Heading2>
-        <Paragraph>
-          加上記住使用者登入狀態的功能，避免使用者在短時間內頻繁操作登入動作提升進一步提升使用者體驗
-        </Paragraph>
+        <Heading2>自動登入 (記住使用者的登入狀態)</Heading2>
         <Heading3>Session Token</Heading3>
-        回顧剛剛
-        <span className="mx-1 font-semibold underline decoration-dotted underline-offset-4 hover:cursor-pointer">
-          <a href="#add-salt">替密碼撒點鹽 (salt)</a>
-        </span>
-        的做法，我們可以用同樣的方式實作記住登入狀態的功能
+        <Paragraph>
+          回顧剛才
+          <span className="mx-1 font-semibold underline decoration-dotted underline-offset-4 hover:cursor-pointer">
+            <a href="#add-salt">替密碼撒點鹽 (salt)</a>
+          </span>
+          的做法，我們可以用同樣的方法實作自動登入的功能，只要在每次使用者成功登入帳號時產生一次性使用的
+          public key 並將它保存到客戶端及服務器內，為了與 salt
+          的功能區分開我們這次給它不同的名字叫做
+          <span className="mx-1 font-semibold underline">session token</span>
+          (後面直接簡稱為 token)
+          ，有了這個功能後客戶端向服務器發送請求時會先詢問客戶端擁有的 token
+          有沒有存在服務器內，如果存在就直接授權客戶端可以登入該帳號
+        </Paragraph>
+        <Blockquote>
+          從剛才 token
+          產生的方法來看這裡其實存在著兩個漏洞，為了讓功能更完整我們馬上來解決這些問題
+        </Blockquote>
+        <Heading4>限制 session token 的有效時間</Heading4>
+
+        <Heading4>限制 session token 的可用範圍</Heading4>
       </Article>
     </RootLayout>
   );

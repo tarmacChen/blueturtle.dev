@@ -53,7 +53,7 @@ export const Heading2 = ({
 }: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h2
-      className={clsx("mb-2 mt-8 text-xl font-semibold", className)}
+      className={clsx("mb-4 mt-8 text-xl font-semibold", className)}
       {...props}>
       {children}
     </h2>
@@ -67,7 +67,7 @@ export const Heading3 = ({
 }: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h3
-      className={clsx("my-4 text-lg font-semibold", className)}
+      className={clsx("mb-4 mt-8 text-lg font-semibold", className)}
       {...props}>
       {children}
     </h3>
@@ -81,7 +81,7 @@ export const Heading4 = ({
 }: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h4
-      className={clsx("text-md my-2", className)}
+      className={clsx("text-md mb-4 mt-8 font-semibold", className)}
       {...props}>
       {children}
     </h4>
