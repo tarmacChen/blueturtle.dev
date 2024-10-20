@@ -67,11 +67,12 @@ ${hash}`;
         <Heading2>什麼是 Authentication</Heading2>
         <Paragraph>
           Authentication
-          是驗證或認證身份，最常見的方法就是帳號密碼登入，也可以用憑證或是生物辨識的方式來確認
+          是驗證或認證身份，最常見的就是帳號密碼登入，也可以透過憑證或是生物辨識來確認身份
         </Paragraph>
         <Heading2>與 Authorization 的差別</Heading2>
         <Paragraph>
-          另一個名詞 Authorization 是用來確認使用者是否擁有存取各功能的權限
+          與 Authentication 不同，Authorization
+          是用來確認使用者是否擁有存取各個功能的權限
         </Paragraph>
         <Table className="my-2 border-[1px]">
           <TableHeader className="bg-gray-200 dark:bg-gray-700">
@@ -90,14 +91,14 @@ ${hash}`;
         <Heading2>帳號密碼登入</Heading2>
         <Heading3>不要幫使用者保存密碼</Heading3>
         <Blockquote>
-          使用者嘗試註冊帳號，帳號及密碼分別為
+          使用者嘗試註冊帳號，帳號密碼設定分別是
           <span className="mx-2 font-semibold ">jessica</span>及
           <span className="mx-2 font-semibold ">123</span>
         </Blockquote>
         <Paragraph>
-          這個時候不應該直接保存使用者的密碼，這是一件很危險的事情，一旦選擇幫使用者保存密碼後續就要增加很多工作來避免資料外洩的問題，並且會洩漏密碼給系統管理員，一勞永逸的方法是讓使用者自己記住密碼(私鑰)，永遠不替使用者保存密碼
+          這時候不應該在服務器上保存使用者的密碼，這是一件很危險的事情，一旦選擇幫使用者保存密碼後續就要增加很多工作來避免資料外洩或其他資安的問題，密碼保存在服務器上讓系統管理員能夠看見(不管有沒有加密)不是一件好事情，最理想的方案是讓使用者自己記住密碼(私鑰)，服務器永遠不替使用者保存密碼
         </Paragraph>
-        <Heading3>替密碼加密</Heading3>
+        <Heading3>編碼及加密</Heading3>
         <Paragraph>
           <ListItems className="list-disc">
             <li>
@@ -112,14 +113,14 @@ ${hash}`;
           </ListItems>
         </Paragraph>
         <Paragraph>
-          如果只是用某種方式將密碼用編碼的方式處理對於安全性是沒有幫助的，前面的
+          如果只是將密碼用特定的編碼方式保存起來對提升安全性沒有任何幫助的，前面的
           <span className="mx-1 font-semibold">MTIz</span>
           可以透過 base64 解碼得到答案為 123，後面的
           <span className="mx-1 font-semibold">30c20a......</span>
           多了非對稱密碼學的處理必須要有 salt (public key) 及 password (private
           key) 才能知道答案
         </Paragraph>
-        <Heading3 id="add-salt">在密碼上灑點鹽</Heading3>
+        <Heading3 id="add-salt">在密碼上灑點鹽 (Salt)</Heading3>
         <Paragraph>
           我們可以在使用者註冊帳號時產生一組 public key
           並將它保存在服務器內，這組專門用來驗證密碼的 public key 我們稱它為
@@ -167,28 +168,15 @@ ${hash}`;
           在使用者註冊帳號或是更換密碼成功時 (牽涉到 private key
           的變更)，我們應該幫使用者更換一組新的 salt
         </Paragraph>
-        <Heading2>自動登入 (記住使用者的登入狀態)</Heading2>
-        <Heading3>Session Token</Heading3>
+        <Heading2>記住使用者的登入狀態</Heading2>
+        <Heading3>Session</Heading3>
         <Paragraph>
-          回顧剛才
-          <span className="mx-1 font-semibold underline decoration-dotted underline-offset-4 hover:cursor-pointer">
-            <a href="#add-salt">替密碼撒點鹽 (salt)</a>
-          </span>
-          的做法，我們可以用同樣的方法實作自動登入的功能，只要在每次使用者成功登入帳號時產生一次性使用的
-          public key 並將它保存到客戶端及服務器內，為了與 salt
-          的功能區分開我們這次給它不同的名字叫做
-          <span className="mx-1 font-semibold underline">session token</span>
-          (後面直接簡稱為 token)
-          ，有了這個功能後客戶端向服務器發送請求時會先詢問客戶端擁有的 token
-          有沒有存在服務器內，如果存在就直接授權客戶端可以登入該帳號
+          使用者成功登入帳號後服務器可以基於使用者的資料產生 session
+          並將它暫存起來，其中的 session ID 會回傳給客戶端 (通常會透過 Cookie
+          存到瀏覽器內)，之後客戶端要發送請求給服務器時，服務器先檢索 session ID
+          存不存在來判斷登入狀態，如果 session ID 不存在或已失效回傳 401
+          狀態將客戶端重導至登入頁面中
         </Paragraph>
-        <Blockquote>
-          從剛才 token
-          產生的方法來看這裡其實存在著兩個漏洞，為了讓功能更完整我們馬上來解決這些問題
-        </Blockquote>
-        <Heading4>限制 session token 的有效時間</Heading4>
-
-        <Heading4>限制 session token 的可用範圍</Heading4>
       </Article>
     </RootLayout>
   );
