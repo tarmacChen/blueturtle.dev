@@ -76,13 +76,17 @@ ${hash}`;
         </Paragraph>
         <Table className="my-2 border-[1px]">
           <TableHeader className="bg-gray-200 dark:bg-gray-700">
-            <TableRow className="">
-              <TableHead className="text-foreground">Authentication</TableHead>
-              <TableHead className="text-foreground">Authorization</TableHead>
+            <TableRow>
+              <TableHead className="text-gray-700 dark:text-white">
+                Authentication
+              </TableHead>
+              <TableHead className="text-gray-700 dark:text-white">
+                Authorization
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className="dark:bg-slate-200 dark:text-black">
+            <TableRow className="text-black dark:bg-gray-300">
               <TableCell>你是誰？</TableCell>
               <TableCell>你可以做什麼？</TableCell>
             </TableRow>
