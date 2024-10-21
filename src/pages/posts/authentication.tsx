@@ -74,19 +74,15 @@ ${hash}`;
           與 Authentication 不同，Authorization
           是用來確認使用者是否擁有存取各個功能的權限
         </Paragraph>
-        <Table className="my-2 border-[1px]">
-          <TableHeader className="bg-gray-200 dark:bg-gray-700">
-            <TableRow>
-              <TableHead className="text-gray-700 dark:text-white">
-                Authentication
-              </TableHead>
-              <TableHead className="text-gray-700 dark:text-white">
-                Authorization
-              </TableHead>
+        <Table className="my-2">
+          <TableHeader className="bg-gray-200 dark:bg-gray-800">
+            <TableRow className="font-semibold">
+              <TableCell>Authentication</TableCell>
+              <TableCell>Authorization</TableCell>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow className="text-black dark:bg-gray-300">
+            <TableRow>
               <TableCell>你是誰？</TableCell>
               <TableCell>你可以做什麼？</TableCell>
             </TableRow>
@@ -103,19 +99,17 @@ ${hash}`;
           這時候不應該在服務器上保存使用者的密碼，這是一件很危險的事情，一旦選擇幫使用者保存密碼後續就要增加很多工作來避免資料外洩或其他資安的問題，密碼保存在服務器上讓系統管理員能夠看見(不管有沒有加密)不是一件好事情，最理想的方案是讓使用者自己記住密碼(私鑰)，服務器永遠不替使用者保存密碼
         </Paragraph>
         <Heading3>編碼及加密</Heading3>
-        <Paragraph>
-          <ListItems className="list-disc">
-            <li>
-              <span className="mr-1 font-semibold">MTIz</span>這是 123
-            </li>
-            <li>
-              <span className="mr-1 font-semibold">
-                30c20a0410bccb6c846c23ce4e26bf13ad3a7dd0b4fdc49f6f81d11b26885ac5
-              </span>
-              這也是 123
-            </li>
-          </ListItems>
-        </Paragraph>
+        <ListItems className="list-disc space-y-2">
+          <li>
+            <span className="mr-1 font-semibold underline">MTIz</span>這是 123
+          </li>
+          <li>
+            <span className="mr-1 font-semibold underline">
+              30c20a0410bccb6c846c23ce4e26bf13ad3a7dd0b4fdc49f6f81d11b26885ac5
+            </span>
+            這也是 123
+          </li>
+        </ListItems>
         <Paragraph>
           如果只是將密碼用特定的編碼方式保存起來對提升安全性沒有任何幫助的，前面的
           <span className="mx-1 font-semibold">MTIz</span>
@@ -153,20 +147,33 @@ ${hash}`;
           有沒有吻合，如果不一樣就是密碼輸入錯誤，除了使用者本人以外沒有人知道密碼
           (private key) 是什麼
         </Paragraph>
-        <Paragraph className="text-nowrap">
-          <CheckIcon className="inline-block size-6 text-green-600" />
-          <Emphasis>{salt}</Emphasis> + <Emphasis>123</Emphasis> =
-          <Emphasis>
-            30c20a0410bccb6c846c23ce4e26bf13ad3a7dd0b4fdc49f6f81d11b26885ac5
-          </Emphasis>
-        </Paragraph>
-        <Paragraph className="text-nowrap">
-          <Cross2Icon className="inline-block size-6 text-red-600" />
-          <Emphasis>{salt}</Emphasis> + <Emphasis>1234</Emphasis> =
-          <Emphasis>
-            3b4f722ef0094771ca3a62db7253800ff3d057c812eb7529064e3214f08ad905
-          </Emphasis>
-        </Paragraph>
+        <Table className="my-2">
+          <TableHeader className="bg-gray-200 dark:bg-gray-800">
+            <TableRow className="font-semibold">
+              <TableCell>public key (salt)</TableCell>
+              <TableCell>private key (password)</TableCell>
+              <TableCell>hash</TableCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>{salt}</TableCell>
+              <TableCell>123</TableCell>
+              <TableCell className="flex items-center justify-center text-nowrap">
+                30c20a0410bccb6c846c23ce4e26bf13ad3a7dd0b4fdc49f6f81d11b26885ac5
+                <CheckIcon className="mx-4 inline-block size-6 text-green-600" />
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>{salt}</TableCell>
+              <TableCell>1234</TableCell>
+              <TableCell className="text-nowrap">
+                3b4f722ef0094771ca3a62db7253800ff3d057c812eb7529064e3214f08ad905
+                <Cross2Icon className="mx-4 inline-block size-6 text-red-600" />
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
         <Heading3>鹽巴記得換新</Heading3>
         <Paragraph>
           在使用者註冊帳號或是更換密碼成功時 (牽涉到 private key
