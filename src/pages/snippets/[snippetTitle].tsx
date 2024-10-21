@@ -1,17 +1,17 @@
-import { getMarkdownFiles, TranspileMarkdownFile } from '@/lib/staticHelper';
+import { getMarkdownFiles, TranspileMarkdownFile } from "@/lib/staticHelper";
 import type {
   GetStaticPaths,
   GetStaticPathsResult,
   GetStaticProps,
   InferGetStaticPropsType,
-} from 'next';
-import { MarkdownFile } from 'mdman';
-import { getStaticProps as getMarkdownProps } from '@/pages/posts/[postTitle]';
-import MarkdownViewPage from '@/components/MarkdownViewPage';
+} from "next";
+import { MarkdownFile } from "mdman";
+import { getStaticProps as getMarkdownProps } from "@/pages/articles/[postTitle]";
+import MarkdownViewPage from "@/components/MarkdownViewPage";
 
 export const getStaticPaths = (async () => {
   const mdFiles = getMarkdownFiles().filter(
-    (md) => md.metadata.type == 'snippet',
+    (md) => md.metadata.type == "snippet",
   );
   const result: GetStaticPathsResult = { paths: [], fallback: false };
 
@@ -26,7 +26,7 @@ export const getStaticPaths = (async () => {
 
 export const getStaticProps = (async (ctx) => {
   const mdFiles = getMarkdownFiles();
-  const title = ctx.params?.['snippetTitle'];
+  const title = ctx.params?.["snippetTitle"];
   const foundFile = mdFiles.find((file) => file.metadata?.title == title);
   foundFile && TranspileMarkdownFile(foundFile);
 

@@ -12,18 +12,21 @@ import {
 import { RootLayout } from "@/components/RootLayout";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import { ArticleProps, articles } from "../../components/articles";
+import {
+  ArticleProp,
+  articleProperties,
+} from "../../components/articleProperties";
 
 export const getStaticProps = (async (ctx) => {
   const filename = "jdk-jabba";
 
-  const article = articles.find(
-    (article) => article.href === `/posts/${filename}`,
+  const article = articleProperties.find(
+    (article) => article.href === `/articles/${filename}`,
   );
 
   return { props: { article: article } };
 }) satisfies GetStaticProps<{
-  article: ArticleProps | undefined;
+  article: ArticleProp | undefined;
 }>;
 
 export default function Page({

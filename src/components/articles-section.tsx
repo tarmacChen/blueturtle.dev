@@ -1,6 +1,7 @@
-import { articles } from "./articles";
+import { articleProperties } from "./articleProperties";
 import clsx from "clsx";
 import { HeaderWithLink } from "@/article";
+import moment from "moment";
 
 const Separator = ({ className }: { className?: string }) => {
   return (
@@ -12,14 +13,46 @@ const Separator = ({ className }: { className?: string }) => {
   );
 };
 
+const sortByTime = (
+  a: string,
+  b: string,
+  sorting: "ascend" | "descend",
+): number => {
+  if (sorting == "ascend") return sortByTimeAscend(a, b);
+  if (sorting == "descend") return sortByTimeDescend(a, b);
+  return 0;
+};
+
+const sortByTimeAscend = (aTimeStamp: string, bTimeStamp: string): number => {
+  const aMoment = moment(aTimeStamp);
+  const bMoment = moment(bTimeStamp);
+
+  if (aMoment.isBefore(bMoment)) return -1;
+  if (aMoment.isAfter(bMoment)) return 1;
+  return 0;
+};
+
+const sortByTimeDescend = (aTimeStamp: string, bTimeStamp: string): number => {
+  const aMoment = moment(aTimeStamp);
+  const bMoment = moment(bTimeStamp);
+
+  if (aMoment.isBefore(bMoment)) return 1;
+  if (aMoment.isAfter(bMoment)) return -1;
+  return 0;
+};
+
 const ArticlesSection = () => {
+  const sortedArticles = articleProperties.sort((a, b) =>
+    sortByTime(a.createdTime, b.createdTime, "descend"),
+  );
+
   return (
     <div className="flex flex-col px-2">
-      {articles.map((article, index) => {
+      {sortedArticles.map((article, index) => {
         return (
           <div key={article.href}>
             <HeaderWithLink {...article} />
-            {index !== articles.length - 1 ? <Separator /> : <></>}
+            {index !== articleProperties.length - 1 ? <Separator /> : <></>}
           </div>
         );
       })}

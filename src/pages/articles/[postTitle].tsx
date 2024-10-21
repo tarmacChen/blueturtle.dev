@@ -37,3 +37,4 @@ export default function PostViewPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return <MarkdownViewPage md={md} />;
 }
+  

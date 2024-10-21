@@ -1,9 +1,9 @@
-import { RootLayout } from '@/components/RootLayout';
-import MarkdownNavbar from 'markdown-navbar';
-import { MarkdownViewer } from '@/components/MarkdownViewer';
-import { a11yDark as darkStyle } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { InferGetStaticPropsType } from 'next';
-import { getStaticProps as getMarkdownProps } from '@/pages/posts/[postTitle]';
+import { RootLayout } from "@/components/RootLayout";
+import MarkdownNavbar from "markdown-navbar";
+import { MarkdownViewer } from "@/components/MarkdownViewer";
+import { a11yDark as darkStyle } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { InferGetStaticPropsType } from "next";
+import { getStaticProps as getMarkdownProps } from "@/pages/articles/[postTitle]";
 
 export default function MarkdownViewPage({
   md,

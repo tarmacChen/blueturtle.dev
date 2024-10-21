@@ -9,14 +9,7 @@ import { CheckIcon, ClipboardIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { docco, a11yDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { useTheme } from "next-themes";
-
-type HeaderProps = {
-  title: string;
-  href?: string;
-  description: string;
-  posted: string;
-  className?: string;
-};
+import { ArticleProp } from "@/components/articleProperties";
 
 export const Article = ({
   className,
@@ -148,12 +141,16 @@ export const Subheading = ({
   );
 };
 
-export const Header = ({ title, description, posted }: HeaderProps) => {
+export const Header = ({
+  title,
+  description,
+  createdTime,
+}: ArticleProp & { className?: string }) => {
   return (
     <section>
       <Heading1>{title}</Heading1>
       <Subheading>{description}</Subheading>
-      <PostTime timeText={posted} />
+      <PostTime timeText={createdTime} />
     </section>
   );
 };
@@ -161,16 +158,20 @@ export const Header = ({ title, description, posted }: HeaderProps) => {
 export const HeaderWithLink = ({
   title,
   description,
-  posted,
+  createdTime,
   href,
-}: HeaderProps) => {
+}: ArticleProp) => {
   return (
-    <section className="hover:bg-gray-100 hover:dark:bg-gray-800">
+    <section className="">
       <Heading1>
-        <Link href={href || ""}>{title}</Link>
+        <Link
+          href={href || ""}
+          className="underline-offset-4 hover:underline">
+          {title}
+        </Link>
       </Heading1>
       <Subheading>{description}</Subheading>
-      <PostTime timeText={posted} />
+      <PostTime timeText={createdTime} />
     </section>
   );
 };
