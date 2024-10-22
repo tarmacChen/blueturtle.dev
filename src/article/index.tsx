@@ -235,7 +235,7 @@ export const CodeBlock = ({
   const { resolvedTheme } = useTheme();
   const [isCopied, setIsCopied] = useState(false);
   const iconSize = 18;
-  const code = (showLanguage ? "\n" : "") + props.children.toString();
+  const code = props.children.toString();
   const lang = props.language || "";
   const languageName =
     lang?.charAt(0).toUpperCase() + lang?.substring(1, lang.length);
@@ -252,29 +252,31 @@ export const CodeBlock = ({
           setIsCopied(false);
         }, 2000);
       }}>
-      <div className="relative mb-6 mt-2 w-full text-sm">
+      <div className="mb-6 mt-2 w-full text-sm">
+        <div className="flex h-8 w-full items-center justify-between">
+          <span className="text-sm text-primary/80">
+            {showLanguage ? languageName : ""}
+          </span>
+          <button className="rounded-lg bg-gray-200 px-2 py-1 text-black hover:bg-gray-300">
+            {isCopied ? (
+              <CheckIcon
+                height={iconSize}
+                width={iconSize}
+              />
+            ) : (
+              <ClipboardIcon
+                height={iconSize}
+                width={iconSize}
+                className=""
+              />
+            )}
+          </button>
+        </div>
         <SyntaxHighlighter
           style={style}
           {...props}>
           {code}
         </SyntaxHighlighter>
-        <span className="absolute left-2 top-2 text-sm text-primary/50">
-          {showLanguage ? languageName : ""}
-        </span>
-        <button className="absolute right-2 top-2 rounded-lg bg-gray-200 px-2 py-1 text-black hover:bg-gray-300">
-          {isCopied ? (
-            <CheckIcon
-              height={iconSize}
-              width={iconSize}
-            />
-          ) : (
-            <ClipboardIcon
-              height={iconSize}
-              width={iconSize}
-              className=""
-            />
-          )}
-        </button>
       </div>
     </CopyToClipboard>
   );

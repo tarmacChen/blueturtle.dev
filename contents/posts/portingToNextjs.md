@@ -3,20 +3,19 @@ title: 從 Hugo 遷移至 Next.js
 author: tarmac
 category: Next.js
 type: post
-description: '用Next.js開發個人技術分享網站的紀錄'
+description: "用Next.js開發個人技術分享網站的紀錄"
 tags:
-  - 'Tech blog'
-  - 'Hugo'
-  - 'Next.js'
-  - 'React'
+  - "Tech blog"
+  - "Hugo"
+  - "Next.js"
+  - "React"
 keywords:
-  - ''
+  - ""
 draft: false
-createdTime: '2024-04-08T07:50:44.733Z'
+createdTime: "2024-04-08T07:50:44.733Z"
 ---
 
 # {{ title }}
-
 
 ## 為什麼要遷移到Next.js
 
@@ -46,23 +45,21 @@ Hugo功能很完整很強大，還有其他優點就不在這篇文章展開來�
 
 ```html
 {{ define "main" }}
-  <main aria-role="main">
-    <header class="homepage-header">
-      <h1>{{ .Title }}</h1>
-      {{ with .Params.subtitle }}
-        <span class="subtitle">{{ . }}</span>
-      {{ end }}
-    </header>
-    <div class="homepage-content">
-      <!-- Note that the content for index.html, as a sort of list page, will pull from content/_index.md -->
-      {{ .Content }}
-    </div>
-    <div>
-      {{ range first 10 .Site.RegularPages }}
-        {{ .Render "summary" }}
-      {{ end }}
-    </div>
-  </main>
+<main aria-role="main">
+  <header class="homepage-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}
+    <span class="subtitle">{{ . }}</span>
+    {{ end }}
+  </header>
+  <div class="homepage-content">
+    <!-- Note that the content for index.html, as a sort of list page, will pull from content/_index.md -->
+    {{ .Content }}
+  </div>
+  <div>
+    {{ range first 10 .Site.RegularPages }} {{ .Render "summary" }} {{ end }}
+  </div>
+</main>
 {{ end }}
 ```
 

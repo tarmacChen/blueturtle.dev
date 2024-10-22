@@ -30,4 +30,10 @@ export const articleProperties: ArticleProp[] = [
     href: "/articles/authentication",
     createdTime: "2024-01-26T14:37:40+08:00",
   },
+  {
+    title: "從 Hugo 遷移至 Next.js",
+    description: "用 Next.js 開發 tech blog",
+    href: "/articles/move-to-nextjs",
+    createdTime: "2024-04-08T07:50:44.733Z",
+  },
 ];
