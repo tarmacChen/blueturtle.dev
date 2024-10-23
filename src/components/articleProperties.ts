@@ -36,4 +36,10 @@ export const articleProperties: ArticleProp[] = [
     href: "/articles/move-to-nextjs",
     createdTime: "2024-04-08T07:50:44.733Z",
   },
+  {
+    title: "Web API 版本控制",
+    description: "為什麼要替 Web API 做版本控制",
+    href: "/articles/webapi-version-control",
+    createdTime: "2023-12-17T05:59:51+08:00",
+  },
 ];

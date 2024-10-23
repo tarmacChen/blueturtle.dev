@@ -81,7 +81,7 @@ export default function Page({
         <Heading3>Go Template</Heading3>
         <CodeBlock
           language="HTML"
-          showLanguageName>
+            showLanguageName >
           {goTemplateCode}
         </CodeBlock>
         <Paragraph>

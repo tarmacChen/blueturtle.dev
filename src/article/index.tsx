@@ -228,8 +228,10 @@ export const Hyperlink = ({
 
 export const CodeBlock = ({
   showLanguageName: showLanguage,
+  specificLanguageName,
   ...props
 }: SyntaxHighlighterProps & {
+  specificLanguageName?: string;
   showLanguageName?: boolean;
 }) => {
   const { resolvedTheme } = useTheme();
@@ -255,7 +257,11 @@ export const CodeBlock = ({
       <div className="mb-6 mt-2 w-full text-sm">
         <div className="flex h-8 w-full items-center justify-between">
           <span className="text-sm text-primary/80">
-            {showLanguage ? languageName : ""}
+            {showLanguage
+              ? specificLanguageName === ""
+                ? languageName
+                : specificLanguageName
+              : ""}
           </span>
           <button className="rounded-lg bg-gray-200 px-2 py-1 text-black hover:bg-gray-300">
             {isCopied ? (
