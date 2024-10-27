@@ -246,28 +246,29 @@ export const CodeBlock = ({
   const style = resolvedTheme === "dark" ? darkStyle : lightStyle;
 
   return (
-    <CopyToClipboard
-      text={props.children.toString()}
-      onCopy={() => {
-        setIsCopied(true);
-        setTimeout(() => {
-          setIsCopied(false);
-        }, 2000);
-      }}>
-      <div className="mb-6 mt-2 w-full text-sm">
-        <div className="flex h-8 w-full items-center justify-between">
-          <span className="text-sm text-primary/80">
-            {showLanguage
-              ? specificLanguageName === ""
-                ? languageName
-                : specificLanguageName
-              : ""}
-          </span>
+    <div className="mb-6 mt-2 w-full text-sm">
+      <div className="flex h-8 w-full items-center justify-between">
+        <span className="text-primary/80">
+          {showLanguage
+            ? specificLanguageName === undefined
+              ? languageName
+              : specificLanguageName
+            : ""}
+        </span>
+        <CopyToClipboard
+          text={props.children.toString()}
+          onCopy={() => {
+            setIsCopied(true);
+            setTimeout(() => {
+              setIsCopied(false);
+            }, 2000);
+          }}>
           <button className="rounded-lg bg-gray-200 px-2 py-1 text-black hover:bg-gray-300">
             {isCopied ? (
               <CheckIcon
                 height={iconSize}
                 width={iconSize}
+                className="animate-bounce"
               />
             ) : (
               <ClipboardIcon
@@ -277,14 +278,14 @@ export const CodeBlock = ({
               />
             )}
           </button>
-        </div>
-        <SyntaxHighlighter
-          style={style}
-          {...props}>
-          {code}
-        </SyntaxHighlighter>
+        </CopyToClipboard>
       </div>
-    </CopyToClipboard>
+      <SyntaxHighlighter
+        style={style}
+        {...props}>
+        {code}
+      </SyntaxHighlighter>
+    </div>
   );
 };
 
